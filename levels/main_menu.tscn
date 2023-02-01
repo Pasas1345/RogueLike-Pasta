@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/ui/mainmenu_buttons.gd" type="Script" id=2]
+
+[node name="Main_Menu" type="Control"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="Buttons" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+
+[node name="title" type="Label" parent="Buttons"]
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 0.5
+anchor_bottom = 0.25
+margin_left = 684.0
+margin_top = 206.0
+margin_right = 1196.0
+margin_bottom = 302.0
+theme = ExtResource( 1 )
+text = "Roguelike Pasta"
+align = 1
+valign = 1
+
+[node name="play" type="Button" parent="Buttons"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 804.0
+margin_top = 340.0
+margin_right = 1076.0
+margin_bottom = 442.0
+rect_pivot_offset = Vector2( -608, -72 )
+theme = ExtResource( 1 )
+text = "Play"
+
+[node name="options" type="Button" parent="Buttons"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 804.0
+margin_top = 476.0
+margin_right = 1076.0
+margin_bottom = 578.0
+rect_pivot_offset = Vector2( -608, -72 )
+theme = ExtResource( 1 )
+text = "Options"
+
+[node name="quit" type="Button" parent="Buttons"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 804.0
+margin_top = 612.0
+margin_right = 1076.0
+margin_bottom = 714.0
+rect_pivot_offset = Vector2( -608, -72 )
+theme = ExtResource( 1 )
+text = "Quit"
+
+[connection signal="pressed" from="Buttons/play" to="Buttons" method="_on_play_pressed"]
+[connection signal="pressed" from="Buttons/options" to="Buttons" method="_on_options_pressed"]
+[connection signal="pressed" from="Buttons/quit" to="Buttons" method="_on_quit_pressed"]

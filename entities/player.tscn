@@ -1,0 +1,169 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/entities/player/player.gd" type="Script" id=1]
+[ext_resource path="res://sprites/entities/peco.png" type="Texture" id=2]
+[ext_resource path="res://sprites/pecorine_sword.png" type="Texture" id=3]
+[ext_resource path="res://src/entities/player/player_weapon.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 5.06512
+height = 70.9117
+
+[sub_resource type="Animation" id=5]
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/PecorineSword:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 0.450625, 0.183011, 2.21914, 1 ),
+"update": 0,
+"values": [ 0.0, -112.793, 64.7223, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/PecorineSword/hitbox/hitbox_collision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "attack"
+length = 0.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.55 ),
+"transitions": PoolRealArray( 0.210224, 0.277392, 2.2974, 1 ),
+"update": 0,
+"values": [ 0.0, -111.205, 87.6713, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/PecorineSword/hitbox/hitbox_collision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 36, 35.8666 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "heal"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.329412, 1, 0.368627, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "hit"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+speed = 250.0
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 2 )
+
+[node name="Weapon" type="Node2D" parent="."]
+position = Vector2( 25, 30 )
+script = ExtResource( 4 )
+
+[node name="Pivot" type="Position2D" parent="Weapon"]
+
+[node name="PecorineSword" type="Sprite" parent="Weapon/Pivot"]
+position = Vector2( 11, 0 )
+scale = Vector2( 1.382, -1.382 )
+texture = ExtResource( 3 )
+offset = Vector2( 29.9978, 2.39773 )
+
+[node name="hitbox" type="Area2D" parent="Weapon/Pivot/PecorineSword"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="hitbox_collision" type="CollisionShape2D" parent="Weapon/Pivot/PecorineSword/hitbox"]
+position = Vector2( 47.7569, -0.72365 )
+rotation = -1.5708
+shape = SubResource( 7 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon/Pivot"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 5 )
+anims/attack = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -9.53674e-07 )
+scale = Vector2( 1, 1.00372 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+smoothing_speed = 7.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/heal = SubResource( 4 )
+anims/hit = SubResource( 3 )
+
+[connection signal="body_entered" from="Weapon/Pivot/PecorineSword/hitbox" to="Weapon" method="_on_hitbox_body_entered"]

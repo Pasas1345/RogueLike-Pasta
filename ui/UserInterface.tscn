@@ -1,0 +1,122 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://ui/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/ui/game_ui.gd" type="Script" id=2]
+[ext_resource path="res://sprites/ui/backpack.png" type="Texture" id=3]
+[ext_resource path="res://sprites/ui/slot.png" type="Texture" id=4]
+[ext_resource path="res://ui/fonts/GloriaHallelujah.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://sprites/ui/selected_slot.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 5 )
+
+[node name="User Interface" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="HealthLabel" type="Label" parent="."]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 392.0
+margin_bottom = 128.0
+theme = ExtResource( 1 )
+text = "Health: xd / xd"
+align = 1
+valign = 1
+
+[node name="backpack_slots" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -136.0
+margin_top = 136.0
+margin_right = -8.0
+margin_bottom = 648.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2
+
+[node name="backpack" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -160.0
+margin_top = 40.0
+margin_right = -48.0
+margin_bottom = 152.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="SelectedSlot" type="Sprite" parent="backpack"]
+position = Vector2( 56, 128 )
+scale = Vector2( 0.525, 0.525 )
+texture = ExtResource( 6 )
+
+[node name="fps_counter" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = -48.0
+margin_right = 223.0
+margin_bottom = 48.0
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+text = "FPS: blah"
+
+[node name="Pause_Menu" type="Control" parent="."]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_top = 136.0
+margin_right = 40.0
+margin_bottom = 176.0
+
+[node name="title" type="Label" parent="Pause_Menu"]
+margin_left = -152.0
+margin_right = 150.0
+margin_bottom = 96.0
+theme = ExtResource( 1 )
+text = "Game Paused"
+
+[node name="resume" type="Button" parent="Pause_Menu"]
+margin_left = -96.0
+margin_top = 112.0
+margin_right = 96.0
+margin_bottom = 182.0
+rect_pivot_offset = Vector2( 168, 35 )
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Resume"
+
+[node name="main_menu" type="Button" parent="Pause_Menu"]
+margin_left = -96.0
+margin_top = 200.0
+margin_right = 96.0
+margin_bottom = 270.0
+rect_pivot_offset = Vector2( 168, 35 )
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Main Menu"
+
+[node name="quit" type="Button" parent="Pause_Menu"]
+margin_left = -96.0
+margin_top = 288.0
+margin_right = 96.0
+margin_bottom = 358.0
+rect_pivot_offset = Vector2( 168, 35 )
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Quit"
+
+[connection signal="pressed" from="Pause_Menu/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Pause_Menu/main_menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Pause_Menu/quit" to="." method="_on_quit_pressed"]

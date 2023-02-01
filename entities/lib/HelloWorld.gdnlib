@@ -1,0 +1,19 @@
+[resource]
+
+entry/Windows.64="res://bin/roguelike_game_pasta.dll"
+dependency/Windows.64=[  ]
+
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=true
+
+[entry]
+
+Windows.64="res://bin/roguelike_game_pasta.dll"
+
+[dependencies]
+
+Windows.64=[  ]
