@@ -10,6 +10,10 @@ onready var max_speed: = speed
 var direction: = Vector2.ZERO
 onready var ui = get_tree().get_nodes_in_group("ui")[0]
 onready var weapon = $Weapon
+onready var items_effects = $ItemAimer
+
+var is_using_item = false
+var is_attacking = false
 
 var attack_cooldown = 0.0
 
@@ -19,25 +23,32 @@ func _init():
 	add_to_group("player")
 
 func _ready():
-	player_stats.sync_player_to_global()
+	if main_game.stage_counter <= 1:
+		player_stats.sync_player_to_global()
+	else:
+		player_stats.sync_global_to_player()
+
 	weapon.player = self
 
 func _process(_delta):
+	if dead:
+		return
+	
 	var _mouse_pos = get_global_mouse_position()
-	if attack_cooldown > 0:
-		attack_cooldown -= _delta
+	
 	# Handle Sprite Orientation
-	if _mouse_pos.x - global_position.x < 0:
-		weapon.position = Vector2(-25, 30)
-		weapon.scale.y = -1
-		_sprite.set_flip_h(true)
-	else:
-		weapon.position = Vector2(25, 30)
-		weapon.scale.y = 1
-		_sprite.set_flip_h(false)
+	if !is_attacking:
+		if _mouse_pos.x - global_position.x < 0:
+			weapon.position = Vector2(-25, 30)
+			weapon.scale.y = -1
+			_sprite.set_flip_h(true)
+		else:
+			weapon.position = Vector2(25, 30)
+			weapon.scale.y = 1
+			_sprite.set_flip_h(false)
 
 	if Input.is_action_just_pressed("use_item"):
-		if !inventory.empty():
+		if !inventory.empty() && !is_using_item:
 			use_item(inventory[0])
 
 	if Input.is_action_just_pressed("attack"):
@@ -49,6 +60,9 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	if !dead:
+		if attack_cooldown > 0:
+			attack_cooldown -= _delta
+
 		direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
 		var sprinting: = Input.is_key_pressed(KEY_SHIFT)
 	
@@ -84,13 +98,21 @@ func add_item(item: Item):
 
 func use_item(item: Item_Entry):
 	var itemid = item.item_id
+	items_effects.visible = true
+	is_using_item = true
 
 	match(itemid):
 		"item_kokkoro":
 			change_health(25)
+		"item_laser":
+			items_effects.get_node("Laser_Item").set_is_casting(true)
+			yield(get_tree().create_timer(5.0), "timeout")
+			items_effects.get_node("Laser_Item").set_is_casting(false)
 
 	inventory.pop_front()
+	items_effects.visible = false
 	ui.update_inventory()
+	is_using_item = false
 	
 func die():
 	print("player death")

@@ -80,6 +80,14 @@ margin_top = 136.0
 margin_right = 40.0
 margin_bottom = 176.0
 
+[node name="ColorRect" type="ColorRect" parent="Pause_Menu"]
+margin_left = -168.0
+margin_top = -16.0
+margin_right = 168.0
+margin_bottom = 432.0
+theme = ExtResource( 1 )
+color = Color( 0.470588, 0.470588, 0.470588, 0.768627 )
+
 [node name="title" type="Label" parent="Pause_Menu"]
 margin_left = -152.0
 margin_right = 150.0

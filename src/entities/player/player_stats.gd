@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 # Player Stats
 var speed: = 200.0
@@ -8,6 +8,7 @@ var attack_speed: = 1.0
 var defense: = 10.0
 var ability_regen: = 1.0
 var ability_strength: = 1.0
+var hp = max_hp
 
 var UP_Regen: = 1.0
 var UP_EnergyRestore: = 10.0
@@ -23,6 +24,7 @@ func sync_player_to_global():
 	_player = get_tree().get_nodes_in_group("player")[0]
 	speed = _player.speed
 	max_hp = _player.max_hp
+	hp = _player.hp
 	attack = _player.attack
 	attack_speed = _player.attack_speed
 	defense = _player.defense
@@ -40,6 +42,7 @@ func sync_global_to_player():
 	_player = get_tree().get_nodes_in_group("player")[0]
 	_player.speed = speed
 	_player.max_hp = max_hp
+	_player.hp = hp
 	_player.attack = attack
 	_player.attack_speed = attack_speed
 	_player.defense = defense

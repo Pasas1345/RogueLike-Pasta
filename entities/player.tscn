@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/entities/peco.png" type="Texture" id=2]
 [ext_resource path="res://sprites/pecorine_sword.png" type="Texture" id=3]
 [ext_resource path="res://src/entities/player/player_weapon.gd" type="Script" id=4]
+[ext_resource path="res://src/entities/player/player_itemaimer.gd" type="Script" id=5]
+[ext_resource path="res://entities/items/effects/beam_item_laser.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 5.06512
@@ -165,5 +167,11 @@ smoothing_speed = 7.5
 anims/RESET = SubResource( 2 )
 anims/heal = SubResource( 4 )
 anims/hit = SubResource( 3 )
+
+[node name="ItemAimer" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="Laser_Item" parent="ItemAimer" instance=ExtResource( 6 )]
+visible = false
 
 [connection signal="body_entered" from="Weapon/Pivot/PecorineSword/hitbox" to="Weapon" method="_on_hitbox_body_entered"]

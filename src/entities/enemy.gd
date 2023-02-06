@@ -25,3 +25,7 @@ func _on_PlayerDetector_body_entered(body:Node):
 
 func _on_PlayerDetector_body_exited(_body:Node):
 	attacking = null
+
+func die():
+	main_game.enemies_left -= 1
+	dead = true
