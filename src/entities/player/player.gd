@@ -37,15 +37,15 @@ func _process(_delta):
 	var _mouse_pos = get_global_mouse_position()
 	
 	# Handle Sprite Orientation
-	if !is_attacking:
-		if _mouse_pos.x - global_position.x < 0:
-			weapon.position = Vector2(-25, 30)
-			weapon.scale.y = -1
-			_sprite.set_flip_h(true)
-		else:
-			weapon.position = Vector2(25, 30)
-			weapon.scale.y = 1
-			_sprite.set_flip_h(false)
+	# if !is_attacking:
+	if _mouse_pos.x - global_position.x < 0:
+		weapon.position = Vector2(-25, 30)
+		weapon.scale.y = -1
+		_sprite.set_flip_h(true)
+	else:
+		weapon.position = Vector2(25, 30)
+		weapon.scale.y = 1
+		_sprite.set_flip_h(false)
 
 	if Input.is_action_just_pressed("use_item"):
 		if !inventory.empty() && !is_using_item:
@@ -53,7 +53,7 @@ func _process(_delta):
 
 	if Input.is_action_just_pressed("attack"):
 		if attack_cooldown <= 0:
-			attack_cooldown = 1 / attack_speed
+			# attack_cooldown = 1 / attack_speed
 			weapon._anim_player.set_speed_scale(attack_speed)
 			weapon.start_attack()
 
