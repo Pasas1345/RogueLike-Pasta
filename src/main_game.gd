@@ -31,6 +31,7 @@ func update_stage():
 	stage = get_tree().get_nodes_in_group("main_stage")[0]
 	enemies_left = stage.enemies
 	stage_cleared = false
+	randomize()
 
 func _ready():
 	main_game.set_process(false)
@@ -83,6 +84,32 @@ func spawn_enemy(enemy_type):
 	new_enemy.add_to_group("enemies")
 	enemy_spawners[0].get_parent().get_parent().add_child(new_enemy)
 
+func spawn_item(item_type = "", position = null):
+	if !get_tree().get_nodes_in_group("item_spawner"):
+		printerr("Warning: No Item spawners in stage detecte. Item drops will not spawn.")
+		return
+
+	var item_spawners = get_tree().get_nodes_in_group("item_spawner")[0].get_children()
+	var item
+
+	match(item_type):
+		"item_kokkoro":
+			item = item_nodes["item_kokkoro"]
+		"item_laser":
+			item = item_nodes["item_laser"]
+		_:
+			randomize()
+			var item_keys: Array = main_game.item_nodes.keys()
+		
+			item = item_nodes[item_keys[randi() % item_keys.size()]]
+
+	var new_item = item.instance()
+	var spawner_index = randi() % item_spawners.size() if position == null else position
+	new_item.set_position(item_spawners[spawner_index].position)
+	get_tree().current_scene.add_child(new_item)
+	
+
+
 func reset():
 	stage = null
 	stage_counter = 0
@@ -97,5 +124,11 @@ func stage_clear():
 
 	if get_tree().get_nodes_in_group("portal").size() > 1:
 		print("Warning: Only one portal location can exist. Please delete the other one as it will be unused forever.")
+
+	if get_tree().get_nodes_in_group("item_spawner"):
+		# print("xd")
+		for i in get_tree().get_nodes_in_group("item_spawner")[0].get_children().size():
+			spawn_item("", i)
+			
 
 	get_tree().get_nodes_in_group("portal")[0].set_active(true)
