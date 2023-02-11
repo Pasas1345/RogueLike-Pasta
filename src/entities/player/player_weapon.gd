@@ -5,8 +5,6 @@ onready var _anim_player := $Pivot/AnimationPlayer
 onready var _pivot := $Pivot
 var player
 var attackable = []
-# TODO: Probably set up attack sequences...
-# 		With that, we can probably have a variable handling attack animations.
 
 export var attack_sequence := 0
 export var can_next_sequence := false
@@ -28,7 +26,8 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	# if !player.is_attacking:
-	look_at(get_global_mouse_position())
+	if !player.dead:
+		look_at(get_global_mouse_position())
 
 func start_attack():
 	if attack_sequence >= attack_seq_multipliers.size():

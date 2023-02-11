@@ -74,11 +74,11 @@ func _process(_delta):
 	if _mouse_pos.x - global_position.x < 0:
 		weapon.position = Vector2(-25, 30)
 		weapon.scale.y = -1
-		_sprite.set_flip_h(true)
+		_sprite.scale.x = -0.75
 	else:
 		weapon.position = Vector2(25, 30)
 		weapon.scale.y = 1
-		_sprite.set_flip_h(false)
+		_sprite.scale.x = 0.75
 
 	if Input.is_action_just_pressed("use_item"):
 		if !inventory.empty() && !is_using_item:

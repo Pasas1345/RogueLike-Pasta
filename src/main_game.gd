@@ -11,6 +11,7 @@ var stage: Stage
 var enemies_left: int
 
 var first_loop: bool = true
+var loop: int = 0
 
 enum EnemyTypes {
 	KYARU,

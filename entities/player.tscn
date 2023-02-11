@@ -7,6 +7,9 @@
 [ext_resource path="res://src/entities/player/player_itemaimer.gd" type="Script" id=5]
 [ext_resource path="res://entities/items/effects/beam_item_laser.tscn" type="PackedScene" id=6]
 
+[sub_resource type="OccluderPolygon2D" id=13]
+polygon = PoolVector2Array( -36, -36, 10, -36, 27, -22, 36, -6, 36, 36, -36, 36 )
+
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 5.06512
 height = 70.9117
@@ -409,9 +412,6 @@ shader_param/blink_color = Color( 1, 0, 0, 1 )
 shader_param/blink_color2 = Color( 0.623529, 0, 0, 1 )
 shader_param/non_blink = Color( 1, 0.960784, 0.709804, 1 )
 
-[sub_resource type="OccluderPolygon2D" id=13]
-polygon = PoolVector2Array( -36, -36, 10, -36, 27, -22, 36, -6, 36, 36, -36, 36 )
-
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 speed = 250.0
@@ -419,6 +419,10 @@ speed = 250.0
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
+scale = Vector2( 1.33333, 1.33333 )
+occluder = SubResource( 13 )
 
 [node name="Weapon" type="Node2D" parent="."]
 position = Vector2( -25, 30 )
@@ -500,8 +504,5 @@ grow_vertical = 0
 rect_rotation = 180.0
 rect_pivot_offset = Vector2( 3.5, 28.5 )
 color = Color( 1, 0.960784, 0.709804, 1 )
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource( 13 )
 
 [connection signal="body_entered" from="Weapon/Pivot/PecorineSword/hitbox" to="Weapon" method="_on_hitbox_body_entered"]

@@ -71,10 +71,12 @@ func pause():
 	if get_tree().paused:
 		get_tree().paused = false
 		pause_menu.visible = false
+		$PauseBG.visible = false
 		pause_menu.set_process(true)
 	else:
 		get_tree().paused = true
 		pause_menu.visible = true
+		$PauseBG.visible = true
 		pause_menu.set_process(false)
 
 func _on_resume_pressed():
