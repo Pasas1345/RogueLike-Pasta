@@ -29,3 +29,19 @@ func _on_PlayerDetector_body_exited(_body:Node):
 func die():
 	main_game.enemies_left -= 1
 	dead = true
+	
+	randomize()
+	var rand_chance = rand_range(0, 100)
+
+	if rand_chance <= 5:
+		drop_item()
+
+
+func drop_item():
+	randomize()
+	var item_keys: Array = main_game.item_nodes.keys()
+
+	var item: Item = main_game.item_nodes[item_keys[randi() % item_keys.size()]].instance()
+
+	item.set_position(self.position)
+	get_tree().current_scene.add_child(item)

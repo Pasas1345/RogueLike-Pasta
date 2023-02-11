@@ -44,6 +44,7 @@ main_game="*res://src/main_game.gd"
 [debug]
 
 gdscript/completion/autocomplete_setters_and_getters=true
+gdscript/warnings/narrowing_conversion=false
 gdscript/warnings/return_value_discarded=false
 
 [display]

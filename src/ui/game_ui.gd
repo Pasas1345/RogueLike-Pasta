@@ -83,6 +83,7 @@ func _on_resume_pressed():
 func _on_main_menu_pressed():
 	get_tree().paused = false
 	get_tree().change_scene("res://levels/main_menu.tscn")
+	main_game.reset()
 
 func _on_quit_pressed():
 	get_tree().quit()

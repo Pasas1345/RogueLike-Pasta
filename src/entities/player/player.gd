@@ -4,13 +4,20 @@ export var UP_Regen: = 1.0
 export var UP_EnergyRestore: = 10.0
 export var inv_slots: = 4
 export var item_strength = 1.0
-export var acceleration: = 3.0
+export var acceleration: = 0.1
 onready var max_acceleration: = acceleration
 onready var max_speed: = speed
 var direction: = Vector2.ZERO
 onready var ui = get_tree().get_nodes_in_group("ui")[0]
 onready var weapon = $Weapon
 onready var items_effects = $ItemAimer
+onready var stamina_bar = $Stamina/StaminaBar
+
+var max_stamina = 100
+var stamina = max_stamina
+var stamina_regen = 10.0
+var stamina_consumtion = 20.0
+var sprint_cooldown = false
 
 var is_using_item = false
 var is_attacking = false
@@ -31,10 +38,36 @@ func _ready():
 	weapon.player = self
 
 func _process(_delta):
+	# print(stamina)
 	if dead:
 		return
 	
 	var _mouse_pos = get_global_mouse_position()
+
+	# Handle stamina here
+	if sprint_cooldown:
+		stamina_bar.material.set_shader_param('blinking', true)
+		# material.set_shader_param("game_time", OS.get_ticks_msec() * _delta * 0.5)
+	else:
+		stamina_bar.material.set_shader_param('blinking', false)
+		# material.set_shader_param("game_time", 0)
+
+	if stamina <= 0:
+		sprint_cooldown = true
+	elif stamina >= max_stamina && sprint_cooldown:
+		sprint_cooldown = false
+
+	if stamina < max_stamina:
+		var tween := create_tween().set_trans(Tween.EASE_IN).set_ease(Tween.EASE_IN)
+
+		tween.tween_property(stamina_bar.get_parent(), "modulate", Color(1, 1, 1, 1), 0.5)
+	else:
+		var tween := create_tween().set_trans(Tween.EASE_IN).set_ease(Tween.EASE_IN)
+
+		tween.tween_property(stamina_bar.get_parent(), "modulate", Color(1, 1, 1, 0), 0.25)
+
+	stamina_bar.set_size(Vector2(7, range_lerp(stamina, 0, max_stamina, 0, 57)))
+	# stamina_bar.set_position(Vector2(1, (max_stamina / max_stamina) * 58))
 	
 	# Handle Sprite Orientation
 	# if !is_attacking:
@@ -65,19 +98,32 @@ func _physics_process(_delta):
 
 		direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
 		var sprinting: = Input.is_key_pressed(KEY_SHIFT)
+
+		if sprint_cooldown:
+			sprinting = false
+
+		if !sprinting || direction == Vector2(0, 0):
+			if stamina < max_stamina:
+				stamina += _delta * stamina_regen
+			if stamina >= max_stamina:
+				stamina = max_stamina
 	
 		if direction != Vector2(0, 0):
-			if sprinting:
+			if sprinting && stamina > 0 && !sprint_cooldown:
+				stamina -= _delta * stamina_consumtion
 				max_speed = clamp(max_speed * 1.5, 0.0, speed * 1.5)
 				acceleration = clamp(acceleration * 2.0, 0.0, max_acceleration * 2.0)
 			else:
 				max_speed = speed
 				acceleration = max_acceleration
 			
-			velocity = velocity + (speed * (direction * (acceleration * _delta)))
-			velocity = velocity.limit_length(max_speed)
+			velocity.x = lerp(velocity.x, direction.x * max_speed, acceleration)
+			velocity.y = lerp(velocity.y, direction.y * max_speed, acceleration)
 		else:
-			velocity = velocity.limit_length(0.0)
+			velocity.x = lerp(velocity.x, 0, 0.25)
+			velocity.y = lerp(velocity.y, 0, 0.25)
+		
+		velocity = velocity.limit_length(max_speed)
 	else:
 		velocity = Vector2.ZERO
 		_sprite.modulate = Color(0.75, 0.25, 0.25)
@@ -98,7 +144,7 @@ func add_item(item: Item):
 
 func use_item(item: Item_Entry):
 	var itemid = item.item_id
-	items_effects.visible = true
+	# items_effects.visible = true
 	is_using_item = true
 
 	match(itemid):
@@ -110,7 +156,7 @@ func use_item(item: Item_Entry):
 			items_effects.get_node("Laser_Item").set_is_casting(false)
 
 	inventory.pop_front()
-	items_effects.visible = false
+	# items_effects.visible = false
 	ui.update_inventory()
 	is_using_item = false
 	

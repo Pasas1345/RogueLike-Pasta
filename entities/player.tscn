@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/entities/peco.png" type="Texture" id=2]
@@ -10,6 +10,9 @@
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 5.06512
 height = 70.9117
+
+[sub_resource type="OccluderPolygon2D" id=14]
+polygon = PoolVector2Array( -28.22, -0.723589, -21.7077, 3.61794, -3.61795, 2.17077, -2.17077, 3.61794, 0, 3.61794, 2.17077, 1.44718, 2.17077, 5.78871, 3.61794, 11.5774, 7.23589, 13.0246, 11.5774, 13.0246, 11.5774, 10.1302, 7.95948, 8.68307, 7.23589, 2.89436, 10.8538, 5.06512, 73.0825, 5.06512, 88.2779, -0.723589, 73.0825, -5.78871, 10.8538, -5.78871, 7.23589, -3.61794, 5.78871, -10.8538, 2.17077, -13.7482, -2.17077, -13.7482, -2.17077, -10.1302, 1.44718, -10.1302, 2.17077, -4.34153, 2.17077, -2.89436, -0.723589, -5.06512, -2.17077, -5.06512, -3.61795, -2.89436, -21.7077, -5.06512 )
 
 [sub_resource type="Animation" id=5]
 length = 0.6
@@ -127,7 +130,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.55 ),
+"times": PoolRealArray( 0, 0.3, 0.45 ),
 "transitions": PoolRealArray( 0.318641, 0.637281, 1 ),
 "update": 0,
 "values": [ 87.6713, -75.1, 0.0 ]
@@ -163,7 +166,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.55, 0.8 ),
+"times": PoolRealArray( 0, 0.4, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -204,7 +207,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.25, 0.6 ),
+"times": PoolRealArray( 0, 0.25, 0.8 ),
 "transitions": PoolRealArray( 0.112656, 0.392292, 1 ),
 "update": 0,
 "values": [ Vector2( -40, 0 ), Vector2( 60, 0 ), Vector2( 0, 0 ) ]
@@ -216,7 +219,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.25, 0.6 ),
+"times": PoolRealArray( 0, 0.25, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -269,7 +272,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.3, 0.8 ),
+"times": PoolRealArray( 0, 0.3, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -377,6 +380,38 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Shader" id=15]
+code = "shader_type canvas_item;
+
+uniform bool blinking = false;
+// uniform float game_time = 0.0;
+uniform vec4 blink_color : hint_color = vec4(1.0, 0.0, 0.0, 1.0);
+uniform vec4 blink_color2 : hint_color = vec4(0.75, 0.0, 0.0, 1.0);
+uniform vec4 non_blink : hint_color = vec4(1.0);
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	
+	if (blinking) {
+		color.rgb = mix(blink_color2.rgb, blink_color.rgb, sin(TIME*10.0));
+	}
+	else {
+		color.rgba = non_blink;
+	}
+	
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = SubResource( 15 )
+shader_param/blinking = false
+shader_param/blink_color = Color( 1, 0, 0, 1 )
+shader_param/blink_color2 = Color( 0.623529, 0, 0, 1 )
+shader_param/non_blink = Color( 1, 0.960784, 0.709804, 1 )
+
+[sub_resource type="OccluderPolygon2D" id=13]
+polygon = PoolVector2Array( -36, -36, 10, -36, 27, -22, 36, -6, 36, 36, -36, 36 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 speed = 250.0
@@ -408,6 +443,9 @@ rotation = -1.5708
 shape = SubResource( 7 )
 disabled = true
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Weapon/Pivot/PecorineSword"]
+occluder = SubResource( 14 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon/Pivot"]
 root_node = NodePath("../..")
 anims/RESET = SubResource( 5 )
@@ -436,5 +474,34 @@ anims/hit = SubResource( 3 )
 script = ExtResource( 5 )
 
 [node name="Laser_Item" parent="ItemAimer" instance=ExtResource( 6 )]
+
+[node name="Stamina" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+light_mask = 0
+margin_left = -57.0
+margin_top = -32.0
+margin_right = -48.0
+margin_bottom = 27.0
+rect_pivot_offset = Vector2( 3.5, 28.5 )
+color = Color( 0.356863, 0.356863, 0.356863, 1 )
+
+[node name="StaminaBar" type="ColorRect" parent="Stamina"]
+light_mask = 0
+material = SubResource( 16 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -3.5
+margin_top = -28.5
+margin_right = 3.5
+margin_bottom = 28.5
+grow_vertical = 0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( 3.5, 28.5 )
+color = Color( 1, 0.960784, 0.709804, 1 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 13 )
 
 [connection signal="body_entered" from="Weapon/Pivot/PecorineSword/hitbox" to="Weapon" method="_on_hitbox_body_entered"]
