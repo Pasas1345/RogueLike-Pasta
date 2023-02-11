@@ -2,10 +2,14 @@ extends Control
 
 var player
 
-onready var health: = $HealthLabel
+onready var health: = $health_label_bg/health_label
+onready var health_bar := $health_bar/health_bar_bg
 onready var backpack_slots = $backpack_slots
 onready var fps = $fps_counter
 onready var pause_menu = $Pause_Menu
+onready var stage_label := $stage_label
+onready var loop_label := $loop_label
+onready var time_label := $time_label
 
 func _init():
 	add_to_group("ui")
@@ -17,8 +21,29 @@ func _ready():
 	
 	
 func _process(_delta):
-	health.text = "Health: {0}/{1}".format([clamp(player.hp, 0, player.max_hp), player.max_hp])
+	health.text = "{0}/{1}".format([clamp(player.hp, 0, player.max_hp), player.max_hp])
+
+	var healthbar_tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	healthbar_tween.tween_property(health_bar, "rect_size", Vector2(range_lerp(player.hp, 0, player.max_hp, 0, 309), 49), 0.1)
+
 	fps.text = "FPS: {0}".format([Engine.get_frames_per_second()])
+	
+	if main_game.loop <= 0:
+		loop_label.text = ""
+		stage_label.text = "Stage {0}".format([main_game.stage_counter])
+	else:
+		loop_label.text = "Loop {0}".format([main_game.loop])
+		stage_label.text = "Stage {0}".format([main_game.stage_counter])
+
+	
+	var time = main_game.game_time
+
+	var seconds = time % 60
+	var minutes = (time / 60) % 60
+
+	time_label.text = "Elapsed Time:\n%02d:%02d" % [minutes, seconds]
+	
+
 	backpack_slots.set_size(Vector2(128, 128 * player.inv_slots))
 
 	if Input.is_action_just_pressed("pause"):
