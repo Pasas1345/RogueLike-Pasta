@@ -7,8 +7,8 @@ onready var health_bar := $health_bar/health_bar_bg
 onready var backpack_slots = $backpack_slots
 onready var fps = $fps_counter
 onready var pause_menu = $Pause_Menu
-onready var stage_label := $stage_label
-onready var loop_label := $loop_label
+onready var stage_label := $loop_stage_container/stage_label
+onready var loop_label := $loop_stage_container/loop_label
 onready var time_label := $time_label
 
 func _init():
@@ -89,10 +89,16 @@ func update_inventory():
 			n.queue_free()
 	
 		pending_deletion.clear()
+
+
+
 		
 
 # Pause menu related stuff
 func pause():
+	if !main_game.can_pause:
+		return
+
 	if get_tree().paused:
 		get_tree().paused = false
 		pause_menu.visible = false
@@ -104,6 +110,8 @@ func pause():
 		$PauseBG.visible = true
 		pause_menu.set_process(false)
 
+
+# Pause Menu Buttons.
 func _on_resume_pressed():
 	pause()
 

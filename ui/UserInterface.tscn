@@ -18,12 +18,12 @@ font_data = ExtResource( 7 )
 size = 24
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 32
-font_data = ExtResource( 7 )
-
 [sub_resource type="DynamicFont" id=6]
 size = 24
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
 font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -82,28 +82,32 @@ texture = ExtResource( 8 )
 expand = true
 
 [node name="backpack_slots" type="TextureRect" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -136.0
-margin_top = 136.0
-margin_right = -8.0
-margin_bottom = 648.0
+anchor_left = 0.946
+anchor_top = 0.089
+anchor_right = 0.946
+anchor_bottom = 0.089
+margin_left = -32.3201
+margin_top = 39.88
+margin_right = 95.6799
+margin_bottom = 551.88
 rect_scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 2
 
 [node name="backpack" type="TextureRect" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -160.0
-margin_top = 40.0
-margin_right = -48.0
-margin_bottom = 152.0
+anchor_left = 0.946
+anchor_top = 0.089
+anchor_right = 0.946
+anchor_bottom = 0.089
+margin_left = -56.3201
+margin_top = -56.12
+margin_right = 55.6799
+margin_bottom = 55.88
 texture = ExtResource( 3 )
 expand = true
 
-[node name="TextureRect" type="TextureRect" parent="backpack"]
+[node name="selected_slot" type="TextureRect" parent="backpack"]
 margin_left = 21.0
 margin_top = 93.0
 margin_right = 91.0
@@ -124,32 +128,6 @@ theme = ExtResource( 1 )
 custom_fonts/font = SubResource( 4 )
 text = "FPS: blah"
 
-[node name="stage_label" type="Label" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -136.0
-margin_top = -64.0
-margin_right = 24.0
-margin_bottom = 55.0
-theme = ExtResource( 1 )
-custom_fonts/font = SubResource( 5 )
-text = "Stage _"
-
-[node name="loop_label" type="Label" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -136.0
-margin_top = -96.0
-margin_right = 24.0
-margin_bottom = 23.0
-theme = ExtResource( 1 )
-custom_fonts/font = SubResource( 5 )
-text = "Loop _"
-
 [node name="time_label" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -162,6 +140,31 @@ custom_fonts/font = SubResource( 6 )
 text = "Elapsed Time:
 _:_"
 align = 1
+
+[node name="loop_stage_container" type="VBoxContainer" parent="."]
+anchor_left = 0.981
+anchor_top = 0.972
+anchor_right = 0.981
+anchor_bottom = 0.972
+margin_left = -107.52
+margin_top = -81.76
+margin_right = -0.520142
+margin_bottom = 0.23999
+
+[node name="loop_label" type="Label" parent="loop_stage_container"]
+margin_right = 107.0
+margin_bottom = 39.0
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Loop _"
+
+[node name="stage_label" type="Label" parent="loop_stage_container"]
+margin_top = 43.0
+margin_right = 107.0
+margin_bottom = 82.0
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Stage _"
 
 [node name="PauseBG" type="ColorRect" parent="."]
 visible = false
@@ -218,6 +221,12 @@ size_flags_vertical = 3
 theme = ExtResource( 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Quit"
+
+[node name="loading_screen" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
 
 [connection signal="pressed" from="Pause_Menu/resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Pause_Menu/main_menu" to="." method="_on_main_menu_pressed"]

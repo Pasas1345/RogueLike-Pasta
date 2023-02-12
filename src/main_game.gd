@@ -9,6 +9,7 @@ var stage_custom_spawns: bool
 var spawner_delay = 0.0
 var stage: Stage
 var enemies_left: int
+var can_pause: bool = true
 
 var first_loop: bool = true
 var loop: int = 0
