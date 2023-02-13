@@ -51,7 +51,7 @@ func _process(_delta):
 	
 	if spawner_delay > 0:
 		spawner_delay -= _delta
-	
+
 	if stage.enemies > 0:
 		if spawner_delay <= 0:
 			spawn_enemy(EnemyTypes.KYARU)
@@ -64,6 +64,9 @@ func _process(_delta):
 		
 
 func advance_time():
+	if !stage:
+		return
+
 	game_time += 1
 
 

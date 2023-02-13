@@ -18,6 +18,12 @@ func _ready():
 	Engine.set_target_fps(int(OS.get_screen_refresh_rate() * 3.0))
 	player = get_tree().get_nodes_in_group("player")[0]
 	update_inventory()
+
+	$loading_screen.visible = true
+	var tween = create_tween().set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property($loading_screen, "modulate", Color(0, 0, 0, 0), 0.4)
+	yield(tween, "finished")
+	$loading_screen.visible = false
 	
 	
 func _process(_delta):
@@ -89,8 +95,6 @@ func update_inventory():
 			n.queue_free()
 	
 		pending_deletion.clear()
-
-
 
 		
 
