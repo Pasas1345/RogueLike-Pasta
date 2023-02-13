@@ -86,7 +86,7 @@ func spawn_enemy(enemy_type):
 	var new_enemy = enemy.instance()
 	new_enemy.set_position(enemy_spawners[randi() % enemy_spawners.size()].position)
 	new_enemy.add_to_group("enemies")
-	enemy_spawners[0].get_parent().get_parent().add_child(new_enemy)
+	get_tree().current_scene.add_child(new_enemy)
 
 func spawn_item(item_type = "", position = null):
 	if !get_tree().get_nodes_in_group("item_spawner"):
