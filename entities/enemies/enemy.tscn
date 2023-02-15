@@ -1,8 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://sprites/entities/kyawoo.png" type="Texture" id=1]
 [ext_resource path="res://src/entities/enemy.gd" type="Script" id=2]
 [ext_resource path="res://src/entities/npc.gd" type="Script" id=3]
+[ext_resource path="res://shaders/entity_generic.gdshader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/solid_color = Color( 1, 1, 1, 1 )
+shader_param/flash = false
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 34.5, 36 )
@@ -10,10 +17,13 @@ extents = Vector2( 34.5, 36 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 21.1875, 22.1875 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="OccluderPolygon2D" id=6]
+polygon = PoolVector2Array( -43, 45, -44, 28, -36, -12, -37, -38, -17, -30, -1, -34, 11, -34, 28, -44, 26, -26, 35, -17, 38, -5, 32, 6, 38, 10, 38, 21, 36, 34, 33, 45 )
+
+[sub_resource type="Animation" id=7]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Sprite:material:shader_param/flash")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -22,43 +32,77 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/solid_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=8]
 resource_name = "heal"
-length = 0.25
+length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Sprite:material:shader_param/solid_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.329412, 1, 0.368627, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 0, 1, 0.0392157, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/flash")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=9]
 resource_name = "hit"
-length = 0.25
+length = 0.1
+step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Sprite:material:shader_param/flash")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+"update": 1,
+"values": [ true, false ]
 }
-
-[sub_resource type="OccluderPolygon2D" id=6]
-polygon = PoolVector2Array( -43, 45, -44, 28, -36, -12, -37, -38, -17, -30, -1, -34, 11, -34, 28, -44, 26, -26, 35, -17, 38, -5, 32, 6, 38, 10, 38, 21, 36, 34, 33, 45 )
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/solid_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 8
@@ -66,6 +110,7 @@ collision_mask = 8
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 10 )
 position = Vector2( -3.8147e-06, -3.8147e-06 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
@@ -84,13 +129,13 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 shape = SubResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 3 )
-anims/heal = SubResource( 4 )
-anims/hit = SubResource( 5 )
-
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/heal = SubResource( 8 )
+anims/hit = SubResource( 9 )
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

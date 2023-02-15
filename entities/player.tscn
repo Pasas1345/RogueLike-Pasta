@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/entities/peco.png" type="Texture" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://src/entities/player/player_weapon.gd" type="Script" id=4]
 [ext_resource path="res://src/entities/player/player_itemaimer.gd" type="Script" id=5]
 [ext_resource path="res://entities/items/effects/beam_item_laser.tscn" type="PackedScene" id=6]
+[ext_resource path="res://shaders/entity_generic.gdshader" type="Shader" id=7]
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = ExtResource( 7 )
+shader_param/solid_color = Color( 1, 1, 1, 1 )
+shader_param/flash = false
 
 [sub_resource type="OccluderPolygon2D" id=13]
 polygon = PoolVector2Array( -36, -36, 10, -36, 27, -22, 36, -6, 36, 36, -36, 36 )
@@ -339,7 +345,7 @@ extents = Vector2( 36, 35.8666 )
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Sprite:material:shader_param/flash")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -348,39 +354,76 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/solid_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=4]
 resource_name = "heal"
-length = 0.25
+length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Sprite:material:shader_param/solid_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.329412, 1, 0.368627, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 0, 1, 0.0392157, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/flash")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.00138778, 0.101388, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false ]
 }
 
 [sub_resource type="Animation" id=3]
 resource_name = "hit"
-length = 0.25
+length = 0.1
+step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Sprite:material:shader_param/flash")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/solid_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Shader" id=15]
@@ -417,6 +460,7 @@ script = ExtResource( 1 )
 speed = 250.0
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 17 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
 
