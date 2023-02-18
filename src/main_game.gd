@@ -10,7 +10,8 @@ var spawner_delay = 0.0
 var stage: Stage
 var enemies_left: int
 var can_pause: bool = true
-var player_fighting: bool = false
+var player: Entity
+var player_fighting: bool = false setget set_player_fighting
 
 var first_loop: bool = true
 var loop: int = 0
@@ -31,8 +32,23 @@ var item_nodes = {
 
 func update_stage():
 	stage = get_tree().get_nodes_in_group("main_stage")[0]
+	player = get_tree().get_nodes_in_group("player")[0]
 	enemies_left = stage.enemies
 	stage_cleared = false
+	stage_custom_spawns = stage.custom_spawns
+
+	# print(player.music_player.playing_tracks.size())
+
+	# yield(get_tree().create_timer(2.0), "timeout")
+
+	# MusicController.music.init_song("transition")
+	# MusicController.music.play("transition")
+
+	if stage_custom_spawns:
+		set_player_fighting(false)
+	else:
+		set_player_fighting(true)
+
 	randomize()
 
 func _ready():
@@ -50,14 +66,15 @@ func _process(_delta):
 	if !stage:
 		return
 	
-	if spawner_delay > 0:
-		spawner_delay -= _delta
-
-	if stage.enemies > 0:
-		if spawner_delay <= 0:
-			spawn_enemy(EnemyTypes.KYARU)
-			spawner_delay = rand_range(1.2, 2.5)
-			stage.enemies -= 1
+	if !stage_custom_spawns:
+		if spawner_delay > 0:
+			spawner_delay -= _delta
+	
+		if stage.enemies > 0:
+			if spawner_delay <= 0:
+				spawn_enemy(EnemyTypes.KYARU)
+				spawner_delay = rand_range(1.2, 2.5)
+				stage.enemies -= 1
 
 	if enemies_left <= 0 && !stage_cleared:
 		stage_cleared = true
@@ -117,8 +134,10 @@ func spawn_item(item_type = "", position = null):
 
 func reset():
 	stage = null
+	player = null
 	stage_counter = 0
 	game_time = 0
+	can_pause = true
 
 func stage_clear():
 	print("stage clear!")
@@ -134,6 +153,21 @@ func stage_clear():
 		# print("xd")
 		for i in get_tree().get_nodes_in_group("item_spawner")[0].get_children().size():
 			spawn_item("", i)
-			
+	
+	set_player_fighting(false)
 
 	get_tree().get_nodes_in_group("portal")[0].set_active(true)
+
+# TODO: FIX THE GOD DAMN MUSIC LOL
+func set_player_fighting(fight):
+	player_fighting = fight
+
+	print("player fighting? {0}".format([player_fighting]))
+
+	if player_fighting:
+		print("playing battle music")
+		MusicController.create_transition("transition", "battle")
+	else:
+		print("playing chill music")
+		MusicController.change_song("chill")
+		

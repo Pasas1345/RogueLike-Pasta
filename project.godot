@@ -40,7 +40,7 @@ config/icon="res://icon.png"
 
 player_stats="*res://src/entities/player/player_stats.gd"
 main_game="*res://src/main_game.gd"
-MixingDesk="*res://addons/mixing-desk/mixing_desk.gd"
+MusicController="*res://autoload/MusicController.tscn"
 
 [debug]
 
@@ -54,6 +54,10 @@ window/size/width=1920
 window/size/height=1080
 window/size/borderless=true
 window/size/fullscreen=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/mixing-desk/plugin.cfg" )
 
 [gui]
 

@@ -115,6 +115,15 @@ func pause():
 		pause_menu.set_process(false)
 
 
+func game_over():
+	main_game.can_pause = false
+	$Pause_Menu/resume.disabled = true
+	pause_menu.visible = true
+	pause_menu.set_process(true)
+	$PauseBG.visible = false
+	$Pause_Menu/title.text = "Game Over!"
+
+
 # Pause Menu Buttons.
 func _on_resume_pressed():
 	pause()
@@ -122,6 +131,7 @@ func _on_resume_pressed():
 func _on_main_menu_pressed():
 	get_tree().paused = false
 	get_tree().change_scene("res://levels/main_menu.tscn")
+	$Pause_Menu/title.text = "Game Paused"
 	main_game.reset()
 
 func _on_quit_pressed():

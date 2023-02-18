@@ -13,7 +13,7 @@ var attack_seq_multipliers := [
 	1.0,
 	0.8,
 	1.5,
-	1.15,
+	0.75,
 	1.35
 ]
 

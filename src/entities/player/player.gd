@@ -35,6 +35,7 @@ func _ready():
 	else:
 		player_stats.sync_global_to_player()
 
+
 	weapon.player = self
 
 func _process(_delta):
@@ -164,6 +165,8 @@ func die():
 	print("player death")
 	_sprite.modulate = Color(0.75, 0.25, 0.25)
 	dead = true
+	ui.game_over()
+	main_game.set_player_fighting(false)
 
 func update_stats():
 	max_speed = speed

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://sprites/tiles/pixel_dungeon_tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://entities/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/UserInterface.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/stage.gd" type="Script" id=4]
 [ext_resource path="res://entities/portal.tscn" type="PackedScene" id=5]
@@ -158,3 +158,11 @@ visible = false
 position = Vector2( 776, 504 )
 next_stage = 3
 stage_path = "main_stages/stage"
+
+[node name="item_spawners" type="Node2D" parent="." groups=["item_spawner"]]
+
+[node name="item" type="Position2D" parent="item_spawners"]
+position = Vector2( 896, 511 )
+
+[node name="item2" type="Position2D" parent="item_spawners"]
+position = Vector2( 664, 512 )
