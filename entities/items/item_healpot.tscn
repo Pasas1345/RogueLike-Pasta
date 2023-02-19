@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/entities/items/item.gd" type="Script" id=2]
+[ext_resource path="res://shaders/item_generic.gdshader" type="Shader" id=3]
+[ext_resource path="res://sprites/items/health_potion.png" type="Texture" id=4]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/color = Color( 0, 0, 0, 1 )
+shader_param/width = 2.0
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12.6667, 12.6667 )
+
+[node name="KokkoroItem" type="Area2D"]
+collision_layer = 128
+input_pickable = false
+monitorable = false
+script = ExtResource( 2 )
+item_id = "item_healpot"
+item_icon = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( -4.76837e-07, 0.759998 )
+scale = Vector2( 0.59375, 0.52 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_Item_body_entered"]

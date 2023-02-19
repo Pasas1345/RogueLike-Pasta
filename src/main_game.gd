@@ -26,7 +26,7 @@ var enemy_nodes = {
 }
 
 var item_nodes = {
-	"item_kokkoro": preload("res://entities/items/item_kokkoro.tscn"),
+	"item_healpot": preload("res://entities/items/item_healpot.tscn"),
 	"item_laser": preload("res://entities/items/item_laser.tscn")
 }
 
@@ -88,12 +88,12 @@ func advance_time():
 	game_time += 1
 
 
-func spawn_enemy(enemy_type):
+func spawn_enemy(enemy_type, spawner_array = null):
 	if !get_tree().get_nodes_in_group("spawners"):
 		printerr("Warning: No spawners in stage detected. Spawning an enemy has failed.")
 		return
 
-	var enemy_spawners = get_tree().get_nodes_in_group("spawners")[0].get_children()
+	var enemy_spawners = get_tree().get_nodes_in_group("spawners")[0].get_children() if spawner_array == null else spawner_array
 	var enemy
 
 	match(enemy_type):
@@ -138,6 +138,7 @@ func reset():
 	stage_counter = 0
 	game_time = 0
 	can_pause = true
+	MusicController.stop_playing()
 
 func stage_clear():
 	print("stage clear!")
@@ -166,6 +167,7 @@ func set_player_fighting(fight):
 
 	if player_fighting:
 		print("playing battle music")
+		MusicController.stop_playing()
 		MusicController.create_transition("transition", "battle")
 	else:
 		print("playing chill music")

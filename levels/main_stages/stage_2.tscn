@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://sprites/tiles/pixel_dungeon_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://src/stage.gd" type="Script" id=4]
 [ext_resource path="res://entities/portal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sprites/glow.png" type="Texture" id=6]
+[ext_resource path="res://src/stage_area.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 254.5, 509.5 )
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -512, 1088, -512, 192, -128, 192, -128, 512, 576, 512, 576, 320, 960, 320, 960, 512, 1472, 512, 1472, 192, 1856, 192, 1856, 960, 1472, 576, 1472, 960, 960, 576, 1213.96, 512, 832, 704, 768, 704, 576, 576, 960, 704, 832, 1408, 1344, 1408, 1344, 1664, 640, 1664, 640, 1408, 768, 1408, 576, 704, -128, 576, -128, 1088 )
@@ -34,7 +38,20 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 131101, 6, 65541, 262135, 6, 65537, 262152, 6, 65539, 262159, 6, 65539, 720904, 6, 65539, 720911, 6, 65539, 983069, 6, 65541, 1114103, 6, 65537, 1703945, 6, 65539, 1703957, 6, 65539 )
 
-[node name="Light2D10" type="Light2D" parent="Map"]
+[node name="Areas" type="Node2D" parent="Map"]
+
+[node name="area1" type="Area2D" parent="Map/Areas"]
+position = Vector2( -408, 340 )
+monitorable = false
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Areas/area1"]
+position = Vector2( 86.5, 302.5 )
+shape = SubResource( 2 )
+
+[node name="lights" type="Node2D" parent="Map"]
+
+[node name="Light2D10" type="Light2D" parent="Map/lights"]
 position = Vector2( 960, 320 )
 texture = ExtResource( 6 )
 texture_scale = 3.81
@@ -42,7 +59,7 @@ color = Color( 1, 0.756863, 0.176471, 1 )
 energy = 0.99
 shadow_enabled = true
 
-[node name="Light2D12" type="Light2D" parent="Map"]
+[node name="Light2D12" type="Light2D" parent="Map/lights"]
 position = Vector2( 960, 704 )
 texture = ExtResource( 6 )
 texture_scale = 3.81
@@ -50,7 +67,7 @@ color = Color( 1, 0.756863, 0.176471, 1 )
 energy = 0.99
 shadow_enabled = true
 
-[node name="Light2D13" type="Light2D" parent="Map"]
+[node name="Light2D13" type="Light2D" parent="Map/lights"]
 position = Vector2( 576, 704 )
 texture = ExtResource( 6 )
 texture_scale = 3.81
@@ -58,7 +75,7 @@ color = Color( 1, 0.756863, 0.176471, 1 )
 energy = 0.99
 shadow_enabled = true
 
-[node name="Light2D11" type="Light2D" parent="Map"]
+[node name="Light2D11" type="Light2D" parent="Map/lights"]
 position = Vector2( 576, 320 )
 texture = ExtResource( 6 )
 texture_scale = 3.81
@@ -66,7 +83,7 @@ color = Color( 1, 0.756863, 0.176471, 1 )
 energy = 0.99
 shadow_enabled = true
 
-[node name="Light2D3" type="Light2D" parent="Map"]
+[node name="Light2D3" type="Light2D" parent="Map/lights"]
 position = Vector2( -512, 192 )
 texture = ExtResource( 6 )
 texture_scale = 6.75
@@ -74,7 +91,7 @@ color = Color( 1, 0.756863, 0.176471, 1 )
 energy = 1.39
 shadow_enabled = true
 
-[node name="Light2D4" type="Light2D" parent="Map"]
+[node name="Light2D4" type="Light2D" parent="Map/lights"]
 position = Vector2( -512, 1088 )
 texture = ExtResource( 6 )
 texture_scale = 6.75
@@ -82,7 +99,7 @@ color = Color( 1, 0.756863, 0.176471, 1 )
 energy = 1.39
 shadow_enabled = true
 
-[node name="Light2D5" type="Light2D" parent="Map"]
+[node name="Light2D5" type="Light2D" parent="Map/lights"]
 position = Vector2( 1856, 960 )
 texture = ExtResource( 6 )
 texture_scale = 6.75
@@ -90,7 +107,7 @@ color = Color( 1, 0.756863, 0.176471, 1 )
 energy = 1.39
 shadow_enabled = true
 
-[node name="Light2D6" type="Light2D" parent="Map"]
+[node name="Light2D6" type="Light2D" parent="Map/lights"]
 position = Vector2( 1856, 192 )
 texture = ExtResource( 6 )
 texture_scale = 6.75
@@ -98,7 +115,7 @@ color = Color( 1, 0.756863, 0.176471, 1 )
 energy = 1.39
 shadow_enabled = true
 
-[node name="Light2D8" type="Light2D" parent="Map"]
+[node name="Light2D8" type="Light2D" parent="Map/lights"]
 position = Vector2( 640, 1664 )
 texture = ExtResource( 6 )
 texture_scale = 6.75
@@ -106,7 +123,7 @@ color = Color( 1, 0.756863, 0.176471, 1 )
 energy = 1.39
 shadow_enabled = true
 
-[node name="Light2D9" type="Light2D" parent="Map"]
+[node name="Light2D9" type="Light2D" parent="Map/lights"]
 position = Vector2( 1344, 1664 )
 texture = ExtResource( 6 )
 texture_scale = 6.75
@@ -166,3 +183,5 @@ position = Vector2( 896, 511 )
 
 [node name="item2" type="Position2D" parent="item_spawners"]
 position = Vector2( 664, 512 )
+
+[connection signal="body_entered" from="Map/Areas/area1" to="Map/Areas/area1" method="_on_area1_body_entered"]

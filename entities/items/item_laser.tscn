@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://sprites/laser.png" type="Texture" id=1]
+[ext_resource path="res://sprites/items/laser.png" type="Texture" id=1]
 [ext_resource path="res://src/entities/items/item.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -9,6 +9,7 @@ extents = Vector2( 10.6667, 10.6667 )
 [node name="LaserItem" type="Area2D"]
 collision_layer = 128
 input_pickable = false
+monitorable = false
 script = ExtResource( 2 )
 item_id = "item_laser"
 item_icon = ExtResource( 1 )

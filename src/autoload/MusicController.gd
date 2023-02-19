@@ -38,10 +38,11 @@ func fade_in(song, fade: float):
 func change_song(song):
 	var song_idx = get_song_index(song)
 
-	fade_out(current_playing_idx, 0.5)
+	if current_playing_idx == song_idx:
+		return
 
+	song_list[current_playing_idx].stop()
 	play_song(song_idx)
-	fade_in(song_idx, 0.5)
 
 
 func play_song(song):
@@ -54,5 +55,12 @@ func create_transition(transition_song, song):
 	var transition_song_idx = get_song_index(transition_song)
 
 	play_song(transition_song_idx)
-	yield(song_list[transition_song_idx], "finished")
+	# print(song_list[transition_song_idx].stream.get_length())
+	yield(get_tree().create_timer(song_list[transition_song_idx].stream.get_length() + 0.055), "timeout")
 	play_song(song_idx)
+
+func stop_playing():
+	if !current_playing_idx:
+		return
+
+	song_list[current_playing_idx].stop()

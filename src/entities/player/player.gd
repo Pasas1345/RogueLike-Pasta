@@ -149,8 +149,8 @@ func use_item(item: Item_Entry):
 	is_using_item = true
 
 	match(itemid):
-		"item_kokkoro":
-			change_health(25)
+		"item_healpot":
+			change_health(floor(max_hp * (0.25 + (0.25 * item_strength))))
 		"item_laser":
 			items_effects.get_node("Laser_Item").set_is_casting(true)
 			yield(get_tree().create_timer(5.0), "timeout")
