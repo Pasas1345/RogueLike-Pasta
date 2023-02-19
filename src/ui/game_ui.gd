@@ -120,7 +120,7 @@ func game_over():
 	$Pause_Menu/resume.disabled = true
 	pause_menu.visible = true
 	pause_menu.set_process(true)
-	$PauseBG.visible = false
+	$PauseBG.visible = true
 	$Pause_Menu/title.text = "Game Over!"
 
 

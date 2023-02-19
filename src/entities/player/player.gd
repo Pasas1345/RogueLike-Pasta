@@ -150,7 +150,7 @@ func use_item(item: Item_Entry):
 
 	match(itemid):
 		"item_healpot":
-			change_health(floor(max_hp * (0.25 + (0.25 * item_strength))))
+			change_health(floor(max_hp * (0.25 * item_strength)))
 		"item_laser":
 			items_effects.get_node("Laser_Item").set_is_casting(true)
 			yield(get_tree().create_timer(5.0), "timeout")

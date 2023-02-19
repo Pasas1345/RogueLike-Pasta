@@ -1,13 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://sounds/music/battletheme1.mp3" type="AudioStream" id=1]
 [ext_resource path="res://sounds/music/transition_battletheme1.mp3" type="AudioStream" id=2]
 [ext_resource path="res://sounds/music/battletheme1_chill.mp3" type="AudioStream" id=3]
+[ext_resource path="res://sounds/music/battletheme1_chill_full.mp3" type="AudioStream" id=4]
+[ext_resource path="res://sounds/music/battletheme1_full.mp3" type="AudioStream" id=5]
 [ext_resource path="res://src/autoload/MusicController.gd" type="Script" id=7]
 [ext_resource path="res://sounds/music/Refreshing Breeze.mp3" type="AudioStream" id=8]
 
 [node name="MusicController" type="Node"]
 script = ExtResource( 7 )
+
+[node name="battle_full" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="chill_full" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [node name="transition" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )

@@ -3,6 +3,7 @@ extends Entity
 onready var player = get_tree().get_nodes_in_group("player")[0]
 var attack_cooldown = 0.0
 var attacking: Node
+var area: Battle_Area
 
 func _process(_delta):
 	if dead:
@@ -28,6 +29,10 @@ func _on_PlayerDetector_body_exited(_body:Node):
 
 func die():
 	main_game.enemies_left -= 1
+	# print(area)
+	if area:
+		area.enemies_left_area -= 1
+
 	dead = true
 	
 	randomize()

@@ -41,7 +41,8 @@ func change_song(song):
 	if current_playing_idx == song_idx:
 		return
 
-	song_list[current_playing_idx].stop()
+	if current_playing_idx != null:
+		song_list[current_playing_idx].stop()
 	play_song(song_idx)
 
 
@@ -60,7 +61,8 @@ func create_transition(transition_song, song):
 	play_song(song_idx)
 
 func stop_playing():
-	if !current_playing_idx:
+	if current_playing_idx == null:
 		return
 
 	song_list[current_playing_idx].stop()
+	print("stopping music")

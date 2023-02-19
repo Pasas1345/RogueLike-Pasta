@@ -102,13 +102,15 @@ func spawn_enemy(enemy_type, spawner_array = null):
 
 
 	var new_enemy = enemy.instance()
-	new_enemy.set_position(enemy_spawners[randi() % enemy_spawners.size()].position)
+	new_enemy.set_position(enemy_spawners[randi() % enemy_spawners.size()].global_position)
 	new_enemy.add_to_group("enemies")
 	get_tree().current_scene.add_child(new_enemy)
 
-func spawn_item(item_type = "", position = null):
-	if !get_tree().get_nodes_in_group("item_spawner"):
-		printerr("Warning: No Item spawners in stage detecte. Item drops will not spawn.")
+	return new_enemy
+
+func spawn_item(item_type = "", position: Node = null):
+	if !get_tree().get_nodes_in_group("item_spawner") && !position:
+		printerr("Warning: No Item spawners in stage detected. No custom position added. Item drops will not spawn.")
 		return
 
 	var item_spawners = get_tree().get_nodes_in_group("item_spawner")[0].get_children()
@@ -126,8 +128,13 @@ func spawn_item(item_type = "", position = null):
 			item = item_nodes[item_keys[randi() % item_keys.size()]]
 
 	var new_item = item.instance()
-	var spawner_index = randi() % item_spawners.size() if position == null else position
-	new_item.set_position(item_spawners[spawner_index].position)
+	var spawner_index = randi() % item_spawners.size()
+
+	if position:
+		new_item.set_position(position.global_position)
+	else:
+		new_item.set_position(item_spawners[spawner_index].global_position)
+		
 	get_tree().current_scene.add_child(new_item)
 	
 
@@ -152,7 +159,7 @@ func stage_clear():
 
 	if get_tree().get_nodes_in_group("item_spawner"):
 		# print("xd")
-		for i in get_tree().get_nodes_in_group("item_spawner")[0].get_children().size():
+		for i in get_tree().get_nodes_in_group("item_spawner")[0].get_children():
 			spawn_item("", i)
 	
 	set_player_fighting(false)
@@ -167,9 +174,10 @@ func set_player_fighting(fight):
 
 	if player_fighting:
 		print("playing battle music")
-		MusicController.stop_playing()
-		MusicController.create_transition("transition", "battle")
+		# MusicController.stop_playing()
+		# MusicController.create_transition("transition", "battle")
+		MusicController.change_song("battle_full")
 	else:
 		print("playing chill music")
-		MusicController.change_song("chill")
+		MusicController.change_song("chill_full")
 		
