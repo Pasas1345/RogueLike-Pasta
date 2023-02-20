@@ -4,7 +4,7 @@ onready var _weapon_sprite := $Pivot/PecorineSword
 onready var _anim_player := $Pivot/AnimationPlayer
 onready var _pivot := $Pivot
 var player
-var attackable = []
+# var attackable = []
 
 export var attack_sequence := 0
 export var can_next_sequence := false
@@ -25,7 +25,6 @@ func _process(_delta):
 		attack_sequence = 0
 
 func _physics_process(_delta):
-	# if !player.is_attacking:
 	if !player.dead:
 		look_at(get_global_mouse_position())
 
@@ -41,8 +40,6 @@ func start_attack():
 		_anim_player.play("attack{0}".format([attack_sequence + 1]))
 		attack_sequence += 1
 
-
 func _on_hitbox_body_entered(body:Node):
 	if body.has_method("change_health") && body != player:
-		# print("hit")
 		body.change_health(-player.attack * attack_seq_multipliers[attack_sequence - 1])

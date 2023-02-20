@@ -9,7 +9,6 @@ export var enemy_count: int
 onready var enemies_left_area: int = enemy_count
 var cleared: bool = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(door).call_deferred("set_collision_layer_bit", 0, false)
 	get_node(door).call_deferred("set_collision_mask_bit", 0, false)
@@ -19,7 +18,6 @@ func _ready():
 		printerr("Warning: Group name doesn't have any spawners. No spawning.")
 
 	connect("body_entered", self, "_on_area1_body_entered")
-
 
 func _on_area1_body_entered(body:Node):
 	if body == main_game.player:
