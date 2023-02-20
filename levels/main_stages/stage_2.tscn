@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://sprites/tiles/pixel_dungeon_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://src/stage.gd" type="Script" id=4]
 [ext_resource path="res://entities/portal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sprites/glow.png" type="Texture" id=6]
-[ext_resource path="res://src/stage_area.gd" type="Script" id=7]
 [ext_resource path="res://src/stage_area.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -57,7 +56,7 @@ tile_data = PoolIntArray( 524287, 3, 131073, 458773, 3, 131074, 589823, 3, 65537
 [node name="area1" type="Area2D" parent="Map/Areas"]
 position = Vector2( -408, 340 )
 monitorable = false
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 area_spawners_group = "area1_eSpawners"
 item_spawner = NodePath("item")
 door = NodePath("../../doors")

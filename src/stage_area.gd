@@ -28,7 +28,6 @@ func _process(_delta):
 		print("area cleared")
 		end_fight()
 		cleared = true
-		
 
 func initiate_fight():
 	main_game.set_player_fighting(true)
