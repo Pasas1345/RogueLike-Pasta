@@ -6,12 +6,13 @@ var current_playing_idx
 func _ready():
 	song_list = get_children()
 
-
 func get_song_index(song):
 	if typeof(song) == TYPE_STRING:
 		var s = get_node(song)
 		if s != null:
 			return s.get_index()
+		else:
+			printerr("[MusicController] Error: Song node doesn't exist.")
 	else:
 		return song
 

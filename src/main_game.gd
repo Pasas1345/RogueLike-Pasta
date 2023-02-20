@@ -166,7 +166,7 @@ func stage_clear():
 
 	get_tree().get_nodes_in_group("portal")[0].set_active(true)
 
-# TODO: FIX THE GOD DAMN MUSIC LOL
+# TODO: Make the music blend in seamlessly. probably have to figure that out.
 func set_player_fighting(fight):
 	player_fighting = fight
 
