@@ -23,6 +23,7 @@ void fragment() {
 				vec4 reflection = texture(SCREEN_TEXTURE, reflected_screenuv);
 				
 				COLOR.rgb = mix(reflection.rgb, water_color.rgb, water_color.a);
+				// COLOR.rgb = reflection.rgb;
 			}
 		}
 	}

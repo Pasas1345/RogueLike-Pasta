@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=29 format=2]
+[gd_resource type="TileSet" load_steps=36 format=2]
 
 [ext_resource path="res://sprites/tiles/placeholder/Cliff.png" type="Texture" id=1]
 [ext_resource path="res://sprites/tiles/placeholder/Ground Tileset.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://sprites/tiles/placeholder/Water Tileset.png" type="Texture" id=5]
 [ext_resource path="res://sprites/tiles/placeholder/Trees.png" type="Texture" id=6]
 [ext_resource path="res://sprites/tiles/placeholder/Water Flora.png" type="Texture" id=7]
+[ext_resource path="res://shaders/water.gdshader" type="Shader" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -61,6 +62,44 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=21]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="OpenSimplexNoise" id=22]
+seed = 9
+period = 53.0
+
+[sub_resource type="NoiseTexture" id=23]
+seamless = true
+noise = SubResource( 22 )
+
+[sub_resource type="ShaderMaterial" id=24]
+resource_local_to_scene = true
+render_priority = 5
+shader = ExtResource( 8 )
+shader_param/target_color = Color( 0.203922, 0.564706, 0.592157, 1 )
+shader_param/water_color = Color( 0.203922, 0.564706, 0.592157, 0.803922 )
+shader_param/scale = Vector2( 64, 64 )
+shader_param/distortion_scale = Vector2( 0.036, 0.036 )
+shader_param/y_zoom = 0.0
+shader_param/intensity = 0.127
+shader_param/speed = 0.02
+shader_param/noise = SubResource( 23 )
+
+[sub_resource type="OpenSimplexNoise" id=25]
+
+[sub_resource type="NoiseTexture" id=26]
+seamless = true
+noise = SubResource( 25 )
+
+[sub_resource type="ShaderMaterial" id=27]
+shader = ExtResource( 8 )
+shader_param/target_color = Color( 0.203922, 0.564706, 0.592157, 1 )
+shader_param/water_color = Color( 0.203922, 0.564706, 0.592157, 0.701961 )
+shader_param/scale = Vector2( 64, 64 )
+shader_param/distortion_scale = Vector2( 0.036, 0.036 )
+shader_param/y_zoom = 0.0
+shader_param/intensity = 0.249
+shader_param/speed = 0.051
+shader_param/noise = SubResource( 26 )
 
 [sub_resource type="ConvexPolygonShape2D" id=18]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -679,6 +718,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 24/name = "Water Tileset.png 24"
 24/texture = ExtResource( 5 )
 24/tex_offset = Vector2( 0, 0 )
+24/material = SubResource( 24 )
 24/modulate = Color( 1, 1, 1, 1 )
 24/region = Rect2( 0, 0, 176, 80 )
 24/tile_mode = 1
@@ -702,6 +742,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 25/name = "Water Tileset.png 25"
 25/texture = ExtResource( 5 )
 25/tex_offset = Vector2( 0, 0 )
+25/material = SubResource( 27 )
 25/modulate = Color( 1, 1, 1, 1 )
 25/region = Rect2( 0, 80, 176, 80 )
 25/tile_mode = 1

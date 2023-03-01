@@ -13,6 +13,9 @@ func _ready():
 func _process(_delta):
 	target_pos = target[0].position
 	set_target_location(target_pos)
+
+	if parent._movement_anims.has_animation("movement"):
+		parent._movement_anims.play("movement")
 	
 
 func _physics_process(_delta):

@@ -18,11 +18,13 @@ var loop: int = 0
 
 enum EnemyTypes {
 	KYARU,
+	SLIME,
 }
 
 
 var enemy_nodes = {
-	EnemyTypes.KYARU: preload("res://entities/enemies/enemy.tscn")
+	EnemyTypes.KYARU: preload("res://entities/enemies/enemy.tscn"),
+	EnemyTypes.SLIME: preload("res://entities/enemies/slime.tscn")
 }
 
 var item_nodes = {
@@ -72,7 +74,7 @@ func _process(_delta):
 	
 		if stage.enemies > 0:
 			if spawner_delay <= 0:
-				spawn_enemy(EnemyTypes.KYARU)
+				spawn_enemy()
 				spawner_delay = rand_range(1.2, 2.5)
 				stage.enemies -= 1
 
@@ -88,7 +90,7 @@ func advance_time():
 	game_time += 1
 
 
-func spawn_enemy(enemy_type, spawner_array = null):
+func spawn_enemy(enemy_type = null, spawner_array = null):
 	if !get_tree().get_nodes_in_group("spawners"):
 		printerr("Warning: No spawners in stage detected. Spawning an enemy has failed.")
 		return
@@ -97,8 +99,15 @@ func spawn_enemy(enemy_type, spawner_array = null):
 	var enemy
 
 	match(enemy_type):
-		_:
+		EnemyTypes.KYARU:
 			enemy = enemy_nodes[EnemyTypes.KYARU]
+		EnemyTypes.SLIME:
+			enemy = enemy_nodes[EnemyTypes.SLIME]
+		_:
+			randomize()
+			var enemy_keys: Array = enemy_nodes.keys()
+		
+			enemy = enemy_nodes[enemy_keys[randi() % enemy_keys.size()]]
 
 
 	var new_enemy = enemy.instance()

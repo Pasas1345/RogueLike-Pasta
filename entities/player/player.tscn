@@ -137,6 +137,7 @@ speed = 250.0
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 17 )
+position = Vector2( 0.855383, 9.53674e-07 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
 
@@ -160,6 +161,8 @@ smoothing_speed = 7.5
 anims/RESET = SubResource( 2 )
 anims/heal = SubResource( 4 )
 anims/hit = SubResource( 3 )
+
+[node name="MovementAnimation" type="AnimationPlayer" parent="."]
 
 [node name="ItemAimer" type="Node2D" parent="."]
 script = ExtResource( 5 )

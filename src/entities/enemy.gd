@@ -17,7 +17,7 @@ func _physics_process(delta):
 	if attacking != null:
 		if attack_cooldown <= 0:
 			attack_cooldown = 1 / attack_speed
-			attacking.change_health(-10)
+			attacking.change_health(-attack)
 	
 
 func _on_PlayerDetector_body_entered(body:Node):

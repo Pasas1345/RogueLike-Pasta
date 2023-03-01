@@ -14,6 +14,7 @@ var dead = false
 
 onready var _sprite: Sprite = $Sprite
 onready var _anim_player = $AnimationPlayer
+onready var _movement_anims = $MovementAnimation
 var velocity: = Vector2.ZERO
 
 func _ready():

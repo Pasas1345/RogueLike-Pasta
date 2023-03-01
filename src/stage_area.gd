@@ -20,7 +20,7 @@ func _ready():
 	connect("body_entered", self, "_on_area1_body_entered")
 
 func _on_area1_body_entered(body:Node):
-	if body == main_game.player:
+	if body == main_game.player && !cleared:
 		initiate_fight()
 
 func _process(_delta):
