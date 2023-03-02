@@ -1,8 +1,9 @@
 shader_type canvas_item;
 
-uniform vec4 target_color : hint_color;
-uniform vec4 water_color : hint_color;
+uniform vec4 target_color : source_color;
+uniform vec4 water_color : source_color;
 uniform sampler2D noise;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform vec2 scale;
 uniform vec2 distortion_scale;
 uniform float y_zoom;

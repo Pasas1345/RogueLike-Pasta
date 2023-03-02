@@ -2,27 +2,28 @@ extends Control
 
 var player
 
-onready var health: = $health_label_bg/health_label
-onready var health_bar := $health_bar/health_bar_bg
-onready var backpack_slots = $backpack_slots
-onready var fps = $fps_counter
-onready var pause_menu = $Pause_Menu
-onready var stage_label := $loop_stage_container/stage_label
-onready var loop_label := $loop_stage_container/loop_label
-onready var time_label := $time_label
+@onready var health: = $health_label_bg/health_label
+@onready var health_bar := $health_bar/health_bar_bg
+@onready var backpack_slots = $backpack_slots
+@onready var fps = $fps_counter
+@onready var pause_menu = $Pause_Menu
+@onready var stage_label := $loop_stage_container/stage_label
+@onready var loop_label := $loop_stage_container/loop_label
+@onready var time_label := $time_label
+@onready var loading_screen = $loading_screen
 
 func _init():
 	add_to_group("ui")
 
 func _ready():
-	Engine.set_target_fps(int(OS.get_screen_refresh_rate() * 3.0))
+	Engine.max_fps = int(DisplayServer.screen_get_refresh_rate() * 3.0)
 	player = get_tree().get_nodes_in_group("player")[0]
 	update_inventory()
 
 	$loading_screen.visible = true
 	var tween = create_tween().set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property($loading_screen, "modulate", Color(0, 0, 0, 0), 0.4)
-	yield(tween, "finished")
+	tween.tween_property(loading_screen, "modulate", Color(0, 0, 0, 0), 0.4)
+	await tween.finished
 	$loading_screen.visible = false
 	
 	
@@ -30,7 +31,7 @@ func _process(_delta):
 	health.text = "{0}/{1}".format([clamp(player.hp, 0, player.max_hp), player.max_hp])
 
 	var healthbar_tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
-	healthbar_tween.tween_property(health_bar, "rect_size", Vector2(range_lerp(player.hp, 0, player.max_hp, 0, 309), 49), 0.1)
+	healthbar_tween.tween_property(health_bar, "size", Vector2(remap(player.hp, 0, player.max_hp, 0, 309), 49), 0.1)
 
 	fps.text = "FPS: {0}".format([Engine.get_frames_per_second()])
 	
@@ -61,7 +62,7 @@ var inv_sprites = []
 var pending_deletion = []
 
 func update_inventory():
-	if player.inventory.empty():
+	if player.inventory.is_empty():
 		for n in inv_sprites:
 			backpack_slots.remove_child(n)
 			pending_deletion.push_back(n)
@@ -80,10 +81,10 @@ func update_inventory():
 		inv_sprites.clear()
 	
 		for i in range(0, player.inventory.size()):
-			var item_placement = backpack_slots.rect_pivot_offset + Vector2(64, (i * 128) + 64)
+			var item_placement = backpack_slots.pivot_offset + Vector2(64, (i * 128) + 64)
 			# inv_sprites.clear()
 	
-			var new_item_sprite = Sprite.new()
+			var new_item_sprite = Sprite2D.new()
 			backpack_slots.add_child(new_item_sprite)
 			new_item_sprite.texture = player.inventory[i].item_icon
 			new_item_sprite.position = item_placement
@@ -130,7 +131,7 @@ func _on_resume_pressed():
 
 func _on_main_menu_pressed():
 	get_tree().paused = false
-	get_tree().change_scene("res://levels/main_menu.tscn")
+	get_tree().change_scene_to_file("res://levels/main_menu.tscn")
 	$Pause_Menu/title.text = "Game Paused"
 	main_game.reset()
 

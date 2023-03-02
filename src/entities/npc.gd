@@ -12,7 +12,7 @@ func _ready():
 	
 func _process(_delta):
 	target_pos = target[0].position
-	set_target_location(target_pos)
+	target_position = target_pos
 
 	if parent._movement_anims.has_animation("movement"):
 		parent._movement_anims.play("movement")
@@ -22,10 +22,10 @@ func _physics_process(_delta):
 	if is_navigation_finished():
 		return
 	
-	parent.position = parent.position.move_toward(get_next_location(), _delta * parent.speed)
+	parent.position = parent.position.move_toward(next_location, _delta * parent.speed)
 
-	if parent.position.direction_to(get_next_location()).x < 0:
-		parent.get_node("Sprite").set_flip_h(true)
-	elif parent.position.direction_to(get_next_location()).x > 0:
-		parent.get_node("Sprite").set_flip_h(false)
+	if parent.position.direction_to(next_location).x < 0:
+		parent.get_node("Sprite2D").set_flip_h(true)
+	elif parent.position.direction_to(next_location).x > 0:
+		parent.get_node("Sprite2D").set_flip_h(false)
 	

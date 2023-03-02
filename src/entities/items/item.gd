@@ -1,10 +1,10 @@
 extends Area2D
 class_name Item
 
-export var item_id: = "item_kokkoro"
-export var item_icon: Texture
+@export var item_id: = "item_kokkoro"
+@export var item_icon: Texture2D
 
-onready var _sprite = $Sprite
+@onready var _sprite = $Sprite2D
 
 func _ready():
 	if !item_icon:

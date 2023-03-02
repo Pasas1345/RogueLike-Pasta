@@ -1,8 +1,8 @@
 extends Node2D
 class_name Stage
 
-export var enemies: int
-export var custom_spawns: bool
+@export var enemies: int
+@export var custom_spawns: bool
 
 func _init():
 	add_to_group("main_stage")

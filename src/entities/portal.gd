@@ -1,35 +1,35 @@
 extends Node2D
 
-export var next_stage: int
-export var stage_path: String
+@export var next_stage: int
+@export var stage_path: String
 
-onready var animation: = $AnimationPlayer
+@onready var animation: = $AnimationPlayer
 
-var selected: bool = false setget set_selected
+var selected: bool = false : set = set_selected
 
-var active setget set_active
+var active : set = set_active
 
 func set_active(act):
 	active = act
 	if act:
 		visible = true
-		$Sprite.scale = Vector2(0, 0)
+		$Sprite2D.scale = Vector2(0, 0)
 		var tween = create_tween().set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-		tween.tween_property($Sprite, "scale", Vector2(2.32, 2.32), 0.5)
+		tween.tween_property($Sprite2D, "scale", Vector2(2.32, 2.32), 0.5)
 	else:
 		visible = false
 		var tween = create_tween().set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-		tween.tween_property($Sprite, "scale", Vector2(0, 0), 0.5)
+		tween.tween_property($Sprite2D, "scale", Vector2(0, 0), 0.5)
 
 func set_selected(select):
 	selected = select
 
 	if selected:
 		var tween = create_tween().set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-		tween.tween_property($Label, "rect_scale", Vector2(1, 1), 0.5)
+		tween.tween_property($Label, "scale", Vector2(1, 1), 0.5)
 	else:
 		var tween = create_tween().set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-		tween.tween_property($Label, "rect_scale", Vector2(0, 0), 0.5)
+		tween.tween_property($Label, "scale", Vector2(0, 0), 0.5)
 
 func _init():
 	add_to_group("portal")
@@ -60,7 +60,7 @@ func teleport():
 		$CanvasLayer/next_stage.text = "Stage {0}".format([main_game.stage_counter])
 	else:
 		$CanvasLayer/next_stage.text = "Loop {0}\nStage {1}".format([main_game.loop, main_game.stage_counter])
-	yield(animation, "animation_finished")
+	await animation.animation_finished
 	main_game.can_pause = true
-	get_tree().change_scene("res://levels/{0}_{1}.tscn".format([stage_path, next_stage]))
+	get_tree().change_scene_to_file("res://levels/{0}_{1}.tscn".format([stage_path, next_stage]))
 

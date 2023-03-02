@@ -1,13 +1,13 @@
 extends Node2D
 
-onready var _weapon_sprite := $Pivot/PecorineSword
-onready var _anim_player := $Pivot/AnimationPlayer
-onready var _pivot := $Pivot
+@onready var _weapon_sprite := $Pivot/PecorineSword
+@onready var _anim_player := $Pivot/AnimationPlayer
+@onready var _pivot := $Pivot
 var player
 # var attackable = []
 
-export var attack_sequence := 0
-export var can_next_sequence := false
+@export var attack_sequence := 0
+@export var can_next_sequence := false
 
 var attack_seq_multipliers := [
 	1.0,

@@ -1,13 +1,13 @@
 extends RayCast2D
 
-var is_casting = false setget set_is_casting
+var is_casting = false : set = set_is_casting
 
 func _ready():
 	set_physics_process(false)
 	$Line2D.points[1] = Vector2.ZERO
 
 func _physics_process(_delta):
-	var cast_point = cast_to
+	var cast_point = target_position
 	force_raycast_update()
 
 	$ImpactParticle.emitting = is_colliding()

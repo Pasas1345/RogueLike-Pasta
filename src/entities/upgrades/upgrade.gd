@@ -1,8 +1,8 @@
 extends Area2D
 class_name Upgrade
 
-export var upgrade_id: String
-export var upgrade_icon: Texture
+@export var upgrade_id: String
+@export var upgrade_icon: Texture2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

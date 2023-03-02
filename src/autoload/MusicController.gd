@@ -22,7 +22,7 @@ func fade_out(song, fade: float):
 	var tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 	tween.tween_property(target_song, "volume_db", -65.0, fade)
-	yield(get_tree().create_timer(fade), "timeout")
+	await get_tree().create_timer(fade).timeout
 	target_song.stop()
 
 	return fade
@@ -58,7 +58,7 @@ func create_transition(transition_song, song):
 
 	play_song(transition_song_idx)
 	# print(song_list[transition_song_idx].stream.get_length())
-	yield(get_tree().create_timer(song_list[transition_song_idx].stream.get_length() + 0.055), "timeout")
+	await get_tree().create_timer(song_list[transition_song_idx].stream.get_length() + 0.055).timeout
 	play_song(song_idx)
 
 func stop_playing():

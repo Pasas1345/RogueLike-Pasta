@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec4 solid_color: hint_color;
+uniform vec4 solid_color: source_color;
 uniform bool flash = false;
 
 void fragment() {

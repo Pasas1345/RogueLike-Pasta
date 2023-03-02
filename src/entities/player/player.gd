@@ -1,17 +1,17 @@
 extends Entity
 
-export var UP_Regen: = 1.0
-export var UP_EnergyRestore: = 10.0
-export var inv_slots: = 4
-export var item_strength = 1.0
-export var acceleration: = 0.1
-onready var max_acceleration: = acceleration
-onready var max_speed: = speed
+@export var UP_Regen: = 1.0
+@export var UP_EnergyRestore: = 10.0
+@export var inv_slots: = 4
+@export var item_strength = 1.0
+@export var acceleration: = 0.1
+@onready var max_acceleration: = acceleration
+@onready var max_speed: = speed
 var direction: = Vector2.ZERO
-onready var ui = get_tree().get_nodes_in_group("ui")[0]
-onready var weapon = $Weapon
-onready var items_effects = $ItemAimer
-onready var stamina_bar = $Stamina/StaminaBar
+@onready var ui = get_tree().get_nodes_in_group("ui")[0]
+@onready var weapon = $Weapon
+@onready var items_effects = $ItemAimer
+@onready var stamina_bar = $Stamina/StaminaBar
 
 var max_stamina = 100
 var stamina = max_stamina
@@ -47,11 +47,11 @@ func _process(_delta):
 
 	# Handle stamina here
 	if sprint_cooldown:
-		stamina_bar.material.set_shader_param('blinking', true)
-		# material.set_shader_param("game_time", OS.get_ticks_msec() * _delta * 0.5)
+		stamina_bar.material.set_shader_parameter('blinking', true)
+		# material.set_shader_parameter("game_time", Time.get_ticks_msec() * _delta * 0.5)
 	else:
-		stamina_bar.material.set_shader_param('blinking', false)
-		# material.set_shader_param("game_time", 0)
+		stamina_bar.material.set_shader_parameter('blinking', false)
+		# material.set_shader_parameter("game_time", 0)
 
 	if stamina <= 0:
 		sprint_cooldown = true
@@ -59,18 +59,23 @@ func _process(_delta):
 		sprint_cooldown = false
 
 	if stamina < max_stamina:
-		var tween := create_tween().set_trans(Tween.EASE_IN).set_ease(Tween.EASE_IN)
+		var tween := create_tween().set_trans(Tween.TRANS_LINEAR)
 
+		tween.set_parallel(true)
+		tween.tween_property(stamina_bar, "modulate", Color(1, 1, 1, 1), 0.5)
 		tween.tween_property(stamina_bar.get_parent(), "modulate", Color(1, 1, 1, 1), 0.5)
 	else:
-		var tween := create_tween().set_trans(Tween.EASE_IN).set_ease(Tween.EASE_IN)
+		var tween := create_tween().set_trans(Tween.TRANS_LINEAR)
 
+		tween.set_parallel(true)
+		tween.tween_property(stamina_bar, "modulate", Color(1, 1, 1, 0), 0.25)
 		tween.tween_property(stamina_bar.get_parent(), "modulate", Color(1, 1, 1, 0), 0.25)
 
-	stamina_bar.set_size(Vector2(7, range_lerp(stamina, 0, max_stamina, 0, 57)))
+
+	stamina_bar.set_size(Vector2(7, remap(stamina, 0, max_stamina, 0, 57)))
 	# stamina_bar.set_position(Vector2(1, (max_stamina / max_stamina) * 58))
 	
-	# Handle Sprite Orientation
+	# Handle Sprite2D Orientation
 	# if !is_attacking:
 	if _mouse_pos.x - global_position.x < 0:
 		weapon.position = Vector2(-25, 30)
@@ -82,7 +87,7 @@ func _process(_delta):
 		_sprite.scale.x = 0.75
 
 	if Input.is_action_just_pressed("use_item"):
-		if !inventory.empty() && !is_using_item:
+		if !inventory.is_empty() && !is_using_item:
 			use_item(inventory[0])
 
 	if Input.is_action_just_pressed("attack"):
@@ -121,14 +126,15 @@ func _physics_process(_delta):
 			velocity.x = lerp(velocity.x, direction.x * max_speed, acceleration)
 			velocity.y = lerp(velocity.y, direction.y * max_speed, acceleration)
 		else:
-			velocity.x = lerp(velocity.x, 0, 0.25)
-			velocity.y = lerp(velocity.y, 0, 0.25)
+			velocity.x = lerp(velocity.x, 0.0, 0.25)
+			velocity.y = lerp(velocity.y, 0.0, 0.25)
 		
 		velocity = velocity.limit_length(max_speed)
 	else:
 		velocity = Vector2.ZERO
 		_sprite.modulate = Color(0.75, 0.25, 0.25)
-
+		
+	move_and_slide()
 
 
 func add_item(item: Item): 
@@ -153,7 +159,7 @@ func use_item(item: Item_Entry):
 			change_health(floor(max_hp * (0.25 * item_strength)))
 		"item_laser":
 			items_effects.get_node("Laser_Item").set_is_casting(true)
-			yield(get_tree().create_timer(5.0), "timeout")
+			await get_tree().create_timer(5.0).timeout
 			items_effects.get_node("Laser_Item").set_is_casting(false)
 
 	inventory.pop_front()
@@ -174,4 +180,4 @@ func update_stats():
 
 class Item_Entry:
 	var item_id: String
-	var item_icon: Texture
+	var item_icon: Texture2D

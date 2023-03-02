@@ -11,7 +11,7 @@ var stage: Stage
 var enemies_left: int
 var can_pause: bool = true
 var player: Entity
-var player_fighting: bool = false setget set_player_fighting
+var player_fighting: bool = false : set = set_player_fighting
 
 var first_loop: bool = true
 var loop: int = 0
@@ -41,7 +41,7 @@ func update_stage():
 
 	# print(player.music_player.playing_tracks.size())
 
-	# yield(get_tree().create_timer(2.0), "timeout")
+	# await get_tree().create_timer(2.0).timeout
 
 	# MusicController.music.init_song("transition")
 	# MusicController.music.play("transition")
@@ -61,7 +61,7 @@ func _ready():
 	timer.set_wait_time(1.0)
 	timer.set_one_shot(false)
 	timer.set_autostart(true)
-	timer.connect("timeout", self, "advance_time")
+	timer.connect("timeout",Callable(self,"advance_time"))
 	add_child(timer)
 
 func _process(_delta):
@@ -75,7 +75,7 @@ func _process(_delta):
 		if stage.enemies > 0:
 			if spawner_delay <= 0:
 				spawn_enemy()
-				spawner_delay = rand_range(1.2, 2.5)
+				spawner_delay = randf_range(1.2, 2.5)
 				stage.enemies -= 1
 
 	if enemies_left <= 0 && !stage_cleared:
@@ -91,7 +91,7 @@ func advance_time():
 
 
 func spawn_enemy(enemy_type = null, spawner_array = null):
-	if !get_tree().get_nodes_in_group("spawners"):
+	if get_tree().get_nodes_in_group("spawners") == null:
 		printerr("Warning: No spawners in stage detected. Spawning an enemy has failed.")
 		return
 
@@ -110,7 +110,7 @@ func spawn_enemy(enemy_type = null, spawner_array = null):
 			enemy = enemy_nodes[enemy_keys[randi() % enemy_keys.size()]]
 
 
-	var new_enemy = enemy.instance()
+	var new_enemy = enemy.instantiate()
 	new_enemy.set_position(enemy_spawners[randi() % enemy_spawners.size()].global_position)
 	new_enemy.add_to_group("enemies")
 	get_tree().current_scene.add_child(new_enemy)
@@ -118,7 +118,7 @@ func spawn_enemy(enemy_type = null, spawner_array = null):
 	return new_enemy
 
 func spawn_item(item_type = "", position: Node = null):
-	if !get_tree().get_nodes_in_group("item_spawner") && !position:
+	if get_tree().get_nodes_in_group("item_spawner") == null && !position:
 		printerr("Warning: No Item spawners in stage detected. No custom position added. Item drops will not spawn.")
 		return
 
@@ -136,7 +136,7 @@ func spawn_item(item_type = "", position: Node = null):
 		
 			item = item_nodes[item_keys[randi() % item_keys.size()]]
 
-	var new_item = item.instance()
+	var new_item = item.instantiate()
 	var spawner_index = randi() % item_spawners.size()
 
 	if position:
@@ -159,7 +159,7 @@ func reset():
 func stage_clear():
 	print("stage clear!")
 
-	if !get_tree().get_nodes_in_group("portal"):
+	if get_tree().get_nodes_in_group("portal") == null:
 		printerr("Warning: No portal location in stage. Can't progress to next stage.")
 		return
 

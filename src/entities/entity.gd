@@ -1,27 +1,29 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name Entity
 
-export var speed: = 200.0
-export var max_hp: = 100.0
-export var attack: = 10.0
-export var attack_speed: = 1.0
-export var defense: = 10.0
-export var ability_regen: = 1.0
-export var ability_strength: = 1.0
+@export var speed: = 200.0
+@export var max_hp: = 100.0
+@export var attack: = 10.0
+@export var attack_speed: = 1.0
+@export var defense: = 10.0
+@export var ability_regen: = 1.0
+@export var ability_strength: = 1.0
 
 var hp = max_hp
 var dead = false
 
-onready var _sprite: Sprite = $Sprite
-onready var _anim_player = $AnimationPlayer
-onready var _movement_anims = $MovementAnimation
-var velocity: = Vector2.ZERO
+@onready var _sprite: Sprite2D = $Sprite2D
+@onready var _anim_player = $AnimationPlayer
+@onready var _movement_anims = $MovementAnimation
+# var velocity: = Vector2.ZERO
 
 func _ready():
 	print("New entity spawned! {0}".format([self]))
 
 func _physics_process(_delta: float):
-	var _movement: = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	# var _movement: = velocity
 
 func change_health(health: float, true_damage = false):
 	if dead: 
