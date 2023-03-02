@@ -23,11 +23,16 @@ func _ready():
 func _physics_process(_delta: float):
 	var _movement: = move_and_slide(velocity)
 
-func change_health(health: float):
+func change_health(health: float, true_damage = false):
 	if dead: 
 		return
 		
-	hp += health
+
+	var health_change = health
+	if health < 0 && !true_damage:
+		health_change = floor(health_change * (1 + defense / 100))
+
+	hp += health_change
 
 	if hp > max_hp:
 		hp = max_hp

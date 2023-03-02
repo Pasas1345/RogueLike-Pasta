@@ -80,7 +80,7 @@ shader_param/water_color = Color( 0.203922, 0.564706, 0.592157, 0.803922 )
 shader_param/scale = Vector2( 64, 64 )
 shader_param/distortion_scale = Vector2( 0.036, 0.036 )
 shader_param/y_zoom = 0.0
-shader_param/intensity = 0.127
+shader_param/intensity = 0.193
 shader_param/speed = 0.02
 shader_param/noise = SubResource( 23 )
 

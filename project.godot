@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "Stage",
 "language": "GDScript",
 "path": "res://src/stage.gd"
+}, {
+"base": "Area2D",
+"class": "Upgrade",
+"language": "GDScript",
+"path": "res://src/entities/upgrades/upgrade.gd"
 } ]
 _global_script_class_icons={
 "Battle_Area": "",
 "Entity": "",
 "Item": "",
-"Stage": ""
+"Stage": "",
+"Upgrade": ""
 }
 
 [application]
