@@ -1,20 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://b28lgdy3hv7g7"]
+[gd_scene load_steps=14 format=3 uid="uid://b28lgdy3hv7g7"]
 
 [ext_resource type="TileSet" uid="uid://lc1ygtotn22y" path="res://sprites/tiles/tiny_dungeon_tileset.tres" id="1"]
 [ext_resource type="Script" path="res://src/stage.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cjvhd2yody540" path="res://entities/player/player.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cx4dwawjymy" path="res://entities/door_1.tscn" id="3_2us44"]
 [ext_resource type="PackedScene" uid="uid://c0g7klb31idb1" path="res://ui/UserInterface.tscn" id="4"]
 [ext_resource type="Script" path="res://src/stage_area.gd" id="5"]
 [ext_resource type="PackedScene" path="res://entities/portal.tscn" id="7"]
 
 [sub_resource type="RectangleShape2D" id="27"]
-size = Vector2(864, 252)
+size = Vector2(1728, 472)
 
 [sub_resource type="RectangleShape2D" id="28"]
-size = Vector2(192, 388)
+size = Vector2(384, 768)
 
 [sub_resource type="RectangleShape2D" id="29"]
-size = Vector2(388, 132)
+size = Vector2(768, 256)
 
 [sub_resource type="NavigationPolygon" id="24"]
 vertices = PackedVector2Array(672, 488, 1168, 488, 1168, 600, 672, 744, 1768, 1216, 2048, 1216, 2048, 1664, 448, 1664, 448, 1216, 1624, 1216, 1768, 600, 1624, 680, 1168, 680, 1168, 744)
@@ -33,7 +34,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(2048, 1368, 2408, 1368,
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2")
-enemies = 11
+enemies = 8
 custom_spawns = true
 
 [node name="Map" type="Node2D" parent="."]
@@ -49,13 +50,27 @@ scale = Vector2(4, 4)
 tile_set = ExtResource("1")
 format = 2
 
-[node name="doors" type="TileMap" parent="Map"]
-position = Vector2(0, 1)
-scale = Vector2(4, 4)
-tile_set = ExtResource("1")
-collision_animatable = true
-format = 2
-layer_0/tile_data = PackedInt32Array(1114137, 43, 0, 1114138, 65579, 0, 1114139, 131115, 0, 1376289, 22, 0, 1376292, 22, 0, 1441825, 22, 0, 1441828, 22, 0, 1769493, 43, 0, 1769494, 131115, 0, 2031637, 43, 0, 2031638, 131115, 0)
+[node name="doors" type="Node2D" parent="Map"]
+
+[node name="door" parent="Map/doors" instance=ExtResource("3_2us44")]
+position = Vector2(1696, 1120)
+scale = Vector2(3.12, 1)
+
+[node name="door2" parent="Map/doors" instance=ExtResource("3_2us44")]
+position = Vector2(1408, 2024)
+scale = Vector2(2.28, 1)
+
+[node name="door3" parent="Map/doors" instance=ExtResource("3_2us44")]
+position = Vector2(1408, 1768)
+scale = Vector2(2.28, 1)
+
+[node name="door4" parent="Map/doors" instance=ExtResource("3_2us44")]
+position = Vector2(2144, 1408)
+scale = Vector2(0.989304, 2.31137)
+
+[node name="door5" parent="Map/doors" instance=ExtResource("3_2us44")]
+position = Vector2(2336, 1408)
+scale = Vector2(0.989304, 2.31137)
 
 [node name="Areas" type="Node2D" parent="Map"]
 
@@ -69,7 +84,7 @@ door = NodePath("../../doors")
 enemy_count = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Areas/area1"]
-position = Vector2(32, 28)
+position = Vector2(32, 44)
 shape = SubResource("27")
 
 [node name="enemy" type="Marker2D" parent="Map/Areas/area1" groups=["area1_eSpawners"]]
@@ -94,7 +109,7 @@ door = NodePath("../../doors")
 enemy_count = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Areas/area2"]
-position = Vector2(32, 4)
+position = Vector2(32, 0)
 shape = SubResource("28")
 
 [node name="enemy3" type="Marker2D" parent="Map/Areas/area2" groups=["area2_eSpawners"]]
@@ -114,7 +129,7 @@ door = NodePath("../../doors")
 enemy_count = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Areas/area3"]
-position = Vector2(-4, 20)
+position = Vector2(0, 16)
 shape = SubResource("29")
 
 [node name="enemy5" type="Marker2D" parent="Map/Areas/area3" groups=["area3_eSpawners"]]
@@ -128,8 +143,6 @@ position = Vector2(242, 74)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="User Interface" parent="CanvasLayer" instance=ExtResource("4")]
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Player" parent="." instance=ExtResource("3")]
 position = Vector2(851, 548)

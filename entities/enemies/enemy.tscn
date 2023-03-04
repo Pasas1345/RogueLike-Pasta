@@ -12,7 +12,7 @@ shader_parameter/solid_color = Color(1, 1, 1, 1)
 shader_parameter/flash = false
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(34.5, 36)
+size = Vector2(64, 66)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(21.1875, 22.1875)
@@ -123,6 +123,7 @@ scale = Vector2(0.0995475, 0.0995475)
 texture = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
 shape = SubResource("1")
 
 [node name="PlayerDetector" type="Area2D" parent="."]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmk850lgmd6qc"]
+[gd_scene load_steps=13 format=3 uid="uid://cmk850lgmd6qc"]
 
 [ext_resource type="TileSet" path="res://sprites/tiles/pixel_dungeon_tileset.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://cjvhd2yody540" path="res://entities/player/player.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c0g7klb31idb1" path="res://ui/UserInterface.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cx4dwawjymy" path="res://entities/door_1.tscn" id="3_k8t5e"]
 [ext_resource type="Script" path="res://src/stage.gd" id="4"]
 [ext_resource type="PackedScene" path="res://entities/portal.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://chvfsv077s4c0" path="res://sprites/glow.png" id="6"]
@@ -41,11 +42,19 @@ tile_set = ExtResource("1")
 format = 2
 layer_0/tile_data = PackedInt32Array(131101, 327685, 1, 262135, 65541, 1, 262152, 196613, 1, 262159, 196613, 1, 720904, 196613, 1, 720911, 196613, 1, 983069, 327685, 1, 1114103, 65541, 1, 1703945, 196613, 1, 1703957, 196613, 1)
 
-[node name="doors" type="TileMap" parent="Map"]
-scale = Vector2(4, 4)
-tile_set = ExtResource("1")
-format = 2
-layer_0/tile_data = PackedInt32Array(524287, 65538, 2, 458773, 131074, 2, 589823, 65538, 1, 524309, 131074, 1, 655359, 65538, 1, 589845, 131074, 1, 1310731, 2, 0, 1310732, 65538, 0, 1310733, 2, 0)
+[node name="doors" type="Node2D" parent="Map"]
+
+[node name="door1" parent="Map/doors" instance=ExtResource("3_k8t5e")]
+position = Vector2(-40, 528)
+scale = Vector2(-0.751392, 3.59652)
+
+[node name="door2" parent="Map/doors" instance=ExtResource("3_k8t5e")]
+position = Vector2(1384, 544)
+scale = Vector2(-0.751392, 2.99652)
+
+[node name="door3" parent="Map/doors" instance=ExtResource("3_k8t5e")]
+position = Vector2(799, 1313)
+scale = Vector2(3.24861, 0.95653)
 
 [node name="Areas" type="Node2D" parent="Map"]
 
@@ -210,8 +219,6 @@ position = Vector2(768, 512)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="User Interface" parent="CanvasLayer" instance=ExtResource("3")]
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("1")

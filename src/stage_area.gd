@@ -10,8 +10,9 @@ var enemy_spawners: Array
 var cleared: bool = false
 
 func _ready():
-	get_node(door).call_deferred("set_collision_layer_value", 0, false)
-	get_node(door).call_deferred("set_collision_mask_value", 0, false)
+	for d in get_node(door).get_children():
+		d.collision_node.set_deferred("disabled", true)
+
 	get_node(door).visible = false
 
 	if get_tree().get_nodes_in_group(area_spawners_group).size() <= 0:
@@ -20,7 +21,7 @@ func _ready():
 	connect("body_entered",Callable(self,"_on_area1_body_entered"))
 
 func _on_area1_body_entered(body:Node):
-	if body == main_game.player && !cleared:
+	if body == main_game.player && !cleared && !main_game.player_fighting:
 		initiate_fight()
 
 func _process(_delta):
@@ -31,8 +32,8 @@ func _process(_delta):
 
 func initiate_fight():
 	main_game.set_player_fighting(true)
-	get_node(door).call_deferred("set_collision_layer_value", 0, true)
-	get_node(door).call_deferred("set_collision_mask_value", 0, true)
+	for d in get_node(door).get_children():
+		d.collision_node.set_deferred("disabled", false)
 	get_node(door).visible = true
 	
 	for _i in enemy_count:
@@ -42,8 +43,8 @@ func initiate_fight():
 
 func end_fight():
 	main_game.set_player_fighting(false)
-	get_node(door).call_deferred("set_collision_layer_value", 0, false)
-	get_node(door).call_deferred("set_collision_mask_value", 0, false)
+	for d in get_node(door).get_children():
+		d.collision_node.set_deferred("disabled", true)
 	get_node(door).visible = false
 
 	main_game.spawn_item("", get_node(item_spawner))

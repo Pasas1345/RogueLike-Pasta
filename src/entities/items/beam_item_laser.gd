@@ -40,11 +40,11 @@ func set_is_casting(cast):
 
 
 func appear():
-	$Tween.stop_all()
-	$Tween.interpolate_property($Line2D, "width", 0, 10.0, 0.1)
-	$Tween.start()
+	var tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+
+	tween.tween_property($Line2D, "width", 10.0, 0.1)
 	
 func disappear():
-	$Tween.stop_all()
-	$Tween.interpolate_property($Line2D, "width", 10, 0.0, 0.05)
-	$Tween.start()
+	var tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+
+	tween.tween_property($Line2D, "width", 0.0, 0.075)

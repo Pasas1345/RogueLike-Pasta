@@ -40,6 +40,7 @@ corner_detail = 12
 
 [resource]
 default_font = ExtResource("1")
+default_font_size = 32
 Button/fonts/font = ExtResource("1")
 Button/styles/disabled = SubResource("5")
 Button/styles/hover = SubResource("3")

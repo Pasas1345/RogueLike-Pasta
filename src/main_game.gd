@@ -117,8 +117,8 @@ func spawn_enemy(enemy_type = null, spawner_array = null):
 
 	return new_enemy
 
-func spawn_item(item_type = "", position: Node = null):
-	if get_tree().get_nodes_in_group("item_spawner") == null && !position:
+func spawn_item(item_type = "", spawn_positon: Node = null):
+	if get_tree().get_nodes_in_group("item_spawner") == null && !spawn_positon:
 		printerr("Warning: No Item spawners in stage detected. No custom position added. Item drops will not spawn.")
 		return
 
@@ -139,8 +139,8 @@ func spawn_item(item_type = "", position: Node = null):
 	var new_item = item.instantiate()
 	var spawner_index = randi() % item_spawners.size()
 
-	if position:
-		new_item.set_position(position.global_position)
+	if spawn_positon:
+		new_item.set_position(spawn_positon.global_position)
 	else:
 		new_item.set_position(item_spawners[spawner_index].global_position)
 		

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b8o3tk7i11un2" path="res://sprites/entities/peco.png" id="2"]
 [ext_resource type="PackedScene" path="res://entities/player/pecorine/player_Peco_Weapon.tscn" id="3"]
 [ext_resource type="Script" path="res://src/entities/player/player_itemaimer.gd" id="5"]
-[ext_resource type="PackedScene" path="res://entities/items/effects/beam_item_laser.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://wv7qles0purx" path="res://entities/items/effects/beam_item_laser.tscn" id="6"]
 [ext_resource type="Shader" path="res://shaders/entity_generic.gdshader" id="7"]
 
 [sub_resource type="ShaderMaterial" id="17"]
