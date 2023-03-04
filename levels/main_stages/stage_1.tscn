@@ -34,7 +34,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(2048, 1368, 2408, 1368,
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2")
-enemies = 8
+enemies = 11
 custom_spawns = true
 
 [node name="Map" type="Node2D" parent="."]

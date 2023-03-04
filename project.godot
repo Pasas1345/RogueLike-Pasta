@@ -13,7 +13,9 @@ config_version=5
 config/name="Rogue Lite Pasta"
 run/main_scene="res://levels/main_menu.tscn"
 config/features=PackedStringArray("4.0")
-config/icon="res://icon.png"
+boot_splash/image="res://pasta_boot.png"
+boot_splash/use_filter=false
+config/icon="res://pasta.png"
 
 [autoload]
 
@@ -33,6 +35,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=2
 window/size/fullscreen=true
+
+[dotnet]
+
+project/assembly_name="Rogue Lite Pasta"
 
 [editor_plugins]
 

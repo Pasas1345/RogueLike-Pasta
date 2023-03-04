@@ -135,7 +135,7 @@ void fragment() {
 shader = SubResource("15")
 shader_parameter/blinking = false
 shader_parameter/blink_color = Color(1, 0, 0, 1)
-shader_parameter/blink_color2 = Color(0.623529, 0, 0, 1)
+shader_parameter/blink_color2 = Color(0.631373, 0, 0, 1)
 shader_parameter/non_blink = Color(1, 0.960784, 0.709804, 1)
 
 [node name="Player" type="CharacterBody2D"]
@@ -186,6 +186,7 @@ pivot_offset = Vector2(3.5, 28.5)
 color = Color(0.356863, 0.356863, 0.356863, 1)
 
 [node name="StaminaBar" type="ColorRect" parent="Stamina"]
+modulate = Color(1, 1, 1, 0)
 light_mask = 0
 material = SubResource("16")
 layout_mode = 0
