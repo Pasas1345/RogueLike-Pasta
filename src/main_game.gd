@@ -32,6 +32,10 @@ var item_nodes = {
 	"item_laser": preload("res://entities/items/item_laser.tscn")
 }
 
+var upgrade_nodes = {
+	"upgrade_backpack": preload("res://entities/upgrades/backpack_upgrade.tscn")
+}
+
 func update_stage():
 	stage = get_tree().get_nodes_in_group("main_stage")[0]
 	player = get_tree().get_nodes_in_group("player")[0]
@@ -61,7 +65,7 @@ func _ready():
 	timer.set_wait_time(1.0)
 	timer.set_one_shot(false)
 	timer.set_autostart(true)
-	timer.connect("timeout",Callable(self,"advance_time"))
+	timer.connect("timeout", Callable(self,"advance_time"))
 	add_child(timer)
 
 func _process(_delta):
@@ -146,6 +150,33 @@ func spawn_item(item_type = "", spawn_positon: Node = null):
 		
 	get_tree().current_scene.add_child(new_item)
 	
+
+func spawn_upgrade(upgrade_type = "", spawn_positon: Node = null):
+	if get_tree().get_nodes_in_group("item_spawner") == null && !spawn_positon:
+		printerr("Warning: No Item spawners in stage detected. No custom position added. Upgrade drops will not spawn.")
+		return
+
+	var upgrade_spawners = get_tree().get_nodes_in_group("item_spawner")[0].get_children()
+	var upgrade
+
+	match(upgrade_type):
+		"upgrade_backpack":
+			upgrade = upgrade_nodes["upgrade_backpack"]
+		_:
+			randomize()
+			var upgrade_keys: Array = main_game.upgrade_nodes.keys()
+		
+			upgrade = upgrade_nodes[upgrade_keys[randi() % upgrade_keys.size()]]
+
+	var new_upgrade = upgrade.instantiate()
+	var spawner_index = randi() % upgrade_spawners.size()
+
+	if spawn_positon:
+		new_upgrade.set_position(spawn_positon.global_position)
+	else:
+		new_upgrade.set_position(upgrade_spawners[spawner_index].global_position)
+		
+	get_tree().current_scene.add_child(new_upgrade)
 
 
 func reset():

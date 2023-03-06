@@ -1,517 +1,589 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=3 uid="uid://cepw1cp1tkfw"]
 
-[ext_resource path="res://src/entities/player/player_weapon.gd" type="Script" id=1]
-[ext_resource path="res://sprites/pecorine_sword_trail.png" type="Texture2D" id=2]
-[ext_resource path="res://sprites/pecorine_sword.png" type="Texture2D" id=3]
+[ext_resource type="Script" path="res://src/entities/player/player_weapon.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://ftcpq6a38pww" path="res://sprites/pecorine_sword_trail.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://kufcjcrthmbb" path="res://sprites/pecorine_sword.png" id="3"]
 
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id="7"]
 radius = 5.06512
 height = 70.9117
 
-[sub_resource type="OccluderPolygon2D" id=14]
-polygon = PackedVector2Array( -28.22, -0.723589, -21.7077, 3.61794, -3.61795, 2.17077, -2.17077, 3.61794, 0, 3.61794, 2.17077, 1.44718, 2.17077, 5.78871, 3.61794, 11.5774, 7.23589, 13.0246, 11.5774, 13.0246, 11.5774, 10.1302, 7.95948, 8.68307, 7.23589, 2.89436, 10.8538, 5.06512, 73.0825, 5.06512, 88.2779, -0.723589, 73.0825, -5.78871, 10.8538, -5.78871, 7.23589, -3.61794, 5.78871, -10.8538, 2.17077, -13.7482, -2.17077, -13.7482, -2.17077, -10.1302, 1.44718, -10.1302, 2.17077, -4.34153, 2.17077, -2.89436, -0.723589, -5.06512, -2.17077, -5.06512, -3.61795, -2.89436, -21.7077, -5.06512 )
+[sub_resource type="OccluderPolygon2D" id="14"]
+polygon = PackedVector2Array(-28.22, -0.723589, -21.7077, 3.61794, -3.61795, 2.17077, -2.17077, 3.61794, 0, 3.61794, 2.17077, 1.44718, 2.17077, 5.78871, 3.61794, 11.5774, 7.23589, 13.0246, 11.5774, 13.0246, 11.5774, 10.1302, 7.95948, 8.68307, 7.23589, 2.89436, 10.8538, 5.06512, 73.0825, 5.06512, 88.2779, -0.723589, 73.0825, -5.78871, 10.8538, -5.78871, 7.23589, -3.61794, 5.78871, -10.8538, 2.17077, -13.7482, -2.17077, -13.7482, -2.17077, -10.1302, 1.44718, -10.1302, 2.17077, -4.34153, 2.17077, -2.89436, -0.723589, -5.06512, -2.17077, -5.06512, -3.61795, -2.89436, -21.7077, -5.06512)
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 length = 0.6
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Pivot/PecorineSword:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 0.450625 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.450625),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Pivot/PecorineSword/hitbox/hitbox_collision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ true ]
+"values": [true]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath(".:can_next_sequence")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Pivot:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( -25, 0 ) ]
+"values": [Vector2(0, 0)]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Pivot:rotation_degrees")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Pivot/PecorineSword/trail:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("Pivot/PecorineSword/trail:flip_v")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
 tracks/6/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [false]
 }
 tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
 tracks/7/path = NodePath("Pivot/PecorineSword/trail:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
 tracks/7/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 49.204, 23.155 ) ]
+"values": [Vector2(49.204, 23.155)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Pivot:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id="Animation_uo8g0"]
+resource_name = "ability"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.575, 0.75, 1),
+"transitions": PackedFloat32Array(0.329877, 0.68302, 2.54912, 2.54912, 2.21914, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(7, -30), Vector2(28, 31), Vector2(28, 31), Vector2(25.2913, 28.0011), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.575, 0.75, 1),
+"transitions": PackedFloat32Array(0.329877, 0.68302, 2.54912, 0.615572, 2.21914, 1),
+"update": 0,
+"values": [0.0, -1.02394, -0.00927353, -0.00927353, 0.292202, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PecorineSword/trail:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/PecorineSword/hitbox/hitbox_collision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="8"]
 resource_name = "attack1"
 length = 0.55
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Pivot:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.1, 0.3, 0.55 ),
-"transitions": PackedFloat32Array( 0.210224, 0.277392, 2.2974, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.55),
+"transitions": PackedFloat32Array(0.210224, 0.277392, 2.2974, 1),
 "update": 0,
-"values": [ 0.0, -111.205, 87.6713, 0.0 ]
+"values": [0.0, -111.205, 87.6713, 0.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Pivot/PecorineSword/hitbox/hitbox_collision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0, 0.1, 0.4 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ true, false, true ]
+"values": [true, false, true]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath(".:can_next_sequence")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0.3, 0.55 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0.3, 0.55),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ true, false ]
+"values": [true, false]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Pivot/PecorineSword/trail:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0, 0.1, 0.3 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ false, true, false ]
+"values": [false, true, false]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Pivot/PecorineSword/trail:flip_v")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Pivot/PecorineSword/trail:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 49.204, 23.155 ) ]
+"values": [Vector2(49.204, 23.155)]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id="9"]
 resource_name = "attack2"
 length = 0.8
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Pivot:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.3, 0.45 ),
-"transitions": PackedFloat32Array( 0.318641, 0.637281, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.45),
+"transitions": PackedFloat32Array(0.318641, 0.637281, 1),
 "update": 0,
-"values": [ 87.6713, -75.1, 0.0 ]
+"values": [87.6713, -75.1, 0.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Pivot/PecorineSword/hitbox/hitbox_collision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0.05, 0.55, 0.8 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0.05, 0.55, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ false, true, true ]
+"values": [false, true, true]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Pivot:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0, 0.3, 0.55, 0.8 ),
-"transitions": PackedFloat32Array( 0.378929, 0.34151, 1.1487, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.55, 0.8),
+"transitions": PackedFloat32Array(0.378929, 0.34151, 1.1487, 1),
 "update": 0,
-"values": [ Vector2( 46, -2 ), Vector2( -40, 0 ), Vector2( -40, 0 ), Vector2( 0, 0 ) ]
+"values": [Vector2(46, -2), Vector2(-40, 0), Vector2(-40, 0), Vector2(0, 0)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath(".:can_next_sequence")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0, 0.4, 0.8 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ false, true, false ]
+"values": [false, true, false]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Pivot/PecorineSword/trail:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PackedFloat32Array( 0, 0.3 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ true, false ]
+"values": [true, false]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Pivot/PecorineSword/trail:flip_v")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("Pivot/PecorineSword/trail:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
 tracks/6/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 49.204, -23.155 ) ]
+"values": [Vector2(49.204, -23.155)]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id="10"]
 resource_name = "attack3"
 length = 0.8
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Pivot:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Pivot/PecorineSword/hitbox/hitbox_collision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0.1, 0.35, 0.6 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0.1, 0.35, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ false, true, true ]
+"values": [false, true, true]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Pivot:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0, 0.25, 0.8 ),
-"transitions": PackedFloat32Array( 0.112656, 0.392292, 1 ),
+"times": PackedFloat32Array(0, 0.25, 0.8),
+"transitions": PackedFloat32Array(0.112656, 0.392292, 1),
 "update": 0,
-"values": [ Vector2( -40, 0 ), Vector2( 60, 0 ), Vector2( 0, 0 ) ]
+"values": [Vector2(-40, 0), Vector2(60, 0), Vector2(0, 0)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath(".:can_next_sequence")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0, 0.25, 0.8 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.25, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ false, true, false ]
+"values": [false, true, false]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id="11"]
 resource_name = "attack4"
 length = 1.2
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Pivot:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.2, 0.5, 0.8, 1.2 ),
-"transitions": PackedFloat32Array( 2.54912, 1.7411, 1.31951, 3.13834, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.8, 1.2),
+"transitions": PackedFloat32Array(2.54912, 1.7411, 1.31951, 3.13834, 1),
 "update": 0,
-"values": [ 0.0, -66.5078, -39.5618, -39.5618, 0.0 ]
+"values": [0.0, -66.5078, -39.5618, -39.5618, 0.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Pivot/PecorineSword/hitbox/hitbox_collision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0.05, 0.35, 1.2 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0.05, 0.35, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ false, true, true ]
+"values": [false, true, true]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Pivot:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0, 0.2, 0.8, 1.2 ),
-"transitions": PackedFloat32Array( 2.46229, 1, 0.34151, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.8, 1.2),
+"transitions": PackedFloat32Array(2.46229, 1, 0.34151, 1),
 "update": 0,
-"values": [ Vector2( 60, 0 ), Vector2( 41, -37 ), Vector2( 41, -37 ), Vector2( 0, 0 ) ]
+"values": [Vector2(60, 0), Vector2(41, -37), Vector2(41, -37), Vector2(0, 0)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath(".:can_next_sequence")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0, 0.3, 1.2 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ false, true, false ]
+"values": [false, true, false]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id="12"]
 resource_name = "attack5"
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Pivot:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.3, 0.5, 1 ),
-"transitions": PackedFloat32Array( 0.406126, 0.225313, 1.68179, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
+"transitions": PackedFloat32Array(0.406126, 0.225313, 1.68179, 1),
 "update": 0,
-"values": [ -39.5618, -49.2827, 80.5852, 0.0 ]
+"values": [-39.5618, -49.2827, 80.5852, 0.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Pivot/PecorineSword/hitbox/hitbox_collision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0.3, 0.5, 1 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0.3, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ false, true, true ]
+"values": [false, true, true]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Pivot:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0, 0.3, 0.5, 1 ),
-"transitions": PackedFloat32Array( 0.176777, 0.176777, 1.86607, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
+"transitions": PackedFloat32Array(0.176777, 0.176777, 1.86607, 1),
 "update": 0,
-"values": [ Vector2( 41, -37 ), Vector2( 39, -49 ), Vector2( 59, 10 ), Vector2( 0, 0 ) ]
+"values": [Vector2(41, -37), Vector2(39, -49), Vector2(59, 10), Vector2(0, 0)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath(".:can_next_sequence")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Pivot/PecorineSword/trail:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 49.204, 23.155 ) ]
+"values": [Vector2(49.204, 23.155)]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Pivot/PecorineSword/trail:flip_v")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("Pivot/PecorineSword/trail:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
 tracks/6/keys = {
-"times": PackedFloat32Array( 0, 0.3, 0.45 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ false, true, false ]
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cdnqo"]
+_data = {
+"RESET": SubResource("5"),
+"ability": SubResource("Animation_uo8g0"),
+"attack1": SubResource("8"),
+"attack2": SubResource("9"),
+"attack3": SubResource("10"),
+"attack4": SubResource("11"),
+"attack5": SubResource("12")
 }
 
 [node name="Weapon" type="Node2D"]
-position = Vector2( -25, 30 )
-script = ExtResource( 1 )
+position = Vector2(-25, 30)
+script = ExtResource("1")
 
 [node name="Pivot" type="Marker2D" parent="."]
 
 [node name="PecorineSword" type="Sprite2D" parent="Pivot"]
-position = Vector2( 11, 0 )
-scale = Vector2( 1.382, -1.382 )
 z_index = 1
-texture = ExtResource( 3 )
-offset = Vector2( 29.9978, 2.39773 )
+position = Vector2(11, 0)
+scale = Vector2(1.382, -1.382)
+texture = ExtResource("3")
+offset = Vector2(29.9978, 2.39773)
 
 [node name="hitbox" type="Area2D" parent="Pivot/PecorineSword"]
 collision_layer = 8
 collision_mask = 8
 
 [node name="hitbox_collision" type="CollisionShape2D" parent="Pivot/PecorineSword/hitbox"]
-position = Vector2( 47.7569, -0.72365 )
+position = Vector2(47.7569, -0.72365)
 rotation = -1.5708
-shape = SubResource( 7 )
+shape = SubResource("7")
 disabled = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Pivot/PecorineSword"]
 visible = false
-occluder = SubResource( 14 )
+occluder = SubResource("14")
 
 [node name="trail" type="Sprite2D" parent="Pivot/PecorineSword"]
 visible = false
-position = Vector2( 49.204, 23.155 )
-scale = Vector2( 1, -1 )
 z_as_relative = false
-texture = ExtResource( 2 )
+position = Vector2(49.204, 23.155)
+scale = Vector2(1, -1)
+texture = ExtResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot"]
 root_node = NodePath("../..")
-anims/RESET = SubResource( 5 )
-anims/attack1 = SubResource( 8 )
-anims/attack2 = SubResource( 9 )
-anims/attack3 = SubResource( 10 )
-anims/attack4 = SubResource( 11 )
-anims/attack5 = SubResource( 12 )
+libraries = {
+"": SubResource("AnimationLibrary_cdnqo")
+}
 
 [connection signal="body_entered" from="Pivot/PecorineSword/hitbox" to="." method="_on_hitbox_body_entered"]

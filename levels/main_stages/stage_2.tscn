@@ -5,18 +5,18 @@
 [ext_resource type="PackedScene" uid="uid://c0g7klb31idb1" path="res://ui/UserInterface.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://cx4dwawjymy" path="res://entities/door_1.tscn" id="3_k8t5e"]
 [ext_resource type="Script" path="res://src/stage.gd" id="4"]
-[ext_resource type="PackedScene" path="res://entities/portal.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://cbacj3u8ce64" path="res://entities/portal.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://chvfsv077s4c0" path="res://sprites/glow.png" id="6"]
 [ext_resource type="Script" path="res://src/stage_area.gd" id="8"]
 
 [sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(224, 509.5)
+size = Vector2(448, 1024)
 
 [sub_resource type="RectangleShape2D" id="3"]
-size = Vector2(412, 160)
+size = Vector2(832, 320)
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(224, 448)
+size = Vector2(448, 896)
 
 [sub_resource type="NavigationPolygon" id="1"]
 vertices = PackedVector2Array(-512, 1088, -512, 192, -128, 192, -128, 512, 576, 512, 576, 320, 960, 320, 960, 512, 1472, 512, 1472, 192, 1856, 192, 1856, 960, 1472, 576, 1472, 960, 960, 576, 1213.96, 512, 832, 704, 768, 704, 576, 576, 960, 704, 832, 1408, 1344, 1408, 1344, 1664, 640, 1664, 640, 1408, 768, 1408, 576, 704, -128, 576, -128, 1088)
@@ -68,7 +68,7 @@ door = NodePath("../../doors")
 enemy_count = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Areas/area1"]
-position = Vector2(56, 302.5)
+position = Vector2(56, 300)
 shape = SubResource("2")
 
 [node name="enemy2" type="Marker2D" parent="Map/Areas/area1" groups=["area1_eSpawners"]]
@@ -104,7 +104,7 @@ position = Vector2(48, 104)
 [node name="item" type="Marker2D" parent="Map/Areas/area2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Areas/area2"]
-position = Vector2(36, 24)
+position = Vector2(32, 24)
 shape = SubResource("3")
 
 [node name="area3" type="Area2D" parent="Map/Areas"]

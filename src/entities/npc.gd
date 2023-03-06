@@ -14,7 +14,6 @@ func _process(_delta):
 	target_pos = target[0].position
 	target_position = target_pos
 	
-
 	if parent._movement_anims.has_animation("movement"):
 		parent._movement_anims.play("movement")
 	

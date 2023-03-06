@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://d1som8dy8lyj"]
+
+[ext_resource type="Texture2D" uid="uid://ccklu2adybljt" path="res://icon.png" id="1_b5h57"]
+[ext_resource type="PackedScene" uid="uid://c0g7klb31idb1" path="res://ui/UserInterface.tscn" id="2_w8a7s"]
+[ext_resource type="PackedScene" uid="uid://cjvhd2yody540" path="res://entities/player/player.tscn" id="3_mtj4w"]
+[ext_resource type="Texture2D" uid="uid://cuf61xev60gx7" path="res://sprites/beegpeco.png" id="4_gha6i"]
+[ext_resource type="PackedScene" path="res://entities/items/item_healpot.tscn" id="5_bo7vq"]
+[ext_resource type="PackedScene" uid="uid://dchil557rdkvu" path="res://entities/items/item_laser.tscn" id="6_j4tjt"]
+[ext_resource type="PackedScene" uid="uid://dp6xwswkchq58" path="res://entities/upgrades/backpack_upgrade.tscn" id="7_f67au"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rl0px"]
+resource_name = "xd"
+texture = ExtResource("1_b5h57")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_scmuj"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 5
+physics_layer_0/collision_mask = 5
+sources/0 = SubResource("TileSetAtlasSource_rl0px")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pjbxx"]
+vertices = PackedVector2Array(-192, 384, -192, -192, 960, -192, 832, 384, 960, 640, 832, 576, 1792, 128, 1408, 128, 1408, -192, 2048, -192, 2048, 896, 1792, 640, 960, 896, 960, 1024, -512, 1024, -512, 576)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(6, 9, 10, 11), PackedInt32Array(11, 10, 12, 4), PackedInt32Array(12, 13, 14, 15, 5), PackedInt32Array(5, 4, 12)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-192, -192, 960, -192, 960, 640, 1792, 640, 1792, 128, 1408, 128, 1408, -192, 2048, -192, 2048, 896, 960, 896, 960, 1024, -512, 1024, -512, 576, 832, 576, 832, 384, -192, 384)])
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_scmuj")
+cell_quadrant_size = 64
+format = 2
+layer_0/tile_data = PackedInt32Array(-262149, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 0, 0, -327672, 0, 0, -327671, 0, 0, -327670, 0, 0, -327669, 0, 0, -196613, 0, 0, -131077, 0, 0, -65541, 0, 0, -5, 0, 0, 65531, 0, 0, 131067, 0, 0, 196603, 0, 0, 262139, 0, 0, 327675, 0, 0, 393211, 0, 0, 458747, 0, 0, 524283, 0, 0, 524284, 0, 0, 524285, 0, 0, 524286, 0, 0, 524287, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, -327668, 0, 0, -327667, 0, 0, -327666, 0, 0, -327665, 0, 0, -327664, 0, 0, -262128, 0, 0, -196592, 0, 0, -131056, 0, 0, -65520, 0, 0, 16, 0, 0, 65552, 0, 0, 131088, 0, 0, 196624, 0, 0, 262160, 0, 0, 327696, 0, 0, 393232, 0, 0, 458768, 0, 0, 524304, 0, 0, 983056, 0, 0, 1048592, 0, 0, 1114128, 0, 0, 1114127, 0, 0, 1114126, 0, 0, 1114125, 0, 0, 1114124, 0, 0, 1114123, 0, 0, 1114122, 0, 0, 1114121, 0, 0, 1114120, 0, 0, 1114119, 0, 0, 1114118, 0, 0, 1114117, 0, 0, 1114116, 0, 0, 1114115, 0, 0, 1114114, 0, 0, 1114113, 0, 0, 1114112, 0, 0, 1179647, 0, 0, 1179646, 0, 0, 1179645, 0, 0, 1179644, 0, 0, 1179643, 0, 0, 1179642, 0, 0, 1179641, 0, 0, 1179640, 0, 0, 1179639, 0, 0, 1179638, 0, 0, 1114102, 0, 0, 1048566, 0, 0, 983030, 0, 0, 917494, 0, 0, 851958, 0, 0, 786422, 0, 0, 720886, 0, 0, 655350, 0, 0, 589814, 0, 0, 524278, 0, 0, 524279, 0, 0, 524280, 0, 0, 524281, 0, 0, 524282, 0, 0, 524305, 0, 0, 524306, 0, 0, 524307, 0, 0, 524308, 0, 0, 524309, 0, 0, 524310, 0, 0, 524311, 0, 0, 524312, 0, 0, 524313, 0, 0, 524314, 0, 0, 983057, 0, 0, 983058, 0, 0, 983059, 0, 0, 983060, 0, 0, 983061, 0, 0, 983062, 0, 0, 983066, 0, 0, 983064, 0, 0, 983063, 0, 0, 983065, 0, 0, 458778, 0, 0, 393242, 0, 0, 327706, 0, 0, 262170, 0, 0, 196634, 0, 0, 196633, 0, 0, 196632, 0, 0, 196631, 0, 0, 196630, 0, 0, 196629, 0, 0, 196628, 0, 0, 131092, 0, 0, 65556, 0, 0, 20, 0, 0, -65516, 0, 0, -131052, 0, 0, -196588, 0, 0, -262124, 0, 0, -327660, 0, 0, -327659, 0, 0, -327658, 0, 0, -327657, 0, 0, -327656, 0, 0, -327655, 0, 0, -327654, 0, 0, -327653, 0, 0, -327649, 0, 0, -327648, 0, 0, -327652, 0, 0, -327651, 0, 0, -327650, 0, 0, -327647, 0, 0, -262111, 0, 0, -196575, 0, 0, -131039, 0, 0, -65503, 0, 0, 33, 0, 0, 65569, 0, 0, 131105, 0, 0, 196641, 0, 0, 262177, 0, 0, 327713, 0, 0, 393249, 0, 0, 458785, 0, 0, 524321, 0, 0, 589857, 0, 0, 655393, 0, 0, 720929, 0, 0, 786465, 0, 0, 852001, 0, 0, 917537, 0, 0, 983073, 0, 0, 983072, 0, 0, 983071, 0, 0, 983070, 0, 0, 983069, 0, 0, 983068, 0, 0, 983067, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="User Interface" parent="CanvasLayer" instance=ExtResource("2_w8a7s")]
+
+[node name="Player" parent="." instance=ExtResource("3_mtj4w")]
+
+[node name="Beegpeco" type="Sprite2D" parent="."]
+position = Vector2(1536, -16)
+scale = Vector2(0.422581, 0.422581)
+texture = ExtResource("4_gha6i")
+
+[node name="NavMesh" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_pjbxx")
+
+[node name="KokkoroItem" parent="." instance=ExtResource("5_bo7vq")]
+position = Vector2(-392, 648)
+
+[node name="LaserItem" parent="." instance=ExtResource("6_j4tjt")]
+position = Vector2(-384, 712)
+
+[node name="Upgrade" parent="." instance=ExtResource("7_f67au")]
+position = Vector2(-392, 800)

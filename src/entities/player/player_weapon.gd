@@ -1,4 +1,5 @@
 extends Node2D
+class_name Player_Weapon
 
 @onready var _weapon_sprite := $Pivot/PecorineSword
 @onready var _anim_player := $Pivot/AnimationPlayer
@@ -8,6 +9,10 @@ var player
 
 @export var attack_sequence := 0
 @export var can_next_sequence := false
+
+@export var dash_length := 0.25
+@export var ability_damage := 45
+@export var ability_cooldown_duration := 8.5
 
 var attack_seq_multipliers := [
 	1.0,
@@ -25,7 +30,7 @@ func _process(_delta):
 		attack_sequence = 0
 
 func _physics_process(_delta):
-	if !player.dead:
+	if !player.dead && !player.casting_ability:
 		look_at(get_global_mouse_position())
 
 func start_attack():
@@ -40,6 +45,33 @@ func start_attack():
 		_anim_player.play("attack{0}".format([attack_sequence + 1]))
 		attack_sequence += 1
 
-func _on_hitbox_body_entered(body:Node):
+func cast_ability(dash_direction: Vector2, _delta: float):
+	if dash_direction == Vector2.ZERO:
+		return
+
+	player.invulnerable = true
+	player.ability_cooldown = ability_cooldown_duration
+	player.casting_ability = true
+
+	player.direction = dash_direction
+	player.velocity = dash_direction.normalized() * (player.speed * 1000) * _delta
+
+	await get_tree().create_timer(0.1).timeout
+
+	player.direction = Vector2.ZERO
+	player.velocity = Vector2.ZERO
+
+	_anim_player.play("ability")
+	await _anim_player.animation_finished
+
+	player.casting_ability = false
+	await get_tree().create_timer(0.25).timeout
+	player.invulnerable = false
+
+func _on_hitbox_body_entered(body: Node):
 	if body.has_method("change_health") && body != player:
-		body.change_health(-player.attack * attack_seq_multipliers[attack_sequence - 1])
+		if !player.casting_ability:
+			body.change_health(-player.attack * attack_seq_multipliers[attack_sequence - 1])
+		else:
+			body.change_health(-ability_damage * player.ability_strength)
+

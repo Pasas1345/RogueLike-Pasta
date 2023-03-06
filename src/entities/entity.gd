@@ -8,6 +8,7 @@ class_name Entity
 @export var defense: = 10.0
 @export var ability_regen: = 1.0
 @export var ability_strength: = 1.0
+@export var invulnerable: = false
 
 var hp = max_hp
 var dead = false
@@ -26,7 +27,7 @@ func _physics_process(_delta: float):
 	# var _movement: = velocity
 
 func change_health(health: float, true_damage = false):
-	if dead: 
+	if dead || invulnerable: 
 		return
 		
 

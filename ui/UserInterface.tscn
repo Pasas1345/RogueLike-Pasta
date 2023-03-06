@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0g7klb31idb1"]
+[gd_scene load_steps=11 format=3 uid="uid://c0g7klb31idb1"]
 
 [ext_resource type="Theme" uid="uid://lgf534gmgtcp" path="res://ui/ui_theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/ui/game_ui.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://igcvtfrfp6m0" path="res://sprites/ui/backpack.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dwrruvjmqq0bh" path="res://sprites/ui/abiltiy_bar_border.png" id="3_pkfr0"]
 [ext_resource type="Texture2D" uid="uid://8qet8o4rqx04" path="res://sprites/ui/slot.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bgnai2hfbulf2" path="res://sprites/ui/abiltiy_bar_content.png" id="4_6hk3m"]
 [ext_resource type="Texture2D" uid="uid://lxs5j7j0328r" path="res://sprites/ui/health_bar_peco.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://bkneau6pv65o5" path="res://sprites/ui/selected_slot.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://p4uxa30vweos" path="res://sprites/ui/health_bar_peco_riceball.png" id="8"]
@@ -25,7 +27,7 @@ offset_left = 48.0
 offset_top = 104.0
 offset_right = 200.0
 offset_bottom = 144.0
-color = Color(0.313726, 0.313726, 0.313726, 1)
+color = Color(0.364706, 0.364706, 0.364706, 1)
 
 [node name="health_label" type="Label" parent="health_label_bg"]
 layout_mode = 0
@@ -36,6 +38,23 @@ offset_bottom = 37.0
 theme = ExtResource("1")
 theme_override_font_sizes/font_size = 24
 text = "xd / xd"
+
+[node name="ability_bar" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 168.0
+offset_right = 176.0
+offset_bottom = 193.0
+scale = Vector2(1.42136, 1.42136)
+texture = ExtResource("3_pkfr0")
+
+[node name="ability_bar_bg" type="TextureRect" parent="ability_bar"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 25.0
+texture = ExtResource("4_6hk3m")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="health_bar" type="TextureRect" parent="."]
 clip_contents = true

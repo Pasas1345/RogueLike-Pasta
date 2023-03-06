@@ -41,14 +41,15 @@ func die():
 	var rand_chance = randf_range(0, 100)
 
 	if rand_chance <= 5:
-		drop_item()
+		var rand = randf_range(1, 2)
+		if rand == 1:
+			drop_item()
+		else:
+			drop_upgrade()
 
 
 func drop_item():
-	randomize()
-	var item_keys: Array = main_game.item_nodes.keys()
+	main_game.spawn_item("", self)
 
-	var item: Item = main_game.item_nodes[item_keys[randi() % item_keys.size()]].instantiate()
-
-	item.set_position(self.position)
-	get_tree().current_scene.add_child(item)
+func drop_upgrade():
+	main_game.spawn_upgrade("", self)

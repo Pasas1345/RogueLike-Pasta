@@ -5,12 +5,13 @@ var player
 @onready var health: = $health_label_bg/health_label
 @onready var health_bar := $health_bar/health_bar_bg
 @onready var backpack_slots = $backpack_slots
-@onready var fps = $fps_counter
-@onready var pause_menu = $Pause_Menu
+@onready var fps := $fps_counter
+@onready var pause_menu := $Pause_Menu
 @onready var stage_label := $loop_stage_container/stage_label
 @onready var loop_label := $loop_stage_container/loop_label
 @onready var time_label := $time_label
 @onready var loading_screen = $loading_screen
+@onready var abiltiy_bar := $ability_bar/ability_bar_bg
 
 func _init():
 	add_to_group("ui")
@@ -26,12 +27,10 @@ func _ready():
 	await tween.finished
 	$loading_screen.visible = false
 	
-	
+# TODO : Move all the tweens in a seperate function. This is so that it doesn't go ballistic.
+
 func _process(_delta):
 	health.text = "{0}/{1}".format([clamp(player.hp, 0, player.max_hp), player.max_hp])
-
-	var healthbar_tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
-	healthbar_tween.tween_property(health_bar, "size", Vector2(remap(player.hp, 0, player.max_hp, 0, 309), 49), 0.1)
 
 	fps.text = "FPS: {0}".format([Engine.get_frames_per_second()])
 	
@@ -42,20 +41,24 @@ func _process(_delta):
 		loop_label.text = "Loop {0}".format([main_game.loop])
 		stage_label.text = "Stage {0}".format([main_game.stage_counter])
 
-	
 	var time = main_game.game_time
 
 	var seconds = time % 60
 	var minutes = (time / 60) % 60
 
 	time_label.text = "Elapsed Time:\n%02d:%02d" % [minutes, seconds]
-	
-
-	backpack_slots.set_size(Vector2(128, 128 * player.inv_slots))
 
 	if Input.is_action_just_pressed("pause"):
 		pause()
-			
+
+func _physics_process(_delta):
+	var tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	tween.set_parallel(true)
+	tween.tween_property(health_bar, "size", Vector2(remap(player.hp, 0, player.max_hp, 0, 309), 49), 0.1)
+	tween.tween_property(abiltiy_bar, "size", Vector2(remap(player.ability_cooldown, 0, player.weapon.ability_cooldown_duration, 150, 0), 25), 0.25)
+
+	tween.set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(backpack_slots, "size", Vector2(128, 128 * player.inv_slots), 0.1)
 
 # Ah yes, optimzation. It does exist i swear...
 var inv_sprites = []

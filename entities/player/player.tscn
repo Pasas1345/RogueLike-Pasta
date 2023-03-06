@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b8o3tk7i11un2" path="res://sprites/entities/peco.png" id="2"]
-[ext_resource type="PackedScene" path="res://entities/player/pecorine/player_Peco_Weapon.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cepw1cp1tkfw" path="res://entities/player/pecorine/player_Peco_Weapon.tscn" id="3"]
 [ext_resource type="Script" path="res://src/entities/player/player_itemaimer.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://wv7qles0purx" path="res://entities/items/effects/beam_item_laser.tscn" id="6"]
 [ext_resource type="Shader" path="res://shaders/entity_generic.gdshader" id="7"]
@@ -139,6 +139,7 @@ shader_parameter/blink_color2 = Color(0.631373, 0, 0, 1)
 shader_parameter/non_blink = Color(1, 0.960784, 0.709804, 1)
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1")
 speed = 250.0
 

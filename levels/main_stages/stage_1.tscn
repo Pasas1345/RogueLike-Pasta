@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cx4dwawjymy" path="res://entities/door_1.tscn" id="3_2us44"]
 [ext_resource type="PackedScene" uid="uid://c0g7klb31idb1" path="res://ui/UserInterface.tscn" id="4"]
 [ext_resource type="Script" path="res://src/stage_area.gd" id="5"]
-[ext_resource type="PackedScene" path="res://entities/portal.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://cbacj3u8ce64" path="res://entities/portal.tscn" id="7"]
 
 [sub_resource type="RectangleShape2D" id="27"]
 size = Vector2(1728, 472)
