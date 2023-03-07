@@ -1702,25 +1702,29 @@ margins = Vector2i(192, 80)
 0:0/7/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3ju44"]
-noise_type = 4
+noise_type = 3
+seed = 78
 frequency = 0.021
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aeatl"]
+resource_local_to_scene = true
 width = 1024
 height = 1024
+generate_mipmaps = false
 seamless = true
-normalize = false
+seamless_blend_skirt = 0.773
 noise = SubResource("FastNoiseLite_3ju44")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5q8a"]
+resource_local_to_scene = true
 shader = ExtResource("5_rssdr")
 shader_parameter/target_color = Color(0.203922, 0.564706, 0.592157, 1)
 shader_parameter/water_color = Color(0.203922, 0.564706, 0.592157, 0.670588)
 shader_parameter/scale = Vector2(64, 64)
 shader_parameter/distortion_scale = Vector2(0.01, 0.01)
 shader_parameter/y_zoom = 0.0
-shader_parameter/intensity = 0.03
-shader_parameter/speed = 0.045
+shader_parameter/intensity = 0.015
+shader_parameter/speed = 0.033
 shader_parameter/noise = SubResource("NoiseTexture2D_aeatl")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4nri3"]

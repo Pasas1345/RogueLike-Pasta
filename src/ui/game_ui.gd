@@ -2,7 +2,7 @@ extends Control
 
 var player
 
-@onready var health: = $health_label_bg/health_label
+@onready var health: = $health_bar/health_label_bg/health_label
 @onready var health_bar := $health_bar/health_bar_bg
 @onready var backpack_slots = $backpack_slots
 @onready var fps := $fps_counter
@@ -55,7 +55,7 @@ func _physics_process(_delta):
 	var tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	tween.set_parallel(true)
 	tween.tween_property(health_bar, "size", Vector2(remap(player.hp, 0, player.max_hp, 0, 309), 49), 0.1)
-	tween.tween_property(abiltiy_bar, "size", Vector2(remap(player.ability_cooldown, 0, player.weapon.ability_cooldown_duration, 150, 0), 25), 0.25)
+	tween.tween_property(abiltiy_bar, "size", Vector2(remap(player.ability_cooldown, 0, player.weapon.ability_cooldown_duration, 144, 0), 19), 0.25)
 
 	tween.set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(backpack_slots, "size", Vector2(128, 128 * player.inv_slots), 0.1)

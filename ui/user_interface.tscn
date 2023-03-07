@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0g7klb31idb1"]
+[gd_scene load_steps=14 format=3 uid="uid://c0g7klb31idb1"]
 
 [ext_resource type="Theme" uid="uid://lgf534gmgtcp" path="res://ui/ui_theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/ui/game_ui.gd" id="2"]
@@ -8,8 +8,19 @@
 [ext_resource type="Texture2D" uid="uid://bgnai2hfbulf2" path="res://sprites/ui/abiltiy_bar_content.png" id="4_6hk3m"]
 [ext_resource type="Texture2D" uid="uid://lxs5j7j0328r" path="res://sprites/ui/health_bar_peco.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://bkneau6pv65o5" path="res://sprites/ui/selected_slot.png" id="6"]
+[ext_resource type="Shader" path="res://shaders/ui/healthbar.gdshader" id="6_l2ck0"]
 [ext_resource type="Texture2D" uid="uid://p4uxa30vweos" path="res://sprites/ui/health_bar_peco_riceball.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://73g5t4dyaxkm" path="res://sprites/ui/health_bar_peco_content.png" id="9"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c0n5p"]
+resource_local_to_scene = true
+shader = ExtResource("6_l2ck0")
+shader_parameter/speed = 0.025
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gc3cl"]
+resource_local_to_scene = true
+shader = ExtResource("6_l2ck0")
+shader_parameter/speed = 0.005
 
 [node name="User Interface" type="Control"]
 process_mode = 3
@@ -21,24 +32,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2")
 
-[node name="health_label_bg" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 104.0
-offset_right = 200.0
-offset_bottom = 144.0
-color = Color(0.364706, 0.364706, 0.364706, 1)
-
-[node name="health_label" type="Label" parent="health_label_bg"]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 5.0
-offset_right = 280.0
-offset_bottom = 37.0
-theme = ExtResource("1")
-theme_override_font_sizes/font_size = 24
-text = "xd / xd"
-
 [node name="ability_bar" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 26.0
@@ -49,30 +42,33 @@ scale = Vector2(1.42136, 1.42136)
 texture = ExtResource("3_pkfr0")
 
 [node name="ability_bar_bg" type="TextureRect" parent="ability_bar"]
+material = SubResource("ShaderMaterial_c0n5p")
 layout_mode = 0
-offset_right = 150.0
-offset_bottom = 25.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 147.0
+offset_bottom = 22.0
 texture = ExtResource("4_6hk3m")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="health_bar" type="TextureRect" parent="."]
-clip_contents = true
 layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 660.0
-offset_bottom = 144.0
+offset_bottom = 141.0
 scale = Vector2(0.749969, 0.749969)
 texture = ExtResource("5")
 expand_mode = 1
 
 [node name="health_bar_bg" type="TextureRect" parent="health_bar"]
+material = SubResource("ShaderMaterial_gc3cl")
 layout_mode = 0
 offset_left = 9.0
 offset_top = 8.0
 offset_right = 318.0
-offset_bottom = 57.0
+offset_bottom = 56.0
 scale = Vector2(2, 2)
 texture = ExtResource("9")
 expand_mode = 1
@@ -86,6 +82,26 @@ offset_right = 624.0
 offset_bottom = 120.0
 texture = ExtResource("8")
 expand_mode = 1
+
+[node name="health_label_bg" type="ColorRect" parent="health_bar"]
+z_index = -1
+layout_mode = 0
+offset_left = 32.0
+offset_top = 107.0
+offset_right = 193.0
+offset_bottom = 160.0
+color = Color(0.364706, 0.364706, 0.364706, 1)
+
+[node name="health_label" type="Label" parent="health_bar/health_label_bg"]
+texture_filter = 2
+layout_mode = 0
+offset_left = 20.0022
+offset_top = 9.00481
+offset_right = 284.002
+offset_bottom = 51.0048
+theme = ExtResource("1")
+theme_override_font_sizes/font_size = 32
+text = "xd / xd"
 
 [node name="backpack_slots" type="TextureRect" parent="."]
 layout_mode = 0
@@ -139,6 +155,7 @@ theme_override_font_sizes/font_size = 24
 text = "FPS: blah"
 
 [node name="time_label" type="Label" parent="."]
+texture_filter = 2
 layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
@@ -164,12 +181,14 @@ offset_right = -0.520142
 offset_bottom = 0.23999
 
 [node name="loop_label" type="Label" parent="loop_stage_container"]
+texture_filter = 2
 layout_mode = 2
 theme = ExtResource("1")
 theme_override_font_sizes/font_size = 24
 text = "Loop _"
 
 [node name="stage_label" type="Label" parent="loop_stage_container"]
+texture_filter = 2
 layout_mode = 2
 theme = ExtResource("1")
 theme_override_font_sizes/font_size = 24
@@ -177,9 +196,12 @@ text = "Stage _"
 
 [node name="PauseBG" type="ColorRect" parent="."]
 visible = false
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1")
 color = Color(0.0941176, 0.0941176, 0.0941176, 0.768627)
 
@@ -199,7 +221,9 @@ theme = ExtResource("1")
 [node name="title" type="Label" parent="Pause_Menu"]
 layout_mode = 2
 theme = ExtResource("1")
+theme_override_font_sizes/font_size = 48
 text = "Game Paused"
+horizontal_alignment = 1
 
 [node name="resume" type="Button" parent="Pause_Menu"]
 layout_mode = 2

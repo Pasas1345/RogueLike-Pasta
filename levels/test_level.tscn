@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1som8dy8lyj"]
+[gd_scene load_steps=11 format=3 uid="uid://cs738xkkbmvkb"]
 
 [ext_resource type="Texture2D" uid="uid://ccklu2adybljt" path="res://icon.png" id="1_b5h57"]
-[ext_resource type="PackedScene" uid="uid://c0g7klb31idb1" path="res://ui/UserInterface.tscn" id="2_w8a7s"]
+[ext_resource type="PackedScene" uid="uid://c0g7klb31idb1" path="res://ui/user_interface.tscn" id="2_w8a7s"]
 [ext_resource type="PackedScene" uid="uid://cjvhd2yody540" path="res://entities/player/player.tscn" id="3_mtj4w"]
 [ext_resource type="Texture2D" uid="uid://cuf61xev60gx7" path="res://sprites/beegpeco.png" id="4_gha6i"]
 [ext_resource type="PackedScene" path="res://entities/items/item_healpot.tscn" id="5_bo7vq"]

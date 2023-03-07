@@ -4,6 +4,7 @@ class_name Player_Weapon
 @onready var _weapon_sprite := $Pivot/PecorineSword
 @onready var _anim_player := $Pivot/AnimationPlayer
 @onready var _pivot := $Pivot
+@onready var _ability_hitbox := $ability_hitbox/ability_hitbox_collision
 var player
 # var attackable = []
 
@@ -52,6 +53,7 @@ func cast_ability(dash_direction: Vector2, _delta: float):
 	player.invulnerable = true
 	player.ability_cooldown = ability_cooldown_duration
 	player.casting_ability = true
+	_ability_hitbox.disabled = false
 
 	player.direction = dash_direction
 	player.velocity = dash_direction.normalized() * (player.speed * 1000) * _delta
@@ -60,6 +62,7 @@ func cast_ability(dash_direction: Vector2, _delta: float):
 
 	player.direction = Vector2.ZERO
 	player.velocity = Vector2.ZERO
+	_ability_hitbox.disabled = true
 
 	_anim_player.play("ability")
 	await _anim_player.animation_finished
@@ -75,3 +78,6 @@ func _on_hitbox_body_entered(body: Node):
 		else:
 			body.change_health(-ability_damage * player.ability_strength)
 
+func _on_ability_hitbox_body_entered(body: Node2D):
+	if body.has_method("change_health") && body != player:
+		body.change_health(-ability_damage * player.ability_strength)

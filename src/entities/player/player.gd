@@ -167,7 +167,11 @@ func add_item(item: Item) -> bool:
 func upgrade_player(upgrade: Upgrade) -> bool:
 	match(upgrade.upgrade_id):
 		"upgrade_backpack":
-			inv_slots += 1
+			if inv_slots >= 9:
+				return false
+			else:
+				inv_slots += 1
+				
 
 	return true
 

@@ -7,5 +7,5 @@ class_name Upgrade
 
 func _on_body_entered(body:Node2D):
 	if body.name == "Player":
-		body.upgrade_player(self)
-		queue_free()
+		if body.upgrade_player(self):
+			queue_free()

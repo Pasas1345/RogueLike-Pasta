@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://lgf534gmgtcp"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://lgf534gmgtcp"]
 
 [ext_resource type="FontFile" uid="uid://dv1fe2vawfndj" path="res://ui/fonts/FiraSans-Medium.otf" id="1"]
 
@@ -38,6 +38,53 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 12
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iiw11"]
+bg_color = Color(0, 0.466667, 0.713726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lou1l"]
+bg_color = Color(0.0117647, 0.0156863, 0.368627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82pvs"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.0627451, 0.235294, 0.364706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0313726, 0.152941, 0.247059, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dgi3"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+bg_color = Color(0.101961, 0.458824, 0.623529, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_color = Color(0.0941176, 0.305882, 0.466667, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vld83"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+bg_color = Color(0.117647, 0.376471, 0.568627, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_color = Color(0.0941176, 0.305882, 0.466667, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
 [resource]
 default_font = ExtResource("1")
 default_font_size = 32
@@ -46,4 +93,9 @@ Button/styles/disabled = SubResource("5")
 Button/styles/hover = SubResource("3")
 Button/styles/normal = SubResource("2")
 Button/styles/pressed = SubResource("4")
+TabBar/styles/tab_selected = SubResource("StyleBoxFlat_iiw11")
+TabBar/styles/tab_unselected = SubResource("StyleBoxFlat_lou1l")
+TabContainer/styles/panel = SubResource("StyleBoxFlat_82pvs")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_3dgi3")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_vld83")
 VBoxContainer/constants/separation = 16

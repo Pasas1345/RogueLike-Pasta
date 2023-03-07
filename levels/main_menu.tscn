@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://drxwxuqiwievm"]
+[gd_scene load_steps=4 format=3 uid="uid://drxwxuqiwievm"]
 
 [ext_resource type="Theme" uid="uid://lgf534gmgtcp" path="res://ui/ui_theme.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://e0vhwlrj3t4x" path="res://ui/option_menu.tscn" id="1_olxny"]
 [ext_resource type="Script" path="res://src/ui/mainmenu_buttons.gd" id="2"]
 
 [node name="Main_Menu" type="Control"]
@@ -26,36 +27,51 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -222.5
 offset_top = -199.5
-offset_right = 222.5
-offset_bottom = 199.5
+offset_right = 222.501
+offset_bottom = 200.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1")
 script = ExtResource("2")
 
 [node name="title" type="Label" parent="Buttons"]
+texture_filter = 2
 layout_mode = 2
 theme = ExtResource("1")
+theme_override_font_sizes/font_size = 48
 text = "Roguelike Pasta"
 horizontal_alignment = 1
 
 [node name="play" type="Button" parent="Buttons"]
+texture_filter = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1")
 text = "Play"
 
 [node name="options" type="Button" parent="Buttons"]
+texture_filter = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1")
 text = "Options"
 
 [node name="quit" type="Button" parent="Buttons"]
+texture_filter = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1")
 text = "Quit"
+
+[node name="options_menu" parent="." instance=ExtResource("1_olxny")]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 
 [connection signal="pressed" from="Buttons/play" to="Buttons" method="_on_play_pressed"]
 [connection signal="pressed" from="Buttons/options" to="Buttons" method="_on_options_pressed"]
