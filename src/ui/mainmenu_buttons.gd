@@ -20,6 +20,8 @@ func _on_options_pressed():
 func toggle_options():
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+	options_menu.update_settings()
+
 	if options_enabled:
 		options_enabled = false
 	

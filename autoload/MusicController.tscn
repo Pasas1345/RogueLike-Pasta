@@ -1,34 +1,40 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://d2n8o7fvwyxbd"]
 
-[ext_resource path="res://sounds/music/battletheme1.mp3" type="AudioStream" id=1]
-[ext_resource path="res://sounds/music/transition_battletheme1.mp3" type="AudioStream" id=2]
-[ext_resource path="res://sounds/music/battletheme1_chill.mp3" type="AudioStream" id=3]
-[ext_resource path="res://sounds/music/battletheme1_chill_full.mp3" type="AudioStream" id=4]
-[ext_resource path="res://sounds/music/battletheme1_full.mp3" type="AudioStream" id=5]
-[ext_resource path="res://src/autoload/MusicController.gd" type="Script" id=7]
-[ext_resource path="res://sounds/music/Refreshing Breeze.mp3" type="AudioStream" id=8]
+[ext_resource type="AudioStream" uid="uid://ltdtvb01vl1g" path="res://sounds/music/battletheme1.mp3" id="1"]
+[ext_resource type="AudioStream" uid="uid://l7vdvvqniqsd" path="res://sounds/music/transition_battletheme1.mp3" id="2"]
+[ext_resource type="AudioStream" uid="uid://dwmuyfdnnd2vf" path="res://sounds/music/battletheme1_chill.mp3" id="3"]
+[ext_resource type="AudioStream" uid="uid://ca1af7aevj4th" path="res://sounds/music/battletheme1_chill_full.mp3" id="4"]
+[ext_resource type="AudioStream" uid="uid://bn50gciqdd3pq" path="res://sounds/music/battletheme1_full.mp3" id="5"]
+[ext_resource type="Script" path="res://src/autoload/MusicController.gd" id="7"]
+[ext_resource type="AudioStream" uid="uid://cmvnsghwbva4q" path="res://sounds/music/Refreshing Breeze.mp3" id="8"]
 
 [node name="MusicController" type="Node"]
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="battle_full" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource("5")
+bus = &"Music"
 
 [node name="chill_full" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+stream = ExtResource("4")
+bus = &"Music"
 
 [node name="transition" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource("2")
 volume_db = -10.0
+bus = &"Music"
 
 [node name="battle" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 1 )
+stream = ExtResource("1")
 volume_db = -10.0
+bus = &"Music"
 
 [node name="chill" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource("3")
 volume_db = -10.0
+bus = &"Music"
 
 [node name="menu" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource("8")
 volume_db = -50.0
+bus = &"Music"

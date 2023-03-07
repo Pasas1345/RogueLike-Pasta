@@ -16,6 +16,12 @@ var player_fighting: bool = false : set = set_player_fighting
 var first_loop: bool = true
 var loop: int = 0
 
+var settings: Dictionary = {
+	vsync = true,
+	sfx_volume = 100,
+	music_volume = 100
+}
+
 enum EnemyTypes {
 	KYARU,
 	SLIME,

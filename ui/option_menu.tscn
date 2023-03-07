@@ -31,17 +31,25 @@ tab_alignment = 1
 
 [node name="Video" type="VBoxContainer" parent="TabContainer"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 12
+
+[node name="vsync" type="CheckButton" parent="TabContainer/Video"]
+layout_mode = 2
+text = "VSync:"
+
+[node name="apply_video" type="Button" parent="TabContainer/Video"]
+layout_mode = 2
+text = "Apply Settings"
 
 [node name="Audio" type="VBoxContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="SFX" type="Label" parent="TabContainer/Audio"]
+[node name="sfx" type="Label" parent="TabContainer/Audio"]
 layout_mode = 2
 text = "SFX:"
 
-[node name="HSlider" type="HSlider" parent="TabContainer/Audio/SFX"]
+[node name="HSlider" type="HSlider" parent="TabContainer/Audio/sfx"]
 layout_mode = 2
 offset_left = 134.0
 offset_top = 12.0
@@ -50,11 +58,11 @@ offset_bottom = 28.0
 value = 100.0
 rounded = true
 
-[node name="Music" type="Label" parent="TabContainer/Audio"]
+[node name="music" type="Label" parent="TabContainer/Audio"]
 layout_mode = 2
 text = "Music:"
 
-[node name="HSlider" type="HSlider" parent="TabContainer/Audio/Music"]
+[node name="HSlider" type="HSlider" parent="TabContainer/Audio/music"]
 layout_mode = 0
 offset_left = 134.0
 offset_top = 14.0
@@ -62,3 +70,8 @@ offset_right = 360.0
 offset_bottom = 30.0
 value = 100.0
 rounded = true
+
+[connection signal="toggled" from="TabContainer/Video/vsync" to="." method="_on_vsync_toggled"]
+[connection signal="pressed" from="TabContainer/Video/apply_video" to="." method="_on_apply_video_pressed"]
+[connection signal="value_changed" from="TabContainer/Audio/sfx/HSlider" to="." method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/music/HSlider" to="." method="_on_music_value_changed"]
