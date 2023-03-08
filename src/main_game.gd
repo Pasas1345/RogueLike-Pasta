@@ -18,6 +18,8 @@ var loop: int = 0
 
 var settings: Dictionary = {
 	vsync = true,
+	max_fps = 60,
+	max_fps_index = 0,
 	sfx_volume = 100,
 	music_volume = 100
 }

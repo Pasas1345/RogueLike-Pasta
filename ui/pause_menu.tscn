@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://dipgb2i7uwhvj"]
+
+[ext_resource type="Theme" uid="uid://lgf534gmgtcp" path="res://ui/ui_theme.tres" id="1_r7u2u"]
+[ext_resource type="Script" path="res://src/ui/pause_menu.gd" id="2_25pis"]
+
+[node name="Pause_Menu" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = -200.5
+offset_right = 188.0
+offset_bottom = 200.5
+theme = ExtResource("1_r7u2u")
+script = ExtResource("2_25pis")
+
+[node name="title" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_r7u2u")
+theme_override_font_sizes/font_size = 48
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="resume" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_r7u2u")
+text = "Resume"
+
+[node name="main_menu" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_r7u2u")
+text = "Main Menu"
+
+[node name="quit" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_r7u2u")
+text = "Quit"
+
+[connection signal="pressed" from="resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="main_menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

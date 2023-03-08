@@ -24,9 +24,9 @@ func toggle_options():
 
 	if options_enabled:
 		options_enabled = false
-	
-		play_button.disabled = false
-		quit_button.disabled = false
+		options_menu.apply_settings()
+		options_button.disabled = true
+		
 		options_button.text = "Options"
 		
 		# tween.set_parallel(true)
@@ -34,17 +34,24 @@ func toggle_options():
 		tween.tween_property(self, "position", Vector2(737.5, 340.5), 0.5)
 		await tween.finished
 		options_menu.visible = false
+		play_button.disabled = false
+		quit_button.disabled = false
+		options_button.disabled = false
 	else:
 		options_enabled = true
+		options_menu.update_settings()
 
 		play_button.disabled = true
 		quit_button.disabled = true
-		options_button.text = "Close Options"
+		options_button.disabled = true
+		options_button.text = "Close and Apply"
 		options_menu.visible = true
 
 		# tween.set_parallel(true)
 		tween.tween_property(self, "position", Vector2(280, 340.5), 0.5)
 		tween.tween_property(options_menu, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.25)
+		await tween.finished
+		options_button.disabled = false
 
 
 		

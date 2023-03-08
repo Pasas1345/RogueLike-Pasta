@@ -17,7 +17,6 @@ func _init():
 	add_to_group("ui")
 
 func _ready():
-	Engine.max_fps = int(DisplayServer.screen_get_refresh_rate() * 3.0)
 	player = get_tree().get_nodes_in_group("player")[0]
 	update_inventory()
 
@@ -128,15 +127,3 @@ func game_over():
 	$Pause_Menu/title.text = "Game Over!"
 
 
-# Pause Menu Buttons.
-func _on_resume_pressed():
-	pause()
-
-func _on_main_menu_pressed():
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://levels/main_menu.tscn")
-	$Pause_Menu/title.text = "Game Paused"
-	main_game.reset()
-
-func _on_quit_pressed():
-	get_tree().quit()

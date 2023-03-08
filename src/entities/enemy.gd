@@ -41,8 +41,8 @@ func die():
 	var rand_chance = randf_range(0, 100)
 
 	if rand_chance <= 5:
-		var rand = randf_range(1, 2)
-		if rand == 1:
+		var rand = randf_range(0, 100)
+		if rand <= 50:
 			drop_item()
 		else:
 			drop_upgrade()

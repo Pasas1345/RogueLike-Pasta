@@ -18,7 +18,7 @@ func _ready():
 	if get_tree().get_nodes_in_group(area_spawners_group).size() <= 0:
 		printerr("Warning: Group name doesn't have any spawners. No spawning.")
 
-	connect("body_entered",Callable(self,"_on_area1_body_entered"))
+	connect("body_entered", Callable(self,"_on_area1_body_entered"))
 
 func _on_area1_body_entered(body:Node):
 	if body == main_game.player && !cleared && !main_game.player_fighting:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0g7klb31idb1"]
+[gd_scene load_steps=15 format=3 uid="uid://c0g7klb31idb1"]
 
 [ext_resource type="Theme" uid="uid://lgf534gmgtcp" path="res://ui/ui_theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/ui/game_ui.gd" id="2"]
@@ -11,6 +11,7 @@
 [ext_resource type="Shader" path="res://shaders/ui/healthbar.gdshader" id="6_l2ck0"]
 [ext_resource type="Texture2D" uid="uid://p4uxa30vweos" path="res://sprites/ui/health_bar_peco_riceball.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://73g5t4dyaxkm" path="res://sprites/ui/health_bar_peco_content.png" id="9"]
+[ext_resource type="PackedScene" uid="uid://dipgb2i7uwhvj" path="res://ui/pause_menu.tscn" id="12_fovnb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c0n5p"]
 resource_local_to_scene = true
@@ -205,43 +206,11 @@ grow_vertical = 2
 theme = ExtResource("1")
 color = Color(0.0941176, 0.0941176, 0.0941176, 0.768627)
 
-[node name="Pause_Menu" type="VBoxContainer" parent="."]
+[node name="Pause_Menu" parent="." instance=ExtResource("12_fovnb")]
 visible = false
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -188.0
-offset_top = -200.5
-offset_right = 188.0
-offset_bottom = 200.5
-theme = ExtResource("1")
-
-[node name="title" type="Label" parent="Pause_Menu"]
-layout_mode = 2
-theme = ExtResource("1")
-theme_override_font_sizes/font_size = 48
-text = "Game Paused"
-horizontal_alignment = 1
-
-[node name="resume" type="Button" parent="Pause_Menu"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("1")
-text = "Resume"
-
-[node name="main_menu" type="Button" parent="Pause_Menu"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("1")
-text = "Main Menu"
-
-[node name="quit" type="Button" parent="Pause_Menu"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("1")
-text = "Quit"
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="loading_screen" type="ColorRect" parent="."]
 visible = false
@@ -249,7 +218,3 @@ layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 1)
-
-[connection signal="pressed" from="Pause_Menu/resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Pause_Menu/main_menu" to="." method="_on_main_menu_pressed"]
-[connection signal="pressed" from="Pause_Menu/quit" to="." method="_on_quit_pressed"]
