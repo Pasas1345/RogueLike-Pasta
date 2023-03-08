@@ -37,27 +37,25 @@ theme_override_constants/separation = 12
 layout_mode = 2
 text = "VSync:"
 
-[node name="fps" type="Label" parent="TabContainer/Video"]
+[node name="resolution" type="Label" parent="TabContainer/Video"]
 layout_mode = 2
-text = "Max FPS:"
+text = "Resolution:"
 
-[node name="OptionButton" type="OptionButton" parent="TabContainer/Video/fps"]
+[node name="OptionButton" type="OptionButton" parent="TabContainer/Video/resolution"]
 layout_mode = 0
-offset_left = 217.0
+offset_left = 204.0
 offset_top = -4.0
-offset_right = 389.0
+offset_right = 385.0
 offset_bottom = 39.0
 alignment = 2
-item_count = 4
-selected = 0
-popup/item_0/text = "60"
+item_count = 3
+selected = 2
+popup/item_0/text = "1280x720"
 popup/item_0/id = 0
-popup/item_1/text = "75"
-popup/item_1/id = 3
-popup/item_2/text = "90"
-popup/item_2/id = 1
-popup/item_3/text = "120"
-popup/item_3/id = 2
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1920x1080"
+popup/item_2/id = 2
 
 [node name="Audio" type="VBoxContainer" parent="TabContainer"]
 visible = false
@@ -90,6 +88,6 @@ value = 100.0
 rounded = true
 
 [connection signal="toggled" from="TabContainer/Video/vsync" to="." method="_on_vsync_toggled"]
-[connection signal="item_selected" from="TabContainer/Video/fps/OptionButton" to="." method="_on_max_fps_option_selected"]
+[connection signal="item_selected" from="TabContainer/Video/resolution/OptionButton" to="." method="_on_max_fps_option_selected"]
 [connection signal="value_changed" from="TabContainer/Audio/sfx/HSlider" to="." method="_on_sfx_value_changed"]
 [connection signal="value_changed" from="TabContainer/Audio/music/HSlider" to="." method="_on_music_value_changed"]
