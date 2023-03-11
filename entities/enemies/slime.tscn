@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://c76f2u43xrcl"]
+[gd_scene load_steps=20 format=3 uid="uid://c76f2u43xrcl"]
 
 [ext_resource type="Texture2D" uid="uid://ke0bd6nnaj8b" path="res://sprites/entities/slime.png" id="1"]
 [ext_resource type="Script" path="res://src/entities/enemy.gd" id="2"]
 [ext_resource type="Script" path="res://src/entities/npc.gd" id="3"]
 [ext_resource type="Shader" path="res://shaders/entity_generic.gdshader" id="4"]
+[ext_resource type="Texture2D" uid="uid://cdk1dm2nu4iok" path="res://sprites/circle.png" id="5_6mhq4"]
 
 [sub_resource type="ShaderMaterial" id="10"]
 resource_local_to_scene = true
@@ -272,6 +273,24 @@ _data = {
 "movement": SubResource("13")
 }
 
+[sub_resource type="Curve" id="Curve_vhy74"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_orlf8"]
+curve = SubResource("Curve_vhy74")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sbh1k"]
+particle_flag_disable_z = true
+spread = 60.0
+initial_velocity_min = 180.0
+initial_velocity_max = 332.65
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 1.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_orlf8")
+
 [node name="Slime" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 8
@@ -312,6 +331,16 @@ root_node = NodePath("../AnimationPlayer")
 libraries = {
 "": SubResource("AnimationLibrary_35uf0")
 }
+
+[node name="HitParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_sbh1k")
+texture = ExtResource("5_6mhq4")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.79
+randomness = 0.37
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

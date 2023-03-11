@@ -9,6 +9,9 @@ var selected: bool = false : set = set_selected
 
 var active : set = set_active
 
+func _init():
+	add_to_group("portal")
+
 func set_active(act):
 	active = act
 	if act:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bpn157x80cb38"]
+[gd_scene load_steps=17 format=3 uid="uid://bpn157x80cb38"]
 
 [ext_resource type="Texture2D" uid="uid://bjimvmijka0p5" path="res://sprites/entities/kyawoo.png" id="1"]
 [ext_resource type="Script" path="res://src/entities/enemy.gd" id="2"]
 [ext_resource type="Script" path="res://src/entities/npc.gd" id="3"]
 [ext_resource type="Shader" path="res://shaders/entity_generic.gdshader" id="4"]
+[ext_resource type="Texture2D" uid="uid://cdk1dm2nu4iok" path="res://sprites/circle.png" id="5_w81js"]
 
 [sub_resource type="ShaderMaterial" id="10"]
 resource_local_to_scene = true
@@ -111,6 +112,24 @@ _data = {
 "hit": SubResource("9")
 }
 
+[sub_resource type="Curve" id="Curve_286s8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g8da3"]
+curve = SubResource("Curve_286s8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_781x3"]
+particle_flag_disable_z = true
+spread = 60.0
+initial_velocity_min = 180.0
+initial_velocity_max = 332.65
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 1.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_g8da3")
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 8
@@ -145,6 +164,16 @@ libraries = {
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
 script = ExtResource("3")
+
+[node name="HitParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_781x3")
+texture = ExtResource("5_w81js")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.79
+randomness = 0.37
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

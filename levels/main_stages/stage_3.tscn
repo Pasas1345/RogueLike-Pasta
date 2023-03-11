@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b24yevjyoyrxu"]
+[gd_scene load_steps=7 format=3 uid="uid://b24yevjyoyrxu"]
 
 [ext_resource type="TileSet" uid="uid://bcqejf2bb8kcs" path="res://sprites/tiles/placeholder.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://cjvhd2yody540" path="res://entities/player/player.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://c0g7klb31idb1" path="res://ui/user_interface.tscn" id="4_vaymk"]
 [ext_resource type="Script" path="res://src/stage.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://cbacj3u8ce64" path="res://entities/portal.tscn" id="5_61dat"]
 
 [sub_resource type="NavigationPolygon" id="3"]
 vertices = PackedVector2Array(192, 128, 1344, 128, 1344, 1216, 192, 1216)
@@ -54,6 +55,12 @@ position = Vector2(712, 640)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="User Interface" parent="CanvasLayer" instance=ExtResource("4_vaymk")]
+
+[node name="Portal" parent="." instance=ExtResource("5_61dat")]
+visible = false
+position = Vector2(777, 584)
+next_stage = null
+stage_path = null
 
 [node name="NavMesh" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("3")

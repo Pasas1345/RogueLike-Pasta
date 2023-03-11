@@ -150,6 +150,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("2")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+visible = false
 scale = Vector2(1.33333, 1.33333)
 occluder = SubResource("13")
 

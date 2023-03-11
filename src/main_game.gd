@@ -18,7 +18,6 @@ var loop: int = 0
 
 var settings: Dictionary = {
 	vsync = true,
-	resolution_index = 2,
 	sfx_volume = 100,
 	music_volume = 100
 }

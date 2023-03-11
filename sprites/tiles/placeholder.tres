@@ -1723,8 +1723,8 @@ shader_parameter/water_color = Color(0.203922, 0.564706, 0.592157, 0.670588)
 shader_parameter/scale = Vector2(64, 64)
 shader_parameter/distortion_scale = Vector2(0.01, 0.01)
 shader_parameter/y_zoom = 0.0
-shader_parameter/intensity = 0.015
-shader_parameter/speed = 0.033
+shader_parameter/intensity = 0.029
+shader_parameter/speed = 0.015
 shader_parameter/noise = SubResource("NoiseTexture2D_aeatl")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4nri3"]

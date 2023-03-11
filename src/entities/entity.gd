@@ -22,15 +22,16 @@ func _ready():
 	print("New entity spawned! {0}".format([self]))
 
 func _physics_process(_delta: float):
-	set_velocity(velocity)
-	move_and_slide()
+	if !dead:
+		set_velocity(velocity)
+		move_and_slide()
+		
 	# var _movement: = velocity
 
-func change_health(health: float, true_damage = false):
+func change_health(health: float, true_damage: bool = false, from_attacker: Node2D = null):
 	if dead || invulnerable: 
 		return
 		
-
 	var health_change = health
 	if health < 0 && !true_damage:
 		health_change = floor(health_change * (1 + defense / 100))
@@ -45,8 +46,12 @@ func change_health(health: float, true_damage = false):
 	
 	if health < 0 && !dead:
 		_anim_player.play("hit")
+		_on_damaged(from_attacker)
 	elif health > 0 && !dead:
 		_anim_player.play("heal")
+
+func _on_damaged(_attacker):
+	pass
 		
 func die():
 	dead = true
