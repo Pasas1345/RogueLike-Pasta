@@ -59,8 +59,8 @@ position = Vector2(712, 640)
 [node name="Portal" parent="." instance=ExtResource("5_61dat")]
 visible = false
 position = Vector2(777, 584)
-next_stage = null
-stage_path = null
+next_stage = 4
+stage_path = "main_stages/stage"
 
 [node name="NavMesh" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("3")

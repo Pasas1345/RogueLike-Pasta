@@ -45,10 +45,12 @@ func change_health(health: float, true_damage: bool = false, from_attacker: Node
 		die()
 	
 	if health < 0 && !dead:
-		_anim_player.play("hit")
+		if _anim_player != null:
+			_anim_player.play("hit")
 		_on_damaged(from_attacker)
 	elif health > 0 && !dead:
-		_anim_player.play("heal")
+		if _anim_player != null:
+			_anim_player.play("heal")
 
 func _on_damaged(_attacker):
 	pass

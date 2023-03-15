@@ -35,9 +35,8 @@ func _init():
 	add_to_group("portal")
 
 func _process(_delta):
-	if Input.is_action_just_pressed("interact") && active && selected:
+	if selected && Input.is_action_just_pressed("interact") && active:
 		teleport()
-
 
 func _on_Area2D_body_entered(body: Node):
 	if body == get_tree().get_nodes_in_group("player")[0] && active:

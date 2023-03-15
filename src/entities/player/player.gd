@@ -21,6 +21,7 @@ var sprint_cooldown: bool = false
 
 var is_using_item: bool = false
 var is_attacking: bool = false
+var bullet_invulnerable: bool = false
 
 var attack_cooldown: float = 0.0
 var ability_cooldown: float = 0.0
@@ -104,7 +105,6 @@ func _process(_delta) -> void:
 		if ability_cooldown <= 0:
 			weapon.cast_ability(direction, get_physics_process_delta_time())
 
-
 func _physics_process(_delta) -> void:
 	if !dead:
 		if attack_cooldown > 0:
@@ -171,7 +171,6 @@ func upgrade_player(upgrade: Upgrade) -> bool:
 				return false
 			else:
 				inv_slots += 1
-				
 
 	return true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://cv2xngoedjn5q"]
 
 [ext_resource type="TileSet" path="res://sprites/tiles/pixel_dungeon_tileset.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://cjvhd2yody540" path="res://entities/player/player.tscn" id="2"]
@@ -45,8 +45,8 @@ layer_0/tile_data = PackedInt32Array(131101, 327685, 1, 262135, 65541, 1, 262152
 [node name="doors" type="Node2D" parent="Map"]
 
 [node name="door1" parent="Map/doors" instance=ExtResource("3_k8t5e")]
-position = Vector2(-40, 528)
-scale = Vector2(-0.751392, 3.59652)
+position = Vector2(-40, 544)
+scale = Vector2(-0.751392, 2.87652)
 
 [node name="door2" parent="Map/doors" instance=ExtResource("3_k8t5e")]
 position = Vector2(1384, 544)

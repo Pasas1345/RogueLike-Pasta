@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cs738xkkbmvkb"]
+[gd_scene load_steps=13 format=3 uid="uid://cs738xkkbmvkb"]
 
 [ext_resource type="Texture2D" uid="uid://ccklu2adybljt" path="res://icon.png" id="1_b5h57"]
 [ext_resource type="PackedScene" uid="uid://c0g7klb31idb1" path="res://ui/user_interface.tscn" id="2_w8a7s"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" path="res://entities/items/item_healpot.tscn" id="5_bo7vq"]
 [ext_resource type="PackedScene" uid="uid://dchil557rdkvu" path="res://entities/items/item_laser.tscn" id="6_j4tjt"]
 [ext_resource type="PackedScene" uid="uid://dp6xwswkchq58" path="res://entities/upgrades/backpack_upgrade.tscn" id="7_f67au"]
+[ext_resource type="PackedScene" uid="uid://moo75do1wdo1" path="res://entities/bullet.tscn" id="8_hx2bp"]
+[ext_resource type="PackedScene" uid="uid://d3cglh3om8oqn" path="res://entities/test_bulletshooter.tscn" id="9_myux0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rl0px"]
 resource_name = "xd"
@@ -58,3 +60,9 @@ position = Vector2(-384, 712)
 
 [node name="Upgrade" parent="." instance=ExtResource("7_f67au")]
 position = Vector2(-392, 800)
+
+[node name="Bullet" parent="." instance=ExtResource("8_hx2bp")]
+position = Vector2(-152, -192)
+
+[node name="Entity" parent="." instance=ExtResource("9_myux0")]
+position = Vector2(0, -152)

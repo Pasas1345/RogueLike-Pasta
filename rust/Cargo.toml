@@ -1,0 +1,11 @@
+[package]
+name = "pasta_roguelike"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
+
+[lib]
+crate-type = ["cdylib"]
+
