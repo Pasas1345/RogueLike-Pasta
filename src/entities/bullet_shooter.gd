@@ -6,6 +6,7 @@ var atk_cooldown = 0.0
 @export var bullet: PackedScene
 
 func _physics_process(delta):
+	rotation = parent.rotation
 	if atk_cooldown > 0:
 		atk_cooldown -= delta
 
@@ -22,5 +23,6 @@ func create_bullet(spd: float, dmg: float, oneshot: bool):
 	new_bullet.set_oneshot(oneshot)
 
 	new_bullet.global_position = global_position
+	new_bullet.rotation = rotation
 
 	get_tree().current_scene.add_child(new_bullet)

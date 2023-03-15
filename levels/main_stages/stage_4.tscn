@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm8p3ijawnijw"]
+[gd_scene load_steps=4 format=3 uid="uid://bm8p3ijawnijw"]
 
 [ext_resource type="Script" path="res://src/stage.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cjvhd2yody540" path="res://entities/player/player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c0g7klb31idb1" path="res://ui/user_interface.tscn" id="3_gavj4"]
 
 [node name="Stage3" type="Node2D"]
 script = ExtResource("1")
@@ -14,3 +15,5 @@ custom_spawns = true
 position = Vector2(912, 840)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="User Interface" parent="CanvasLayer" instance=ExtResource("3_gavj4")]

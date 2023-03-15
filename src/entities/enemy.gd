@@ -1,13 +1,17 @@
 extends Entity
 class_name Enemy
 
-@onready var player := get_tree().get_nodes_in_group("player")[0]
+@export var player: Node2D
 @onready var sprite := $Sprite2D
 @onready var hit_particles := $HitParticles
 var death_particle := preload("res://entities/death_particle.tscn")
 var attack_cooldown: = 0.0
 var attacking: Node
 var area: Battle_Area
+
+func _ready():
+	if player == null:
+		player = get_tree().get_nodes_in_group("player")[0]
 
 func _physics_process(delta):
 	if !dead:
@@ -64,8 +68,9 @@ func _on_damaged(_attacker):
 	if _attacker == null:
 		return
 
-	hit_particles.rotation = get_angle_to(_attacker.global_position) + PI
-	hit_particles.emitting = true
+	if hit_particles != null:
+		hit_particles.rotation = get_angle_to(_attacker.global_position) + PI
+		hit_particles.emitting = true
 
 func drop_item():
 	main_game.spawn_item("", self)

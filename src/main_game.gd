@@ -13,6 +13,8 @@ var can_pause: bool = true
 var player: Entity
 var player_fighting: bool = false : set = set_player_fighting
 
+var damage_notif = preload("res://entities/damage_number.tscn")
+
 var first_loop: bool = true
 var loop: int = 0
 

@@ -9,9 +9,9 @@ pub struct Bullet {
 	pub damage: real,
 	#[export(getter = "get_oneshot", setter = "set_oneshot")]
 	pub one_shot: bool,
-
+	
 	#[base]
-	base: Base<Area2D>
+	base: Base<Area2D>,
 }
 
 #[godot_api]
@@ -31,6 +31,18 @@ impl Bullet {
 					self.base.queue_free();
 				}
 			}
+		}
+	}
+
+	#[func]
+	fn expire(&mut self) {
+		if self.base.share().has_node("hitbox_custom".into()) {
+            let custom_hitbox = self.base.get_node_as::<Area2D>("hitbox_custom");
+			// Expect Pasas to have a queue free after hes done with this function. ISTG if he doesn't.
+			custom_hitbox.share().call("_custom_hit".into(), &[self.damage.to_variant()]);
+        }
+		else {
+			self.base.queue_free();
 		}
 	}
 
@@ -74,6 +86,9 @@ impl GodotExt for Bullet {
 
 	fn ready(&mut self)  {
 		self.base.share().connect("body_entered".into(), Callable::from_object_method(self.base.share(), "on_bullet_body_entered"), 0);
+		let mut timer = self.get_tree().unwrap().create_timer(5.0, false, false, false).unwrap();
+
+		timer.connect("timeout".into(), Callable::from_object_method(self.base.share(), "expire"), 0);
 	}
 
 	fn physics_process(&mut self, delta: f64) {

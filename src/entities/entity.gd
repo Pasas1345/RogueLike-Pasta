@@ -40,17 +40,27 @@ func change_health(health: float, true_damage: bool = false, from_attacker: Node
 
 	if hp > max_hp:
 		hp = max_hp
-
-	if hp <= 0:
-		die()
 	
 	if health < 0 && !dead:
 		if _anim_player != null:
 			_anim_player.play("hit")
+
+		spawn_damage_notif(health)
 		_on_damaged(from_attacker)
 	elif health > 0 && !dead:
 		if _anim_player != null:
 			_anim_player.play("heal")
+
+	if hp <= 0:
+		die()
+
+func spawn_damage_notif(dmg: float):
+	var new_dmgNotif = main_game.damage_notif.instantiate()
+
+	new_dmgNotif.set_damage(dmg)
+	new_dmgNotif.global_position = global_position
+	get_tree().current_scene.add_child(new_dmgNotif)
+	new_dmgNotif.begin()
 
 func _on_damaged(_attacker):
 	pass

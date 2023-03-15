@@ -1,18 +1,120 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3cglh3om8oqn"]
+[gd_scene load_steps=13 format=3 uid="uid://d3cglh3om8oqn"]
 
-[ext_resource type="Script" path="res://src/entities/entity.gd" id="1_dhxnj"]
+[ext_resource type="Script" path="res://src/entities/enemy.gd" id="1_mdxdt"]
+[ext_resource type="Shader" path="res://shaders/entity_generic.gdshader" id="2_1xjyq"]
 [ext_resource type="Texture2D" uid="uid://shll21sj6r4o" path="res://sprites/witchhatsmen.png" id="2_o064m"]
 [ext_resource type="Script" path="res://src/entities/bullet_shooter.gd" id="3_j6mqi"]
 [ext_resource type="PackedScene" uid="uid://moo75do1wdo1" path="res://entities/bullet.tscn" id="4_5cv2m"]
+[ext_resource type="Script" path="res://src/entities/npc.gd" id="5_kllma"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1sg5b"]
+shader = ExtResource("2_1xjyq")
+shader_parameter/solid_color = Color(1, 1, 1, 1)
+shader_parameter/flash = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmvsw"]
 size = Vector2(112, 112)
 
-[node name="Entity" type="CharacterBody2D"]
+[sub_resource type="Animation" id="7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/solid_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="8"]
+resource_name = "heal"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/solid_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0.0392157, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/flash")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+
+[sub_resource type="Animation" id="9"]
+resource_name = "hit"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/solid_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vc3ge"]
+_data = {
+"RESET": SubResource("7"),
+"heal": SubResource("8"),
+"hit": SubResource("9")
+}
+
+[node name="BulletShooter" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 8
 motion_mode = 1
-script = ExtResource("1_dhxnj")
+script = ExtResource("1_mdxdt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 2
+material = SubResource("ShaderMaterial_1sg5b")
 scale = Vector2(0.224, 0.224)
 texture = ExtResource("2_o064m")
 
@@ -20,6 +122,15 @@ texture = ExtResource("2_o064m")
 shape = SubResource("RectangleShape2D_gmvsw")
 
 [node name="BulletShooter" type="Marker2D" parent="."]
-position = Vector2(128, 0)
+position = Vector2(104, 0)
 script = ExtResource("3_j6mqi")
 bullet = ExtResource("4_5cv2m")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+script = ExtResource("5_kllma")
+face_target = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vc3ge")
+}
