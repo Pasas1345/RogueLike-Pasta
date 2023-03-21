@@ -10,7 +10,7 @@ class_name Entity
 @export var ability_strength: = 1.0
 @export var invulnerable: = false
 
-var hp = max_hp
+var hp = max_hp : set = _hp_changed
 var dead = false
 
 @onready var _sprite: Sprite2D = $Sprite2D
@@ -45,7 +45,7 @@ func change_health(health: float, true_damage: bool = false, from_attacker: Node
 		if _anim_player != null:
 			_anim_player.play("hit")
 
-		spawn_damage_notif(health)
+		spawn_damage_notif(health_change)
 		_on_damaged(from_attacker)
 	elif health > 0 && !dead:
 		if _anim_player != null:
@@ -61,6 +61,11 @@ func spawn_damage_notif(dmg: float):
 	new_dmgNotif.global_position = global_position
 	get_tree().current_scene.add_child(new_dmgNotif)
 	new_dmgNotif.begin()
+
+func _hp_changed(_health):
+	hp = _health
+
+	pass
 
 func _on_damaged(_attacker):
 	pass

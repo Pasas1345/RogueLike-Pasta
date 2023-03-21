@@ -2,7 +2,7 @@ extends Entity
 
 @export var UP_Regen: = 1.0
 @export var UP_EnergyRestore: = 10.0
-@export var inv_slots: = 4
+@export var inv_slots: = 4 : set = set_inv_slots
 @export var item_strength: = 1.0
 @export var acceleration: = 0.1
 @onready var max_acceleration: = acceleration
@@ -202,6 +202,14 @@ func die() -> void:
 func update_stats() -> void:
 	max_speed = speed
 	max_acceleration = acceleration
+
+func _hp_changed(_health):
+	hp = _health
+	ui.update_health(_health, max_hp)
+
+func set_inv_slots(_slots):
+	inv_slots = _slots
+	ui.update_invslots(inv_slots)
 
 class Item_Entry:
 	var item_id: String

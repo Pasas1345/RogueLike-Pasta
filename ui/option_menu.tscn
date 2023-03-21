@@ -43,7 +43,7 @@ layout_mode = 2
 
 [node name="sfx" type="Label" parent="TabContainer/Audio"]
 layout_mode = 2
-text = "SFX:"
+text = "Master:"
 
 [node name="HSlider" type="HSlider" parent="TabContainer/Audio/sfx"]
 layout_mode = 2

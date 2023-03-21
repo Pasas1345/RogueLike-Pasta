@@ -18,17 +18,19 @@ pub struct Bullet {
 impl Bullet {
 	#[func]
 	fn on_bullet_body_entered(&mut self, _body: Gd<Node2D>) {
-        if self.base.share().has_node("hitbox_custom".into()) {
-            let custom_hitbox = self.base.get_node_as::<Area2D>("hitbox_custom");
-			// Expect Pasas to have a queue free after hes done with this function. ISTG if he doesn't.
-			custom_hitbox.share().call("_custom_hit".into(), &[self.damage.to_variant()]);
-        }
-		else {
-			if _body.share().has_method(("change_health").into()) {
-				_body.share().call("change_health".into(), &[(-self.damage).to_variant()]);
-	
-				if self.one_shot {
-					self.base.queue_free();
+		if !Engine::singleton().is_editor_hint() {
+			if self.base.share().has_node("hitbox_custom".into()) {
+				let custom_hitbox = self.base.get_node_as::<Area2D>("hitbox_custom");
+				// Expect Pasas to have a queue free after hes done with this function. ISTG if he doesn't.
+				custom_hitbox.share().call("_custom_hit".into(), &[self.damage.to_variant()]);
+			}
+			else {
+				if _body.share().has_method(("change_health").into()) {
+					_body.share().call("change_health".into(), &[(-self.damage).to_variant()]);
+		
+					if self.one_shot {
+						self.base.queue_free();
+					}
 				}
 			}
 		}
@@ -36,13 +38,15 @@ impl Bullet {
 
 	#[func]
 	fn expire(&mut self) {
-		if self.base.share().has_node("hitbox_custom".into()) {
-            let custom_hitbox = self.base.get_node_as::<Area2D>("hitbox_custom");
-			// Expect Pasas to have a queue free after hes done with this function. ISTG if he doesn't.
-			custom_hitbox.share().call("_custom_hit".into(), &[self.damage.to_variant()]);
-        }
-		else {
-			self.base.queue_free();
+		if !Engine::singleton().is_editor_hint() {
+			if self.base.share().has_node("hitbox_custom".into()) {
+				let custom_hitbox = self.base.get_node_as::<Area2D>("hitbox_custom");
+				// Expect Pasas to have a queue free after hes done with this function. ISTG if he doesn't.
+				custom_hitbox.share().call("_custom_hit".into(), &[self.damage.to_variant()]);
+			}
+			else {
+				self.base.queue_free();
+			}
 		}
 	}
 
@@ -85,10 +89,12 @@ impl GodotExt for Bullet {
 	}
 
 	fn ready(&mut self)  {
-		self.base.share().connect("body_entered".into(), Callable::from_object_method(self.base.share(), "on_bullet_body_entered"), 0);
-		let mut timer = self.get_tree().unwrap().create_timer(5.0, false, false, false).unwrap();
+		if !Engine::singleton().is_editor_hint() {
+			self.base.share().connect("body_entered".into(), Callable::from_object_method(self.base.share(), "on_bullet_body_entered"), 0);
+			let mut timer = self.get_tree().unwrap().create_timer(5.0, false, false, false).unwrap();
 
-		timer.connect("timeout".into(), Callable::from_object_method(self.base.share(), "expire"), 0);
+			timer.connect("timeout".into(), Callable::from_object_method(self.base.share(), "expire"), 0);
+		}
 	}
 
 	fn physics_process(&mut self, delta: f64) {

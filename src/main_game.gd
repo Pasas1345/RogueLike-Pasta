@@ -123,7 +123,7 @@ func spawn_enemy(enemy_type = null, spawner_array = null):
 
 
 	var new_enemy = enemy.instantiate()
-	new_enemy.set_position(enemy_spawners[randi() % enemy_spawners.size()].global_position)
+	new_enemy.set_global_position(enemy_spawners[randi() % enemy_spawners.size()].global_position)
 	new_enemy.add_to_group("enemies")
 	get_tree().current_scene.add_child(new_enemy)
 
@@ -131,7 +131,7 @@ func spawn_enemy(enemy_type = null, spawner_array = null):
 
 func spawn_item(item_type = "", spawn_positon: Node = null):
 	if get_tree().get_nodes_in_group("item_spawner") == null && !spawn_positon:
-		printerr("Warning: No Item spawners in stage detected. No custom position added. Item drops will not spawn.")
+		printerr("Warning: No Item spawners in stage detected. No custom position specified. Item drops will not spawn.")
 		return
 
 	var item_spawners = get_tree().get_nodes_in_group("item_spawner")[0].get_children()
@@ -160,8 +160,8 @@ func spawn_item(item_type = "", spawn_positon: Node = null):
 	
 
 func spawn_upgrade(upgrade_type = "", spawn_positon: Node = null):
-	if get_tree().get_nodes_in_group("item_spawner") == null && !spawn_positon:
-		printerr("Warning: No Item spawners in stage detected. No custom position added. Upgrade drops will not spawn.")
+	if get_tree().get_nodes_in_group("item_spawner").size() <= 0 && spawn_positon == null:
+		printerr("Warning: No Item spawners in stage detected. No custom position specified. Upgrade drops will not spawn.")
 		return
 
 	var upgrade_spawners = get_tree().get_nodes_in_group("item_spawner")[0].get_children()

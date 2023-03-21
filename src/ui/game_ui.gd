@@ -16,7 +16,7 @@ var player
 func _init():
 	add_to_group("ui")
 
-func _ready():
+func _ready() -> void:
 	player = get_tree().get_nodes_in_group("player")[0]
 	update_inventory()
 
@@ -28,7 +28,7 @@ func _ready():
 	
 # TODO : Move all the tweens in a seperate function. This is so that it doesn't go ballistic.
 
-func _process(_delta):
+func _process(_delta) -> void:
 	health.text = "{0}/{1}".format([clamp(player.hp, 0, player.max_hp), player.max_hp])
 
 	fps.text = "FPS: {0}".format([Engine.get_frames_per_second()])
@@ -50,20 +50,16 @@ func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		pause()
 
-func _physics_process(_delta):
+func _physics_process(_delta) -> void:
 	var tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	tween.set_parallel(true)
-	tween.tween_property(health_bar, "size", Vector2(remap(player.hp, 0, player.max_hp, 0, 309), 49), 0.1)
 	tween.tween_property(abiltiy_bar, "size", Vector2(remap(player.ability_cooldown, 0, player.weapon.ability_cooldown_duration, 144, 0), 19), 0.25)
-
-	tween.set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(backpack_slots, "size", Vector2(128, 128 * player.inv_slots), 0.1)
 
 # Ah yes, optimzation. It does exist i swear...
 var inv_sprites = []
 var pending_deletion = []
 
-func update_inventory():
+func update_inventory() -> void:
 	if player.inventory.is_empty():
 		for n in inv_sprites:
 			backpack_slots.remove_child(n)
@@ -99,10 +95,19 @@ func update_inventory():
 	
 		pending_deletion.clear()
 
-		
+
+func update_health(h, mhp) -> void:
+	if player != null:
+		var tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+		tween.tween_property(health_bar, "size", Vector2(remap(h, 0, mhp, 0, 309), 49), 0.1)
+
+func update_invslots(inv) -> void:
+	if player != null:
+		var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(backpack_slots, "size", Vector2(128, 128 * inv), 1.0)
 
 # Pause menu related stuff
-func pause():
+func pause() -> void:
 	if !main_game.can_pause:
 		return
 
@@ -118,7 +123,7 @@ func pause():
 		pause_menu.set_process(false)
 
 
-func game_over():
+func game_over() -> void:
 	main_game.can_pause = false
 	$Pause_Menu/resume.disabled = true
 	pause_menu.visible = true
