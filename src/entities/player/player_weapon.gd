@@ -74,10 +74,10 @@ func cast_ability(dash_direction: Vector2, _delta: float):
 func _on_hitbox_body_entered(body: Node):
 	if body.has_method("change_health") && body != player:
 		if !player.casting_ability:
-			body.change_health(-player.attack * attack_seq_multipliers[attack_sequence - 1], false, self)
+			body.change_health(-player.attack * attack_seq_multipliers[attack_sequence - 1], false, true, self)
 		else:
-			body.change_health(-ability_damage * player.ability_strength, false, self)
+			body.change_health(-ability_damage * player.ability_strength, false, true, self)
 
 func _on_ability_hitbox_body_entered(body: Node2D):
 	if body.has_method("change_health") && body != player:
-		body.change_health(-ability_damage * player.ability_strength, false, self)
+		body.change_health(-ability_damage * player.ability_strength, false, true, self)

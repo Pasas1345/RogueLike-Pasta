@@ -30,6 +30,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-192, -192, 960, -192, 960, 640, 1792, 640, 1792, 128, 1408, 128, 1408, -192, 2048, -192, 2048, 896, 960, 896, 960, 1024, -512, 1024, -512, 576, 832, 576, 832, 384, -192, 384)])
 
 [node name="TestLevel" type="Node2D"]
+scale = Vector2(1.00148, 1.00148)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_scmuj")
@@ -43,7 +44,6 @@ layer_0/tile_data = PackedInt32Array(-262149, 0, 0, -262148, 0, 0, -262147, 0, 0
 
 [node name="BulletShooter" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_myux0")]
 position = Vector2(0, -152)
-rotation = -0.00644563
 player = NodePath("../Player")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_mtj4w")]

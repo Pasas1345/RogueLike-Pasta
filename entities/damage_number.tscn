@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dohq0wac5akej"]
+[gd_scene load_steps=6 format=3 uid="uid://dohq0wac5akej"]
 
+[ext_resource type="Script" path="res://src/entities/damage_number.gd" id="1_8kr4a"]
 [ext_resource type="FontFile" uid="uid://bx2yhqf82yq1o" path="res://ui/fonts/PatrickHand-Regular.ttf" id="1_r2y57"]
 
 [sub_resource type="Animation" id="Animation_ltuf6"]
@@ -64,7 +65,13 @@ _data = {
 "damage": SubResource("Animation_eioxr")
 }
 
-[node name="DamageNumber" type="DamageNumber"]
+[node name="DamageNumber" type="Node2D"]
+script = ExtResource("1_8kr4a")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5stsn")
+}
 
 [node name="Label" type="Label" parent="."]
 texture_filter = 6
@@ -87,8 +94,3 @@ theme_override_font_sizes/font_size = 24
 text = "20"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_5stsn")
-}

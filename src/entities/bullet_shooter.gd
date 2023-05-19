@@ -4,6 +4,7 @@ extends Marker2D
 
 var atk_cooldown = 0.0
 @export var bullet: PackedScene
+@export var filter: Node2D
 
 func _physics_process(delta):
 	rotation = parent.rotation
@@ -20,9 +21,13 @@ func create_bullet(spd: float, dmg: float, oneshot: bool):
 
 	new_bullet.set_speed(spd) 
 	new_bullet.set_damage(dmg)
-	new_bullet.set_oneshot(oneshot)
+	new_bullet.set_one_shot(oneshot)
+	if filter != null: 
+		new_bullet.set_filter(filter)
 
 	new_bullet.global_position = global_position
 	new_bullet.rotation = rotation
 
 	get_tree().current_scene.add_child(new_bullet)
+
+	# new_bullet.expire()s

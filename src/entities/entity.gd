@@ -28,13 +28,17 @@ func _physics_process(_delta: float):
 		
 	# var _movement: = velocity
 
-func change_health(health: float, true_damage: bool = false, from_attacker: Node2D = null):
-	if dead || invulnerable: 
+func change_health(health: float, true_damage: bool = false, show_dmgnumber: bool = true, from_attacker: Node2D = null):
+	if dead: 
 		return
 		
 	var health_change = health
 	if health < 0 && !true_damage:
 		health_change = floor(health_change * (1 + defense / 100))
+
+	if invulnerable && health_change < 0:
+		health_change = 0
+
 
 	hp += health_change
 
@@ -45,7 +49,8 @@ func change_health(health: float, true_damage: bool = false, from_attacker: Node
 		if _anim_player != null:
 			_anim_player.play("hit")
 
-		spawn_damage_notif(health_change)
+		if show_dmgnumber:
+			spawn_damage_notif(health_change)
 		_on_damaged(from_attacker)
 	elif health > 0 && !dead:
 		if _anim_player != null:
@@ -54,13 +59,14 @@ func change_health(health: float, true_damage: bool = false, from_attacker: Node
 	if hp <= 0:
 		die()
 
+# TODO: FIX THIS SHIT
 func spawn_damage_notif(dmg: float):
-	var new_dmgNotif = main_game.damage_notif.instantiate()
+	var new_dmgNotif: Node2D = main_game.damage_notif.instantiate()
 
-	new_dmgNotif.set_damage(dmg)
+	new_dmgNotif.damage = dmg
 	new_dmgNotif.global_position = global_position
 	get_tree().current_scene.add_child(new_dmgNotif)
-	new_dmgNotif.begin()
+	# new_dmgNotif.show_damage()
 
 func _hp_changed(_health):
 	hp = _health

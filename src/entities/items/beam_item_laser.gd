@@ -18,7 +18,7 @@ func _physics_process(_delta):
 		$ImpactParticle.position = cast_point
 
 		if get_collider().has_method("change_health"):
-			get_collider().change_health(-(get_parent().get_parent().item_strength * 2.5))
+			get_collider().change_health(-(get_parent().get_parent().item_strength * 2.5), false, false, get_parent().get_parent())
 
 	$Line2D.points[1] = cast_point
 	$BeamParticle.position = cast_point * 0.5

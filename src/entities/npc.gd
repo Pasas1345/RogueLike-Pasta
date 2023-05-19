@@ -31,6 +31,10 @@ func _physics_process(_delta):
 
 		if face_target:
 			parent.look_at(target[0].position)
+			if parent.position.direction_to(get_next_path_position()).x < 0:
+				parent.get_node("Sprite2D").set_flip_v(true)
+			elif parent.position.direction_to(get_next_path_position()).x > 0:
+				parent.get_node("Sprite2D").set_flip_v(false)
 		else:
 			if parent.position.direction_to(get_next_path_position()).x < 0:
 				parent.get_node("Sprite2D").set_flip_h(true)

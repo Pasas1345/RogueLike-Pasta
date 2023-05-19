@@ -176,6 +176,7 @@ libraries = {
 script = ExtResource("5")
 
 [node name="Laser_Item" parent="ItemAimer" instance=ExtResource("6")]
+position = Vector2(37, 0)
 
 [node name="Stamina" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
