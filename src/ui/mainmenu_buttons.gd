@@ -12,6 +12,8 @@ func _on_play_pressed():
 	get_tree().change_scene_to_file("res://levels/main_stages/stage_1.tscn")
 	main_game.set_process(true)
 	main_game.set_physics_process(true)
+	MusicController.stop_playing()
+	MusicController.play_song("chill")
 
 
 func _on_options_pressed():

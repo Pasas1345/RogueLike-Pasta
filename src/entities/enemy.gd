@@ -8,11 +8,14 @@ var death_particle := preload("res://entities/death_particle.tscn")
 var attack_cooldown: = 0.0
 var attacking: Node
 var area: Battle_Area
+var bullet_shooter: Marker2D
 
 func _ready():
 	if player == null:
 		player = get_tree().get_nodes_in_group("player")[0]
-
+	if get_node_or_null("BulletShooter") != null:
+		bullet_shooter = get_node_or_null("BulletShooter")
+		
 func _physics_process(delta):
 	if !dead:
 		# print(delta)

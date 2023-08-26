@@ -63,6 +63,8 @@ func update_stage():
 	else:
 		set_player_fighting(true)
 
+	player.ui.update_invslots(player_stats.inv_slots)
+
 	randomize()
 
 func _ready():
@@ -74,6 +76,7 @@ func _ready():
 	timer.set_one_shot(false)
 	timer.set_autostart(true)
 	timer.connect("timeout", Callable(self,"advance_time"))
+
 	add_child(timer)
 
 func _process(_delta):
@@ -193,7 +196,8 @@ func reset():
 	stage_counter = 0
 	game_time = 0
 	can_pause = true
-	MusicController.stop_playing()
+	MusicController.play_song("menu")
+
 
 func stage_clear():
 	print("stage clear!")
@@ -224,8 +228,8 @@ func set_player_fighting(fight):
 		print("playing battle music")
 		# MusicController.stop_playing()
 		# MusicController.create_transition("transition", "battle")
-		MusicController.change_song("battle_full")
+		MusicController.change_song("battle")
 	else:
-		print("playing chill music")
-		MusicController.change_song("chill_full")
+		print("playing battle music")
+		MusicController.change_song("chill")
 		

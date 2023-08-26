@@ -1,5 +1,0 @@
-[configuration]
-entry_symbol = "gdext_rust_init"
-
-[libraries]
-windows.64 = "res://rust/target/debug/pasta_roguelike.dll"

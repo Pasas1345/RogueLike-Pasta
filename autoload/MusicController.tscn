@@ -1,40 +1,78 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2n8o7fvwyxbd"]
+[gd_scene load_steps=10 format=3 uid="uid://d2n8o7fvwyxbd"]
 
 [ext_resource type="AudioStream" uid="uid://ltdtvb01vl1g" path="res://sounds/music/battletheme1.mp3" id="1"]
 [ext_resource type="AudioStream" uid="uid://l7vdvvqniqsd" path="res://sounds/music/transition_battletheme1.mp3" id="2"]
 [ext_resource type="AudioStream" uid="uid://dwmuyfdnnd2vf" path="res://sounds/music/battletheme1_chill.mp3" id="3"]
-[ext_resource type="AudioStream" uid="uid://ca1af7aevj4th" path="res://sounds/music/battletheme1_chill_full.mp3" id="4"]
-[ext_resource type="AudioStream" uid="uid://bn50gciqdd3pq" path="res://sounds/music/battletheme1_full.mp3" id="5"]
+[ext_resource type="Script" path="res://addons/meta_player/meta_player.gd" id="3_vh48d"]
+[ext_resource type="Script" path="res://addons/meta_player/trans_rule.gd" id="6_bi0ja"]
 [ext_resource type="Script" path="res://src/autoload/MusicController.gd" id="7"]
 [ext_resource type="AudioStream" uid="uid://cmvnsghwbva4q" path="res://sounds/music/Refreshing Breeze.mp3" id="8"]
+
+[sub_resource type="Resource" id="Resource_m7wo5"]
+script = ExtResource("6_bi0ja")
+target_player = NodePath("../transition")
+transition_type = "On Beat"
+signal_node = NodePath("..")
+signal_name = "transition"
+
+[sub_resource type="Resource" id="Resource_0pbpr"]
+script = ExtResource("6_bi0ja")
+target_player = NodePath("../transition")
+transition_type = "On Beat"
+signal_node = NodePath("..")
+signal_name = "transition"
 
 [node name="MusicController" type="Node"]
 script = ExtResource("7")
 
-[node name="battle_full" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5")
+[node name="menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8")
 bus = &"Music"
+script = ExtResource("3_vh48d")
+auto_play = true
+tempo = 128
+bars = 49
 
-[node name="chill_full" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4")
+[node name="chill" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3")
 bus = &"Music"
+script = ExtResource("3_vh48d")
+tempo = 128
+bars = 207
+transition_rules = Array[ExtResource("6_bi0ja")]([SubResource("Resource_m7wo5")])
+
+[node name="battle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1")
+bus = &"Music"
+script = ExtResource("3_vh48d")
+tempo = 128
+bars = 198
+transition_rules = Array[ExtResource("6_bi0ja")]([SubResource("Resource_0pbpr")])
 
 [node name="transition" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2")
-volume_db = -10.0
-bus = &"Music"
+script = ExtResource("3_vh48d")
+loop = false
+tempo = 128
 
-[node name="battle" type="AudioStreamPlayer" parent="."]
+[node name="old" type="Node" parent="."]
+
+[node name="battle" type="AudioStreamPlayer" parent="old"]
 stream = ExtResource("1")
 volume_db = -10.0
 bus = &"Music"
 
-[node name="chill" type="AudioStreamPlayer" parent="."]
+[node name="transition" type="AudioStreamPlayer" parent="old"]
+stream = ExtResource("2")
+volume_db = -10.0
+bus = &"Music"
+
+[node name="chill" type="AudioStreamPlayer" parent="old"]
 stream = ExtResource("3")
 volume_db = -10.0
 bus = &"Music"
 
-[node name="menu" type="AudioStreamPlayer" parent="."]
+[node name="menu" type="AudioStreamPlayer" parent="old"]
 stream = ExtResource("8")
-volume_db = -50.0
+volume_db = -30.0
 bus = &"Music"

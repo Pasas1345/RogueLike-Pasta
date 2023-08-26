@@ -110,11 +110,12 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iiw11"]
-bg_color = Color(0, 0.466667, 0.713726, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lou1l"]
 bg_color = Color(0.0117647, 0.0156863, 0.368627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iiw11"]
+bg_color = Color(0, 0.34902, 0.541176, 1)
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82pvs"]
 content_margin_left = 16.0
@@ -133,11 +134,11 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dgi3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vld83"]
 content_margin_left = 16.0
 content_margin_top = 4.0
 content_margin_right = 16.0
-bg_color = Color(0.101961, 0.458824, 0.623529, 1)
+bg_color = Color(0.117647, 0.376471, 0.568627, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -145,11 +146,11 @@ border_color = Color(0.0941176, 0.305882, 0.466667, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vld83"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dgi3"]
 content_margin_left = 16.0
 content_margin_top = 4.0
 content_margin_right = 16.0
-bg_color = Color(0.117647, 0.376471, 0.568627, 1)
+bg_color = Color(0.101961, 0.458824, 0.623529, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -177,9 +178,11 @@ OptionButton/styles/normal = SubResource("StyleBoxFlat_cjjbn")
 OptionButton/styles/normal_mirrored = SubResource("StyleBoxFlat_h08mv")
 OptionButton/styles/pressed = SubResource("StyleBoxFlat_ua2ou")
 OptionButton/styles/pressed_mirrored = SubResource("StyleBoxFlat_b24ce")
+TabBar/styles/tab_hovered = SubResource("StyleBoxFlat_lou1l")
 TabBar/styles/tab_selected = SubResource("StyleBoxFlat_iiw11")
 TabBar/styles/tab_unselected = SubResource("StyleBoxFlat_lou1l")
 TabContainer/styles/panel = SubResource("StyleBoxFlat_82pvs")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_vld83")
 TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_3dgi3")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_vld83")
 VBoxContainer/constants/separation = 16

@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Rogue Lite Pasta"
 run/main_scene="res://levels/main_menu.tscn"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.1")
 boot_splash/image="res://pasta_boot.png"
 boot_splash/use_filter=false
 config/icon="res://pasta.png"
@@ -27,9 +27,9 @@ MusicController="*res://autoload/MusicController.tscn"
 
 gdscript/warnings/unused_variable=0
 gdscript/warnings/unused_private_class_variable=0
-gdscript/warnings/narrowing_conversion=false
 gdscript/warnings/return_value_discarded=false
 gdscript/warnings/integer_division=0
+gdscript/warnings/narrowing_conversion=false
 gdscript/completion/autocomplete_setters_and_getters=true
 
 [display]
@@ -45,7 +45,7 @@ project/assembly_name="Rogue Lite Pasta"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/meta_player/plugin.cfg")
 
 [gui]
 
@@ -96,7 +96,7 @@ use_item={
 }
 attack={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
 interact={

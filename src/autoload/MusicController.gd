@@ -2,6 +2,7 @@ extends Node
 
 var song_list: Array
 var current_playing_idx
+# @onready var mixing_desk = $MixingDeskMusic
 
 func _ready():
 	song_list = get_children()
@@ -43,13 +44,15 @@ func change_song(song):
 		return
 
 	if current_playing_idx != null:
-		song_list[current_playing_idx].stop()
+		song_list[current_playing_idx].mstop()
+	
+	emit_signal("transition")
 	play_song(song_idx)
 
 
 func play_song(song):
 	var song_idx = get_song_index(song)
-	song_list[song_idx].play()
+	song_list[song_idx].mplay()
 	current_playing_idx = song_idx
 
 func create_transition(transition_song, song):
@@ -65,5 +68,5 @@ func stop_playing():
 	if current_playing_idx == null:
 		return
 
-	song_list[current_playing_idx].stop()
+	song_list[current_playing_idx].mstop()
 	print("stopping music")
