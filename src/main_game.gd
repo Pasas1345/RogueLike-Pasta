@@ -63,6 +63,7 @@ func update_stage():
 	else:
 		set_player_fighting(true)
 
+	await get_tree().process_frame
 	player.ui.update_invslots(player_stats.inv_slots)
 
 	randomize()

@@ -32,14 +32,14 @@ impl Bullet {
 
 	#[func]
 	fn hit(&mut self, _body: Gd<Node2D>) {
-		if self.base.share().has_node("hitbox_custom".into()) {
+		if self.base.clone().has_node("hitbox_custom".into()) {
 			let custom_hitbox = self.base.get_node_as::<Area2D>("hitbox_custom");
 			// Expect Pasas to have a queue free after hes done with this function. ISTG if he doesn't.
-			custom_hitbox.share().call("_custom_hit".into(), &[self.damage.to_variant()]);
+			custom_hitbox.clone().call("_custom_hit".into(), &[self.damage.to_variant()]);
 		}
 		else {
-			if _body.share().has_method(("change_health").into()) {
-				_body.share().call("change_health".into(), &[(-self.damage).to_variant()]);
+			if _body.clone().has_method(("change_health").into()) {
+				_body.clone().call("change_health".into(), &[(-self.damage).to_variant()]);
 				if self.one_shot {
 					self.base.queue_free();
 				}
@@ -49,10 +49,10 @@ impl Bullet {
 
 	#[func]
 	fn expire(&mut self) {
-		if self.base.share().has_node("hitbox_custom".into()) {
+		if self.base.clone().has_node("hitbox_custom".into()) {
 			let custom_hitbox = self.base.get_node_as::<Area2D>("hitbox_custom");
 			// Expect Pasas to have a queue free after hes done with this function. ISTG if he doesn't.
-			custom_hitbox.share().call("_custom_hit".into(), &[self.damage.to_variant()]);
+			custom_hitbox.clone().call("_custom_hit".into(), &[self.damage.to_variant()]);
 		}
 		else {
 			self.base.queue_free();
@@ -73,10 +73,10 @@ impl Area2DVirtual for Bullet {
 	}
 
 	fn ready(&mut self)  {
-		self.base.share().connect("body_entered".into(), Callable::from_object_method(self.base.share(), "on_bullet_body_entered"));
+		self.base.clone().connect("body_entered".into(), Callable::from_object_method(self.base.clone(), "on_bullet_body_entered"));
 		let mut timer = self.base.get_tree().unwrap().create_timer(5.0).unwrap();
 
-		timer.connect("timeout".into(), Callable::from_object_method(self.base.share(), "expire"));
+		timer.connect("timeout".into(), Callable::from_object_method(self.base.clone(), "expire"));
 	}
 
 	fn physics_process(&mut self, delta: f64) {

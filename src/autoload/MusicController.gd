@@ -38,22 +38,24 @@ func fade_in(song, fade: float):
 	return fade
 
 func change_song(song):
-	var song_idx = get_song_index(song)
+	# var song_idx = get_song_index(song)
 
-	if current_playing_idx == song_idx:
-		return
+	# if current_playing_idx == song_idx:
+	# 	return
 
-	if current_playing_idx != null:
-		song_list[current_playing_idx].mstop()
+	# if current_playing_idx != null:
+	# 	song_list[current_playing_idx].mstop()
 	
-	emit_signal("transition")
-	play_song(song_idx)
+	# emit_signal("transition")
+	# play_song(song_idx)
+	pass
 
 
 func play_song(song):
-	var song_idx = get_song_index(song)
-	song_list[song_idx].mplay()
-	current_playing_idx = song_idx
+	pass
+	# var song_idx = get_song_index(song)
+	# song_list[song_idx].mplay()
+	# current_playing_idx = song_idx
 
 func create_transition(transition_song, song):
 	var song_idx = get_song_index(song)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=14 format=3 uid="uid://ceh326r70cxyh"]
 
 [ext_resource type="TileSet" uid="uid://lc1ygtotn22y" path="res://sprites/tiles/tiny_dungeon_tileset.tres" id="1"]
 [ext_resource type="Script" path="res://src/stage.gd" id="2"]

@@ -29,7 +29,6 @@ script = ExtResource("7")
 stream = ExtResource("8")
 bus = &"Music"
 script = ExtResource("3_vh48d")
-auto_play = true
 tempo = 128
 bars = 49
 
