@@ -1,2 +1,2 @@
 # Roguelike Pasta
-yes, welcome to godot. Practice before Godot Rust
+Some rougelike game i want to make. Has some Rust in it.
